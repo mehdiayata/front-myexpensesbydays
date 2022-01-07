@@ -11,8 +11,7 @@ const LoginComponents = () => {
 
         e.preventDefault();
 
-        // Appel de la route /api/login/
-        
+
         axios.post('http://127.0.0.1:8000/api/login', {
             username: formEmail,
             password: formPassword
@@ -20,8 +19,21 @@ const LoginComponents = () => {
             localStorage.setItem("JWT", resp.data.token);
         });
 
+        testWallet();
     }
 
+    const testWallet = (e) => {
+
+
+        axios.get('http://127.0.0.1:8000/api/wallets', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('JWT') //the token is a variable which holds the token
+            }
+        }).then(resp => {
+            console.log(resp.data['hydra:member'][0]['amount']);
+        });
+
+    }
 
     return (
         <div className="form-login">
