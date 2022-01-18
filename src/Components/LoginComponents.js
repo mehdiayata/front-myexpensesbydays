@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import securityService from '../Services/security.service';
 
 const LoginComponents = () => {
 
@@ -11,27 +12,11 @@ const LoginComponents = () => {
 
         e.preventDefault();
 
-
-        axios.post('http://127.0.0.1:8000/api/login', {
-            username: formEmail,
-            password: formPassword
-        }).then(resp => {
+        // Get token and add in local storage (à changer par un système plus sécurisé)
+        securityService.getToken(formEmail, formPassword).then(resp => {
             localStorage.setItem("JWT", resp.data.token);
         });
 
-        testWallet();
-    }
-
-    const testWallet = (e) => {
-
-
-        axios.get('http://127.0.0.1:8000/api/wallets', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('JWT') //the token is a variable which holds the token
-            }
-        }).then(resp => {
-            console.log(resp.data['hydra:member'][0]['amount']);
-        });
 
     }
 
@@ -40,7 +25,7 @@ const LoginComponents = () => {
             <Form onSubmit={login} method='post' >
                 <Form.Group controlId='form-login-email'>
                     <Form.Label>Email Adress</Form.Label>
-                    <Form.Control required name="formLoginEmail" type="email" placeholder="Ex. test@test.fr" onChange={(e) => setFormEmail(e.target.value)} />
+                    <Form.Control required name="formLoginEmail" id="formLoginEmail" type="email" placeholder="Ex. test@test.fr" onChange={(e) => setFormEmail(e.target.value)} />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                  </Form.Text>
@@ -48,7 +33,7 @@ const LoginComponents = () => {
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setFormPassword(e.target.value)} />
+                    <Form.Control type="password" id="formLoginPassword" placeholder="myPassword1375" onChange={(e) => setFormPassword(e.target.value)} />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
