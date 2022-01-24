@@ -3,12 +3,17 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import securityService from '../Services/security.service';
 import walletService from '../Services/wallet.service';
+import { useNavigate } from 'react-router-dom';
 
 const LoginComponents = () => {
 
     const [formEmail, setFormEmail] = useState();
     const [formPassword, setFormPassword] = useState();
     const [idCurrentWallet, setIdCurrentWallet] = useState();
+    const [credentialValid, setCrendentailValid] = useState();
+    const [loginError, setLoginError] = useState("");
+    const navigate = useNavigate();
+
 
     const login = (e) => {
 
@@ -16,15 +21,24 @@ const LoginComponents = () => {
 
         // Get token and add in local storage (à changer par un système plus sécurisé)
         securityService.getToken(formEmail, formPassword).then(resp => {
+           
             localStorage.setItem("JWT", resp.data.token);
             localStorage.setItem("refresh_token", resp.data.refresh_token);
-            
+
             // Défini le wallet principal après la connexion
             walletService.getMainWallet().then((resp) => {
-                localStorage.setItem("current_wallet", resp.data.id)
+                localStorage.setItem("current_wallet", resp.data.id);
             });
-            
-        });
+
+            navigate('/transaction');
+        }).catch((error) => {
+            if(error.response.status === 401) {
+                setCrendentailValid(false);
+                setLoginError("Sorry your email or your password is not correct");
+            } else {
+                console.log(error);
+            }
+        })
 
     }
 
@@ -47,6 +61,7 @@ const LoginComponents = () => {
                     Submit
                 </Button>
             </Form>
+            {loginError}
         </div>
     );
 };

@@ -12,6 +12,17 @@ const getWallets = () => {
 };
 
 
+const getWallet = (idWallet) => {
+
+    return axios.get('http://127.0.0.1:8000/api/wallets/'+idWallet, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        }
+
+    })
+};
+
+
 const getMainWallet = () => {
     return axios.get('http://127.0.0.1:8000/api/wallets/main', {
         headers: {
@@ -29,9 +40,57 @@ const getWalletTransactions = (idCurrentWallet) => {
 }
 
 
+const postWallet = (amount) => {
+
+    return axios.post('http://127.0.0.1:8000/api/wallets', {
+        amount: amount,
+        createdAt: new Date().toJSON()
+    }, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        },
+
+    })
+}
+
+const putMainWallet = (idCurrentWallet) => {
+    return axios.put('http://127.0.0.1:8000/api/wallets/'+idCurrentWallet+'/main', {
+
+    }, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        },
+    })
+}
+
+const putWallet = (idWallet, amount) => {
+    return axios.put('http://127.0.0.1:8000/api/wallets/'+idWallet, {
+        amount: amount,
+        editAt: new Date().toJSON()
+    }, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        },
+    })
+}
+
+const deleteWallet = (idWallet) => {
+    return axios.delete('http://127.0.0.1:8000/api/wallets/'+idWallet, {}, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        },
+    })
+}
+
+
 export default {
     getWallets,
+    getWallet,
     getMainWallet,
-    getWalletTransactions
+    getWalletTransactions,
+    postWallet,
+    putMainWallet,
+    putWallet,
+    deleteWallet
 };
 
