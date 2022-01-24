@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import walletService from '../Services/wallet.service';
 
 const SelectWalletForm = (props) => {
-     /* Desctructuring permet de ne plus utilser props à chaque fois*/
-     const { wallets } = props;
 
-    const handleCurrentWallet = (e) => {
-        var currentWallet = '/api/wallets/' + e;
-        localStorage.setItem('current_wallet', currentWallet);
+    const { setWalletSelected } = props;
+    const [idCurrentWallet, setIdCurrentWallet] = useState(null);
+    const [wallets, setWallets] = useState();
 
-    };
+    useEffect(() => {
+
+        if(idCurrentWallet == null) {
+            setIdCurrentWallet(localStorage.getItem('current_wallet'));
+        }
+
+        setWalletSelected(idCurrentWallet);
+
+        // Get wallet (by user), and add idCurrentWallet and wallet
+        walletService.getWallets().then((res) => {
+            setWallets(res.data['hydra:member']);
+        })
+
+    }, [idCurrentWallet]);
 
 
     return (
         <div className="selectWalletForm">
             <Form>
-                <Form.Group controlId="selectWallet">
-                    <Form.Label>Select your wallet</Form.Label>
-                    <Form.Control as="select" custom='true' onChange={(e) => handleCurrentWallet(e.target.value)}>
-                        {wallets.map((wallet) => (
-                            <option key={wallet.id} value={wallet['id']}>{wallet.id} </option>
-                        ))}
+                {wallets != null &&
+                    <Form.Group controlId="selectWallet">
 
-                    </Form.Control>
-                </Form.Group>
+                        <Form.Label>Select your wallet</Form.Label>
+                        <Form.Control as="select" custom='true' defaultValue={idCurrentWallet} onChange={(e) => setIdCurrentWallet(e.target.value)}>
+                            {wallets.map((wallet) => (
+                                <option key={wallet.id} value={wallet['id']}>{wallet.id} </option>
+                            ))}
+
+                        </Form.Control>
+                    </Form.Group>
+
+                }
+
             </Form>
 
         </div>

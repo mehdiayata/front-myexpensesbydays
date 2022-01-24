@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
@@ -30,6 +31,9 @@ const DisplayTransaction = (props) => {
                         <th>#</th>
                         <th>Amount</th>
                         <th>CreatedAt</th>
+                        <th>Edit At</th>
+                        <th>Update</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
 
@@ -40,6 +44,10 @@ const DisplayTransaction = (props) => {
                                 <td>{transaction.id}</td>
                                 <td>{transaction.amount}</td>
                                 <td>{transaction.createdAt}</td>
+                                <td>{transaction.editAt}</td>
+                                <td><Button>Edit</Button></td>
+                                <td><Button>Delete</Button></td>
+
                             </tr>
                         )
                     })}
