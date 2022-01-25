@@ -1,6 +1,6 @@
 import { Alert, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-import walletService from '../Services/wallet.service';
+import walletService from '../../Services/wallet.service';
 
 const WalletDelete = (props) => {
     const {idWalletDelete } = props;
@@ -30,8 +30,10 @@ const WalletDelete = (props) => {
                 });
             } else {
                 walletService.deleteWallet(idWalletDelete).then((resp => {
+
                     // Variable permettant d'actualiser la liste
                     setOnSubmitWalletDelete(true);
+
                 }));
             }
 

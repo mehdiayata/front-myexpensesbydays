@@ -1,6 +1,5 @@
 import React from 'react';
-import WalletAdd from '../Components/WalletAdd';
-import WalletList from '../Components/WalletList';
+import WalletList from '../Components/Wallet/WalletList';
 
 const WalletPage = () => {
     return (

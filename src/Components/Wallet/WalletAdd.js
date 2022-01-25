@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import walletService from '../Services/wallet.service';
+import walletService from '../../Services/wallet.service';
 
 const WalletAdd = (props) => {
-    const {setOnSubmitWalletAdd} = props;
+    const { setOnSubmitWalletAdd } = props;
     const [amount, setAmount] = useState();
     const [main, setMain] = useState(false);
+
 
     const addWallet = (e) => {
 
@@ -16,11 +17,15 @@ const WalletAdd = (props) => {
             // Change le wallet principal (resp.data.id = id nouveau wallet principal)
             if (main == true) {
                 walletService.putMainWallet(resp.data.id).then((resp) => {
+
+                    setOnSubmitWalletAdd(true);
+                    setMain(false);
                 })
 
             }
 
             setOnSubmitWalletAdd(true);
+            setMain(false);
 
             // Reset
             setAmount(null);

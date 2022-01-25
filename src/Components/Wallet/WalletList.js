@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import walletService from '../Services/wallet.service';
+import walletService from '../../Services/wallet.service';
 import WalletAdd from './WalletAdd';
 import WalletDelete from './WalletDelete';
 import WalletEdit from './WalletEdit';
+
 
 const WalletList = () => {
     const [wallets, setWallets] = useState([]);

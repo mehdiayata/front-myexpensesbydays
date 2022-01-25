@@ -47,7 +47,7 @@ const TransactionAdd = (props) => {
                     <Form.Control type="number" id="transaction-add-amount" onChange={(e) => { setAmount(e.target.value) }} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" set>
+                <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>

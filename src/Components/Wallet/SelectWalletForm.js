@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import walletService from '../Services/wallet.service';
+import walletService from '../../Services/wallet.service';
+
 
 const SelectWalletForm = (props) => {
 
@@ -10,6 +11,7 @@ const SelectWalletForm = (props) => {
 
     useEffect(() => {
 
+        // Attribut automatiquement l'idCurrentWallet au current_wallet contenu dans le localStorage
         if(idCurrentWallet == null) {
             setIdCurrentWallet(localStorage.getItem('current_wallet'));
         }

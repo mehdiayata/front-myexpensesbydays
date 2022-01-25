@@ -1,6 +1,18 @@
 import axios from "axios";
 
-const postTransactions = (amount, idCurrentWallet) => {
+const getTransaction = (idTransaction) => {
+    return axios.get('http://127.0.0.1:8000/api/transactions/' + idTransaction, {
+
+    }, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT') //the token is a variable which holds the token
+        }
+    }
+    )
+
+}
+
+const postTransactions = (amount, idTransaction) => {
 
     amount = amount.toString();
     let date = new Date();
@@ -9,7 +21,7 @@ const postTransactions = (amount, idCurrentWallet) => {
     return axios.post('http://127.0.0.1:8000/api/transactions', {
         amount: amount,
         createdAt: date.toJSON(),
-        wallet: "/api/wallets/" + idCurrentWallet
+        wallet: "/api/wallets/" + idTransaction
     },
         {
             headers: {
@@ -18,6 +30,23 @@ const postTransactions = (amount, idCurrentWallet) => {
         })
 }
 
+const putTransaction = (amount, idTransaction) => {
+    amount = amount.toString();
+    let date = new Date();
+
+    return axios.put('http://127.0.0.1:8000/api/transactions/'+idTransaction, {
+        amount: amount,
+        editAt: date.toJSON(),
+    })
+}
+
+const deleteTransaction = (idTransaction) => {
+    return axios.delete('http://127.0.0.1:8000/api/transactions/'+idTransaction);
+}
+
 export default {
-    postTransactions
+    postTransactions,
+    getTransaction,
+    putTransaction,
+    deleteTransaction
 }

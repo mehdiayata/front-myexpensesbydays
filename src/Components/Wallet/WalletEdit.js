@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import walletService from '../Services/wallet.service';
+import walletService from '../../Services/wallet.service';
 
 const WalletEdit = (props) => {
     const { idWalletEdit } = props;
     const { setOnSubmitWalletEdit } = props;
     const { handleOnSubmitWalletEdit } = props;
     const [walletInfo, setWalletInfo] = useState();
-    const [amount, setAmount] = useState('');
+    const [amount, setAmount] = useState();
     const [main, setMain] = useState();
 
 
@@ -53,12 +53,12 @@ const WalletEdit = (props) => {
 
     return (
         <div className="walletEdit">
-            <h1> Wallet Add </h1>
+            <h1> Wallet Edit </h1>
 
             <Form onSubmit={editWallet} method='post' >
                 <Form.Group controlId='form-wallet-edit-amount'>
                     <Form.Label>Amount</Form.Label>
-                    <Form.Control required name="amount" value={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
+                    <Form.Control required name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
                 {['checkbox'].map((type) => (

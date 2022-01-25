@@ -3,7 +3,6 @@ import axios from 'axios';
 const getWallets = () => {
 
     return axios.get('http://127.0.0.1:8000/api/wallets/', {
-
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
         }
