@@ -29,7 +29,7 @@ const TransactionList = () => {
         // Get transactions du Wallet user
         if (walletSelected != null) {
             walletService.getWalletTransactions(walletSelected).then((resp) => {
-                setTransactions(resp.data.transactions);
+                setTransactions(resp.data['hydra:member']);
             });
         }
     }, [walletSelected, onSubmitAdd, onSubmitEdit, onSubmitDelete])

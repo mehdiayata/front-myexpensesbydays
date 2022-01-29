@@ -9,6 +9,7 @@ import axios from 'axios';
 import securityService from './Services/security.service';
 import RegistrationPage from './Pages/RegistrationPage';
 import WalletPage from './Pages/WalletPage';
+import PasswordEditPage from './Pages/PasswordEditPage';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/wallets" element={<WalletPage />} />
+          <Route path="/password/edit" element={<PasswordEditPage />} />
         </Routes>
       </BrowserRouter>
     </div>

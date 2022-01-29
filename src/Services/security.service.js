@@ -48,11 +48,11 @@ const refreshTokenResponse = () => {
             return res;
         },
         async (err) => {
-            
+
             const originalConfig = err.config;
 
             if (originalConfig.url !== "/api/login" && err.response) {
-                
+
                 if (err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
 
@@ -76,10 +76,22 @@ const refreshTokenResponse = () => {
     );
 }
 
+const editPassword = (idUser, newPassword) => {
+    return axios.put('http://127.0.0.1:8000/api/users/' + idUser, {
+        password: newPassword
+    },
+        {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('JWT') //the token is a variable which holds the token
+            }
+        })
+}
+
 export default {
     getToken,
     refreshToken,
     registration,
     refreshTokenResponse,
-    refreshTokenRequest
+    refreshTokenRequest,
+    editPassword
 }
