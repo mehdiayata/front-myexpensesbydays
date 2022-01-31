@@ -15,11 +15,14 @@ const TransactionList = () => {
     const [onSubmitDelete, setOnSubmitDelete] = useState();
 
     const [addTransactionButton, setAddTransactionButton] = useState();
-    const [editTransactionButton, setEditTransactionButton] = useState();
+    const [editTransactionButton, setEditTransactionButton] = useState(false);
     const [deleteTransactionButton, setDeleteTransactionButton] = useState();
 
     const [idTransactionEdit, setIdTransactionEdit] = useState(null);
     const [idTransactionDelete, setIdTransactionDelete] = useState(null);
+
+    const [quitAdd, setquitAdd] = useState(false);
+    const [quitEdit, setquitEdit] = useState(false);
 
     useEffect(() => {
         setOnSubmitAdd(false);
@@ -34,15 +37,14 @@ const TransactionList = () => {
             walletService.getWalletTransactions(walletSelected).then((resp) => {
                 setTransactions(resp.data['hydra:member']);
             });
-
-
         }
-
 
     }, [walletSelected, onSubmitAdd, onSubmitEdit, onSubmitDelete])
 
 
     const handleAddButton = (e) => {
+
+        setquitAdd(true);
         if (addTransactionButton == true) {
             setAddTransactionButton(false);
         } else {
@@ -52,13 +54,9 @@ const TransactionList = () => {
 
     const handleEditButton = (e) => {
 
-        if (editTransactionButton == true) {
-            setEditTransactionButton(false);
-        } else {
-            setEditTransactionButton(true);
-        }
+        setquitEdit(true);
+        setEditTransactionButton(true);
     };
-
 
     const handleDeleteButton = (e) => {
         if (deleteTransactionButton == true) {
@@ -68,8 +66,34 @@ const TransactionList = () => {
         }
     };
 
+    const handleQuitAddButton = (e) => {
+        if (quitAdd == true) {
+            setquitAdd(false);
+            setAddTransactionButton(false);
+        } else {
+            setquitAdd(true);
+        }
+    }
+
+    const handleQuitEditButton = (e) => {
+        if (quitEdit == true) {
+            setquitEdit(false);
+            setEditTransactionButton(false);
+        } else {
+            setquitEdit(true);
+        }
+    }
+
+
     return (
         <div className="transaction-list">
+            {quitAdd == true &&
+                <Button onClick={(e) => handleQuitAddButton(e)}> X </Button>
+            }
+
+            {quitEdit == true &&
+                <Button onClick={(e) => handleQuitEditButton(e)}> X </Button>
+            }
 
             <SelectWalletForm setWalletSelected={setWalletSelected} />
 
@@ -87,7 +111,9 @@ const TransactionList = () => {
             }
 
 
-            <Button onClick={(e) => handleAddButton()}> Add </Button>
+            {addTransactionButton == false &&
+                <Button onClick={(e) => handleAddButton()}> Add </Button>
+            }
             <Table>
                 <thead>
                     <tr>
@@ -109,9 +135,16 @@ const TransactionList = () => {
                                 <td>{transaction.amount}</td>
                                 <td>{new Date(transaction.createdAt).toUTCString()}</td>
                                 <td>{transaction.editAt != null && new Date(transaction.editAt).toUTCString()}</td>
-                                <td><Button onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
-                                <td><Button onClick={(e) => { handleDeleteButton(e); setIdTransactionDelete(transaction.id) }}> Delete</Button></td>
 
+                                {editTransactionButton == true &&
+                                    <td><Button disabled onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
+                                }
+                                {editTransactionButton == false &&
+                                    <td><Button  onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
+                                
+                                }
+                                    <td><Button onClick={(e) => { handleDeleteButton(e); setIdTransactionDelete(transaction.id) }}> Delete</Button></td>
+                                
                             </tr>
                         )
                     })}
