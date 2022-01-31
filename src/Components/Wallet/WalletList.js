@@ -98,16 +98,14 @@ const WalletList = () => {
                         } else if (wallet.main == false) {
                             var test = 'NO'
                         }
-                        if (wallet.editAt == null) {
-                            wallet.editAt = "No edit";
-                        }
+                    
                         return (
                             <tr key={wallet.id}>
                                 <td>{wallet.id}</td>
                                 <td>{wallet.amount}</td>
                                 <td>{test}</td>
-                                <td>{wallet.createdAt}</td>
-                                <td>{wallet.editAt}</td>
+                                <td>{new Date(wallet.createdAt).toUTCString()}</td>
+                                <td>{wallet.editAt != null && new Date(wallet.editAt).toUTCString()}</td>
                                 <td><Button onClick={(e) => handleEditButton(e.target.value)} value={wallet.id}>Edit</Button></td>
                                 <td><Button onClick={(e) => { handleDeleteButton(e.target.value); setIdWalletDelete(e.target.value) }} value={wallet.id}>Delete</Button></td>
 

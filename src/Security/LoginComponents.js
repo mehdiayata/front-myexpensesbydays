@@ -20,18 +20,19 @@ const LoginComponents = () => {
 
         // Get token and add in local storage (à changer par un système plus sécurisé)
         securityService.getToken(formEmail, formPassword).then(resp => {
-           
+
             localStorage.setItem("JWT", resp.data.token);
             localStorage.setItem("refresh_token", resp.data.refresh_token);
 
             // Défini le wallet principal après la connexion
             walletService.getMainWallet().then((resp) => {
                 localStorage.setItem("current_wallet", resp.data.id);
+
+                navigate('/transaction');
             });
 
-            navigate('/transaction');
         }).catch((error) => {
-            if(error.response.status === 401) {
+            if (error.response.status === 401) {
                 setCrendentailValid(false);
                 setLoginError("Sorry your email or your password is not correct");
             } else {

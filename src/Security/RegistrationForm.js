@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import securityService from '../Services/security.service';
+import { useNavigate } from 'react-router-dom';
+import walletService from '../Services/wallet.service';
 
 const RegistrationForm = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const navigate = useNavigate();
 
     const registration = (e) => {
-        
         e.preventDefault();
-        securityService.registration(email, password).then((resp) => {
-            console.log('registration OK');
-            console.log(resp);
-        })
+
+        if (confirmPassword === password) {
+            securityService.registration(email, password).then((resp) => {
+
+                    navigate('/login');
+            })
+        } else {
+            alert('Your password is incorrect');
+        }
     }
 
     return (
@@ -30,6 +38,11 @@ const RegistrationForm = () => {
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setPassword(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formConfirmPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">

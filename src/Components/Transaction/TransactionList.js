@@ -26,12 +26,19 @@ const TransactionList = () => {
         setOnSubmitEdit(false);
         setOnSubmitDelete(false);
 
+        if (walletSelected == null) {
+            setWalletSelected(localStorage.getItem('current_wallet'));
+        }
         // Get transactions du Wallet user
         if (walletSelected != null) {
             walletService.getWalletTransactions(walletSelected).then((resp) => {
                 setTransactions(resp.data['hydra:member']);
             });
+
+
         }
+
+
     }, [walletSelected, onSubmitAdd, onSubmitEdit, onSubmitDelete])
 
 
@@ -52,7 +59,7 @@ const TransactionList = () => {
         }
     };
 
-    
+
     const handleDeleteButton = (e) => {
         if (deleteTransactionButton == true) {
             setDeleteTransactionButton(false);
@@ -76,7 +83,7 @@ const TransactionList = () => {
 
 
             {deleteTransactionButton == true &&
-                <TransactionDelete  idTransactionDelete={idTransactionDelete} setOnSubmitDelete={setOnSubmitDelete} handleDeleteButton={handleDeleteButton}/>
+                <TransactionDelete idTransactionDelete={idTransactionDelete} setOnSubmitDelete={setOnSubmitDelete} handleDeleteButton={handleDeleteButton} />
             }
 
 
@@ -95,15 +102,13 @@ const TransactionList = () => {
                 <tbody>
 
                     {transactions.map((transaction) => {
-                        if (transaction.editAt == null) {
-                            transaction.editAt = "No edit";
-                        }
+
                         return (
                             <tr key={transaction.id}>
                                 <td>{transaction.id}</td>
                                 <td>{transaction.amount}</td>
-                                <td>{transaction.createdAt}</td>
-                                <td>{transaction.editAt}</td>
+                                <td>{new Date(transaction.createdAt).toUTCString()}</td>
+                                <td>{transaction.editAt != null && new Date(transaction.editAt).toUTCString()}</td>
                                 <td><Button onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
                                 <td><Button onClick={(e) => { handleDeleteButton(e); setIdTransactionDelete(transaction.id) }}> Delete</Button></td>
 

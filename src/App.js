@@ -13,24 +13,23 @@ import PasswordEditPage from './Pages/PasswordEditPage';
 
 function App() {
 
-  
-  securityService.refreshTokenResponse();
-  securityService.refreshTokenRequest();
+
+  if (localStorage.getItem('JWT') !== 'undefined' && localStorage.getItem('JWT') !== null) {
+    securityService.refreshTokenResponse();
+    securityService.refreshTokenRequest();
+  }
 
   useEffect(() => {
-
-
     // Si l'user n'est pas connecté
-    if (localStorage.getItem('JWT') != null) {
-
+    if (localStorage.getItem('JWT') !== 'undefined'  && localStorage.getItem('JWT') !== null) {
+    
       // Get wallet by default and add in localStorage 
       walletService.getMainWallet().then((resp) => {
         localStorage.setItem('current_wallet', resp.data.id);
       });
     }
 
-
-  }, []);
+  });
 
   return (
     <div className="App">

@@ -36,7 +36,6 @@ const WalletEdit = (props) => {
                 walletService.putMainWallet(idWalletEdit);
             }
 
-
             setOnSubmitWalletEdit(true);
         })
 
@@ -61,17 +60,37 @@ const WalletEdit = (props) => {
                     <Form.Control required name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
-                {['checkbox'].map((type) => (
-                    <div key={`default-${type}`} className="mb-3">
-                        <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label={`default ${type}`}
-                            defaultChecked={main}
-                            onChange={(e) => handleEditMainWallet(e)}
-                        />
-                    </div>
-                ))}
+                {main == true &&
+
+                    ['checkbox'].map((type) => (
+                        <div key={`default-${type}`} className="mb-3">
+                            <Form.Check
+                                type={type}
+                                id={`default-${type}`}
+                                label={`default ${type}`}
+                                defaultChecked={main}
+                                onChange={(e) => handleEditMainWallet(e)}
+                                disabled
+                            />
+                        </div>
+                    ))
+                }
+
+                {main == false &&
+                    ['checkbox'].map((type) => (
+                        <div key={`default-${type}`} className="mb-3">
+                            <Form.Check
+                                type={type}
+                                id={`default-${type}`}
+                                label={`default ${type}`}
+                                defaultChecked={main}
+                                onChange={(e) => handleEditMainWallet(e)}
+                            />
+                        </div>
+                    ))
+                }
+
+
 
                 <Button variant="primary" type="submit">
                     Submit
