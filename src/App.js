@@ -26,6 +26,8 @@ function App() {
       // Get wallet by default and add in localStorage 
       walletService.getMainWallet().then((resp) => {
         localStorage.setItem('current_wallet', resp.data.id);
+
+        
       });
     }
 
@@ -36,6 +38,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route component={NotFound} />
+          
+          <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/registration" element={<RegistrationPage />} />

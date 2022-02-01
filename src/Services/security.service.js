@@ -27,7 +27,7 @@ const refreshTokenRequest = () => {
     return axios.interceptors.request.use(
 
         (config) => {
-
+            
             const token = localStorage.getItem('JWT');
             if (token) {
                 config.headers["Authorization"] = 'Bearer ' + token;
@@ -36,7 +36,6 @@ const refreshTokenRequest = () => {
         },
         (error) => {
 
-            console.log(error);
             return Promise.reject(error);
         }
     );
@@ -56,11 +55,16 @@ const refreshTokenResponse = () => {
                 if (err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
 
+                    // Si les TokenRefresh est invalid redirige vers login
+                    if (err.response.data.message == "JWT Refresh Token Not Found") {
+                        localStorage.clear()
+                        window.location.href = "/login";
+                    }
+
                     try {
                         const rs = await axios.post("http://127.0.0.1:8000/api/token/refresh", {
                             refresh_token: localStorage.getItem('refresh_token')
                         });
-
 
                         localStorage.setItem('JWT', rs.data.token)
 
@@ -70,7 +74,6 @@ const refreshTokenResponse = () => {
                     }
                 }
             }
-
             return Promise.reject(err);
         }
     );
