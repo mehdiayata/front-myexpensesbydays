@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import securityService from '../Services/security.service';
 import { useNavigate } from 'react-router-dom';
 import walletService from '../Services/wallet.service';
@@ -10,20 +10,22 @@ const RegistrationForm = () => {
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const registration = (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
+        
         if (confirmPassword === password) {
             securityService.registration(email, password).then((resp) => {
 
-                    navigate('/login');
+                navigate('/login');
             })
         } else {
             alert('Your password is incorrect');
         }
     }
-
+    
     return (
         <div className="registration_form">
             <Form onSubmit={registration} method='post' >
@@ -45,9 +47,24 @@ const RegistrationForm = () => {
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                {isLoading == false &&
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                }
+
+                {isLoading == true &&
+                    <Button variant="primary" disabled>
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                 Loading...
+               </Button>
+                }
             </Form>
         </div>
     );

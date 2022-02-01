@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
 import { useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
@@ -12,11 +12,13 @@ const LoginComponents = () => {
     const [credentialValid, setCrendentailValid] = useState();
     const [loginError, setLoginError] = useState("");
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const login = (e) => {
 
         e.preventDefault();
+        setIsLoading(true);
 
         // Get token and add in local storage (à changer par un système plus sécurisé)
         securityService.getToken(formEmail, formPassword).then(resp => {
@@ -27,12 +29,14 @@ const LoginComponents = () => {
             // Défini le wallet principal après la connexion
             walletService.getMainWallet().then((resp) => {
                 localStorage.setItem("current_wallet", resp.data.id);
-
+                
+                setIsLoading(false);
                 navigate('/transaction');
             });
 
         }).catch((error) => {
             if (error.response.status === 401) {
+                setIsLoading(false);
                 setCrendentailValid(false);
                 setLoginError("Sorry your email or your password is not correct");
             } else {
@@ -57,10 +61,26 @@ const LoginComponents = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setFormPassword(e.target.value)} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                {isLoading == false &&
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                }
+
+                {isLoading == true &&
+                    <Button variant="primary" disabled>
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                 Loading...
+               </Button>
+                }
             </Form>
+
             {loginError}
         </div>
     );

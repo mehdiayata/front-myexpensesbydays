@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Spinner, Table } from 'react-bootstrap';
 import walletService from '../../Services/wallet.service';
 import WalletAdd from './WalletAdd';
 import WalletDelete from './WalletDelete';
@@ -24,15 +24,20 @@ const WalletList = () => {
     const [quitAdd, setquitAdd] = useState(false);
     const [quitEdit, setquitEdit] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         // Initialisalisation à false;
         setOnSubmitWalletDelete(false);
         setOnSubmitWalletEdit(false);
         setOnSubmitWalletAdd(false);
 
+        setIsLoading(true);
+
         // GET Wallets
         walletService.getWallets().then((resp) => {
             setWallets(resp.data['hydra:member']);
+            setIsLoading(false);
         });
 
     }, [onSubmitWalletEdit, onSubmitWalletDelete, onSubmitWalletAdd])
@@ -79,82 +84,93 @@ const WalletList = () => {
         }
     }
 
-    return (
-        <div className="walletList">
-            {quitAdd == true &&
-                <Button onClick={(e) => handleQuitAddButton(e)}> X </Button>
-            }
+    if (isLoading == false) {
+        return (
+            <div className="walletList">
+                {quitAdd == true &&
+                    <Button onClick={(e) => handleQuitAddButton(e)}> X </Button>
+                }
 
-            {quitEdit == true &&
-                <Button onClick={(e) => handleQuitEditButton(e)}> X </Button>
-            }
+                {quitEdit == true &&
+                    <Button onClick={(e) => handleQuitEditButton(e)}> X </Button>
+                }
 
-            {addWalletButton == true &&
-                <WalletAdd setOnSubmitWalletAdd={setOnSubmitWalletAdd} />
-            }
+                {addWalletButton == true &&
+                    <WalletAdd setOnSubmitWalletAdd={setOnSubmitWalletAdd} />
+                }
 
-            <h1> List of your Wallets </h1>
+                <h1> List of your Wallets </h1>
 
-            {editWalletButton === true &&
-                <WalletEdit idWalletEdit={idWalletEdit} setOnSubmitWalletEdit={setOnSubmitWalletEdit} />
-            }
+                {editWalletButton === true &&
+                    <WalletEdit idWalletEdit={idWalletEdit} setOnSubmitWalletEdit={setOnSubmitWalletEdit} />
+                }
 
-            {deleteWalletButton == true &&
-                <WalletDelete idWalletDelete={idWalletDelete} wallets={wallets} handleDeleteButton={handleDeleteButton} setOnSubmitWalletDelete={setOnSubmitWalletDelete} />
-            }
+                {deleteWalletButton == true &&
+                    <WalletDelete idWalletDelete={idWalletDelete} wallets={wallets} handleDeleteButton={handleDeleteButton} setOnSubmitWalletDelete={setOnSubmitWalletDelete} />
+                }
 
 
-            {addWalletButton == false &&
-                <Button onClick={(e) => handleAddButton(e.target.value)}> Add </Button>
-            }
 
-            <Table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Amount</th>
-                        <th>Main</th>
-                        <th>Created At</th>
-                        <th>Edited At</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    {wallets.map((wallet) => {
-                        if (wallet.main == true) {
-                            var test = 'OK'
-                        } else if (wallet.main == false) {
-                            var test = 'NO'
-                        }
+                {addWalletButton == false &&
+                    <Button onClick={(e) => handleAddButton(e.target.value)}> Add </Button>
+                }
 
-                        return (
-                            <tr key={wallet.id}>
-                                <td>{wallet.id}</td>
-                                <td>{wallet.amount}</td>
-                                <td>{test}</td>
-                                <td>{new Date(wallet.createdAt).toUTCString()}</td>
-                                <td>{wallet.editAt != null && new Date(wallet.editAt).toUTCString()}</td>
-                                {editWalletButton == true &&
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Amount</th>
+                            <th>Main</th>
+                            <th>Created At</th>
+                            <th>Edited At</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                    <td><Button disabled onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
-                                }
+                        {wallets.map((wallet) => {
+                            if (wallet.main == true) {
+                                var test = 'OK'
+                            } else if (wallet.main == false) {
+                                var test = 'NO'
+                            }
 
-                                {editWalletButton == false &&
+                            return (
+                                <tr key={wallet.id}>
+                                    <td>{wallet.id}</td>
+                                    <td>{wallet.amount}</td>
+                                    <td>{test}</td>
+                                    <td>{new Date(wallet.createdAt).toUTCString()}</td>
+                                    <td>{wallet.editAt != null && new Date(wallet.editAt).toUTCString()}</td>
+                                    {editWalletButton == true &&
 
-                                    <td><Button onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
-                                }
-                                <td><Button onClick={(e) => { handleDeleteButton(e.target.value); setIdWalletDelete(e.target.value); }} value={wallet.id}>Delete</Button></td>
+                                        <td><Button disabled onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
+                                    }
 
-                            </tr>
-                        )
-                    })}
+                                    {editWalletButton == false &&
 
-                </tbody>
-            </Table>
-        </div>
-    );
+                                        <td><Button onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
+                                    }
+                                    <td><Button onClick={(e) => { handleDeleteButton(e.target.value); setIdWalletDelete(e.target.value); }} value={wallet.id}>Delete</Button></td>
+
+                                </tr>
+                            )
+                        })}
+
+                    </tbody>
+                </Table>
+
+            </div>
+        );
+    } else {
+        return (
+            <Spinner animation="border" role="status">
+                <span className="visually-hidden"></span>
+            </Spinner>
+        );
+    }
 };
 
 export default WalletList;

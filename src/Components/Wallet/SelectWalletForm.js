@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import walletService from '../../Services/wallet.service';
 
 
@@ -17,6 +17,8 @@ const SelectWalletForm = (props) => {
         }
 
         setWalletSelected(idCurrentWallet);
+
+        
 
         // Get wallet (by user), and add idCurrentWallet and wallet
         walletService.getWallets().then((res) => {

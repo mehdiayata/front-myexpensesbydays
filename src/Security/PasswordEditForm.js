@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import securityService from '../Services/security.service';
 import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router';
@@ -10,6 +10,8 @@ const PasswordEditForm = () => {
     const [newPassword, setNewPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const [confirmMessage, setConfirmMessage] = useState(false);
 
     const verifyNewPassword = () => {
         if (newPassword == confirmPassword) {
@@ -21,7 +23,8 @@ const PasswordEditForm = () => {
 
     const editPassword = (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
+        setConfirmMessage(false);
         // Vérifie si les password inscrit sont identique
         let validEdit = verifyNewPassword();
 
@@ -36,8 +39,12 @@ const PasswordEditForm = () => {
                         localStorage.setItem("JWT", resp.data.token);
                         localStorage.setItem("refresh_token", resp.data.refresh_token);
 
-                        // Redirection
-                        navigate('/transaction');
+                        setIsLoading(false);
+                        setConfirmMessage(true);
+
+                        e.target.reset();
+                        // // Redirection
+                        // navigate('/transaction');
                     })
 
                 })
@@ -65,12 +72,30 @@ const PasswordEditForm = () => {
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control type="password" placeholder="confirm password" onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
+                
+                {isLoading == false &&
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                }
 
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                {isLoading == true &&
+                    <Button variant="primary" disabled>
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                 Loading...
+               </Button>
+                }
             </Form>
+
+            {confirmMessage == true &&
+                <p> Your password is edited </p>
+            }
         </div>
     );
 };

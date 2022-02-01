@@ -9,7 +9,6 @@ const TransactionDelete = (props) => {
 
     const [alertTransaction, setAlertTransaction] = useState(true);
 
-
     const handleValidDeleteButton = (valid) => {
         handleDeleteButton(false);
 
@@ -41,7 +40,6 @@ const TransactionDelete = (props) => {
     } else {
         return (
             <div className="transaction-delete" >
-
 
             </div >
         )
