@@ -31,7 +31,7 @@ const LoginComponents = () => {
                 localStorage.setItem("current_wallet", resp.data.id);
                 
                 setIsLoading(false);
-                navigate('/transaction');
+                navigate('/transactions');
             });
 
         }).catch((error) => {

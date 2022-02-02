@@ -1,9 +1,11 @@
+import Navigation from '../Components/Navigation/Navigation';
 import TransactionList from '../Components/Transaction/TransactionList';
 
 const Transaction = () => {
 
     return (
-        <div>
+        <div className="transaction-page">
+            <Navigation />
             <TransactionList />
         </div>
     );
