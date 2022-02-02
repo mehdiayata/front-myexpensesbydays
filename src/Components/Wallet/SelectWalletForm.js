@@ -29,15 +29,14 @@ const SelectWalletForm = (props) => {
 
 
     return (
-        <div className="selectWalletForm">
+        <div className="select-wallet-form">
             <Form>
                 {wallets != null &&
                     <Form.Group controlId="selectWallet">
 
-                        <Form.Label>Select your wallet</Form.Label>
                         <Form.Control as="select" custom='true' defaultValue={idCurrentWallet} onChange={(e) => setIdCurrentWallet(e.target.value)}>
                             {wallets.map((wallet) => (
-                                <option key={wallet.id} value={wallet['id']}>{wallet.id} </option>
+                                <option key={wallet.id} value={wallet['id']}> Wallet : {wallet.id} </option>
                             ))}
 
                         </Form.Control>

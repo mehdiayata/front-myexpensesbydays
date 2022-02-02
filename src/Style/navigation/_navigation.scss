@@ -1,0 +1,41 @@
+.navigation {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-right: 1px solid rgb(255, 255, 255);
+    background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+    width: 10%;
+
+    .app-title {
+        color: rgb(124, 255, 112);
+        margin-bottom: 50px;
+
+        svg{
+            font-size: 45px;
+        }
+    }
+
+    .nav {
+        flex-grow: 1;
+        height: 100%;
+        padding: 10px;
+        margin: 10px;
+
+        a {
+            border: 2px solid rgb(173, 190, 173);
+            font-size: 45px;
+            width: 100%;
+            transition: transform 1s;
+            margin-bottom: 35px;
+
+            svg {
+                color: rgb(107, 243, 107);
+            }
+
+            &:hover {
+                transform: scale(1.2);
+                background-image: linear-gradient(15deg, #b9abab 25%, #5c635c 100%);
+            }
+        }
+    }
+}

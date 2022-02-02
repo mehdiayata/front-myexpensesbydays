@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Table, Button, Spinner } from 'react-bootstrap';
+import { Table, Button, Spinner } from 'react-bootstrap';
+import { GiTrashCan } from 'react-icons/gi';
 import walletService from '../../Services/wallet.service';
 import SelectWalletForm from '../Wallet/SelectWalletForm';
 import TransactionAdd from './TransactionAdd';
 import TransactionDelete from './TransactionDelete';
 import TransactionEdit from './TransactionEdit';
+
 
 const TransactionList = () => {
     const [walletSelected, setWalletSelected] = useState();
@@ -36,9 +38,9 @@ const TransactionList = () => {
             setWalletSelected(localStorage.getItem('current_wallet'));
         }
 
-        if(transactions == []) {
+        if (transactions == []) {
             setIsLoading(true);
-        } 
+        }
 
         // Get transactions du Wallet user
         if (walletSelected != null) {
@@ -46,7 +48,7 @@ const TransactionList = () => {
                 setTransactions(resp.data['hydra:member']);
                 setIsLoading(false);
             });
-        } 
+        }
 
     }, [walletSelected, onSubmitAdd, onSubmitEdit, onSubmitDelete])
 
@@ -95,74 +97,90 @@ const TransactionList = () => {
 
     if (isLoading == false) {
         return (
-            <div className="transaction-list">
+            <div className="transaction">
+                <div class="transaction-list-header">
+                    <SelectWalletForm setWalletSelected={setWalletSelected} />
 
-                {quitAdd == true &&
-                    <Button onClick={(e) => handleQuitAddButton(e)}> X </Button>
-                }
+                    {addTransactionButton == false &&
+                        <Button onClick={(e) => handleAddButton()}> Add </Button>
+                    }
 
-                {quitEdit == true &&
-                    <Button onClick={(e) => handleQuitEditButton(e)}> X </Button>
-                }
-
-                <SelectWalletForm setWalletSelected={setWalletSelected} />
-
-                {addTransactionButton == true &&
-                    <TransactionAdd walletSelected={walletSelected} setOnSubmitAdd={setOnSubmitAdd} />
-                }
-
-                {editTransactionButton == true &&
-                    <TransactionEdit walletSelected={walletSelected} idTransactionEdit={idTransactionEdit} setOnSubmitEdit={setOnSubmitEdit} />
-                }
+                    {quitAdd == true &&
+                        <Button onClick={(e) => handleQuitAddButton(e)}> Close Add </Button>
+                    }
 
 
-                {deleteTransactionButton == true &&
-                    <TransactionDelete idTransactionDelete={idTransactionDelete} setOnSubmitDelete={setOnSubmitDelete} handleDeleteButton={handleDeleteButton} />
-                }
+                    {quitEdit == true &&
+                        <Button onClick={(e) => handleQuitEditButton(e)}> Close Edit </Button>
+                    }
+
+                </div>
+
+                <div className="transaction-list">
+
+                    {addTransactionButton == true &&
+                        <TransactionAdd walletSelected={walletSelected} setOnSubmitAdd={setOnSubmitAdd} />
+                    }
+
+                    {editTransactionButton == true &&
+                        <TransactionEdit walletSelected={walletSelected} idTransactionEdit={idTransactionEdit} setOnSubmitEdit={setOnSubmitEdit} />
+                    }
 
 
-                {addTransactionButton == false &&
-                    <Button onClick={(e) => handleAddButton()}> Add </Button>
-                }
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Amount</th>
-                            <th>Created At</th>
-                            <th>Edited At</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    {deleteTransactionButton == true &&
+                        <TransactionDelete idTransactionDelete={idTransactionDelete} setOnSubmitDelete={setOnSubmitDelete} handleDeleteButton={handleDeleteButton} />
+                    }
 
-                        {transactions.map((transaction) => {
-                            return (
-                                <tr key={transaction.id}>
-                                    <td>{transaction.id}</td>
-                                    <td>{transaction.amount}</td>
-                                    <td>{new Date(transaction.createdAt).toUTCString()}</td>
-                                    <td>{transaction.editAt != null && new Date(transaction.editAt).toUTCString()}</td>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Amount</th>
+                                <th>Created At</th>
+                                <th>Edited At</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                    {editTransactionButton == true &&
-                                        <td><Button disabled onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
-                                    }
-                                    {editTransactionButton == false &&
-                                        <td><Button onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
+                            {transactions.map((transaction) => {
+                                return (
+                                    <tr key={transaction.id}>
+                                        <td>{transaction.id}</td>
+                                        <td>{transaction.amount}</td>
+                                        <td>{new Date(transaction.createdAt).toUTCString()}</td>
+                                        <td>{transaction.editAt != null && new Date(transaction.editAt).toUTCString()}</td>
 
-                                    }
-                                    <td><Button onClick={(e) => { handleDeleteButton(e); setIdTransactionDelete(transaction.id) }}> Delete</Button></td>
+                                        {editTransactionButton == true &&
+                                            <td><Button className="transaction-list-edit-button" disabled onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
+                                        }
+                                        {editTransactionButton == false &&
+                                            <td><Button className="transaction-list-edit-button" onClick={(e) => { handleEditButton(e); setIdTransactionEdit(transaction.id) }} > Edit</Button></td>
 
-                                </tr>
-                            )
-                        })}
+                                        }
 
 
-                    </tbody>
-                </Table>
+                                        {deleteTransactionButton == true &&
+
+                                            <td><Button disabled className="transaction-list-delete-button" onClick={(e) => { handleDeleteButton(e); setIdTransactionDelete(transaction.id) }}> <GiTrashCan /> </Button></td>
+
+                                        }
+
+                                        {deleteTransactionButton == false &&
+
+                                            <td><Button className="transaction-list-delete-button" onClick={(e) => { handleDeleteButton(e); setIdTransactionDelete(transaction.id) }}> <GiTrashCan /> </Button></td>
+                                        }
+                                    </tr>
+                                )
+                            })}
+
+
+                        </tbody>
+                    </Table>
+                </div>
+
             </div>
-
         );
     } else {
         return (

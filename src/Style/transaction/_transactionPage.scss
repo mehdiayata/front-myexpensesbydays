@@ -1,0 +1,59 @@
+.transaction-page {
+    display: flex;
+
+    .select-wallet-form {
+        width: 20%;
+        border: 2px solid black;
+    }
+
+    .transaction {
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .transaction-list-header {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+            border: black;
+            color: #6bf36b;
+            width: 15%;
+            font-weight: bold;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            transition: transform 1s;
+
+            &:hover {
+                transform: scale(1.05);
+
+                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+            }
+        }
+    }
+
+    .transaction-list {
+        border: 2px solid black;
+        background-color: white;
+        padding: 50px;
+
+        .transaction-list-edit-button, .transaction-list-delete-button {
+            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+            border: black;
+            color: #6bf36b;
+            transition: transform 1s;
+
+            &:hover {
+                transform: scale(1.05);
+                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+            }
+        }
+
+        .transaction-list-delete-button svg {
+            font-size: 20px;
+        }
+
+    }
+}

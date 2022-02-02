@@ -2,8 +2,8 @@ import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import securityService from '../Services/security.service';
-import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router';
+
 
 const PasswordEditForm = () => {
     const [oldPassword, setOldPassword] = useState();
