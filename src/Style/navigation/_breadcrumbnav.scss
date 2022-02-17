@@ -1,0 +1,17 @@
+.breadcrumb-nav {
+    flex-direction: row;
+
+    .breadcrumb {
+        background-image: linear-gradient(15deg,  #191b19  25%, #838383 100%);
+        border-radius: 0px;
+        
+        justify-content: right;
+
+        .breadcrumb-item {
+            font-weight: bold;
+            color: white;
+            font-size: 22px;
+        }
+        
+    }
+}

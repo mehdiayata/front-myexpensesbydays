@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import securityService from '../Services/security.service';
-import { useNavigate } from 'react-router-dom';
-import walletService from '../Services/wallet.service';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
 
@@ -15,7 +14,7 @@ const RegistrationForm = () => {
     const registration = (e) => {
         e.preventDefault();
         setIsLoading(true);
-        
+
         if (confirmPassword === password) {
             securityService.registration(email, password).then((resp) => {
 
@@ -25,11 +24,11 @@ const RegistrationForm = () => {
             alert('Your password is incorrect');
         }
     }
-    
+
     return (
-        <div className="registration_form">
-            <Form onSubmit={registration} method='post' >
-                <Form.Group controlId='form-login-email'>
+        <div className="registration">
+            <Form onSubmit={registration} method='post' id="registration-form" >
+                <Form.Group controlId='registration-form-email'>
                     <Form.Label>Email Adress</Form.Label>
                     <Form.Control required name="formLoginEmail" type="email" placeholder="Ex. test@test.fr" onChange={(e) => setEmail(e.target.value)} />
                     <Form.Text className="text-muted">
@@ -66,6 +65,12 @@ const RegistrationForm = () => {
                </Button>
                 }
             </Form>
+
+
+
+            <NavLink className="registration-btn-login" to='/login' exact='true' activeclassname="nav-active">
+                Login
+            </NavLink>
         </div>
     );
 };

@@ -5,3 +5,10 @@ body {
     font-family: "DM Sans", sans-serif;
     
 }
+
+.App {
+    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}

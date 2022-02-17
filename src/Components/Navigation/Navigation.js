@@ -3,6 +3,7 @@ import { Button, Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AiOutlineDisconnect, AiOutlineDollarCircle, AiOutlineUser, AiOutlineWallet } from 'react-icons/ai';
 import { GiCash, GiWallet } from 'react-icons/gi'
+import BreadcrumbNav from './BreadcrumbNav';
 
 const Navigation = () => {
 
@@ -16,6 +17,7 @@ const Navigation = () => {
 
     return (
         <div className="navigation">
+
               <div className="app-title">
                     <h1>mEbD</h1>
                     <GiCash />

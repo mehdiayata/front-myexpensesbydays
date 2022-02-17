@@ -49,14 +49,13 @@ const TransactionEdit = (props) => {
 
     return (
         <div className="transaction-edit">
-            <h1> Transaction Edit</h1>
+            <h3> Transaction Edit</h3>
             <Form onSubmit={(e) => {editTransaction(e)}} id="transaction-edit-form">
-            <Form.Group>
-                    <Form.Label>Négative ? </Form.Label>
-                    <Form.Check type="switch" id="transaction-edit-positive-negative" checked={amountNegative} onChange={(e) => { handlePosiNega(e) }}/>
+            <Form.Group className="transaction-edit-form-positive-negative">
+                    <Form.Check type="switch" id="transaction-edit-positive-negative" checked={amountNegative} onChange={(e) => { handlePosiNega(e) }} label="Check if your amount is negative"/>
                 </Form.Group>
 
-                <Form.Group>
+                <Form.Group className="transaction-edit-form-amount">
                     <Form.Label> Amount </Form.Label>
                     <Form.Control type="number" id="transaction-edit-amount"  defaultValue={amount} onChange={(e) => { setAmount(e.target.value) }} />
                 </Form.Group>

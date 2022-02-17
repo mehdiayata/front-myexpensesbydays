@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import RegistrationForm from '../Security/RegistrationForm';
+import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
 
 
 const RegistrationPage = () => {
@@ -13,7 +14,8 @@ const RegistrationPage = () => {
     })
 
     return (
-        <div className="registration_page">
+        <div className="registration-page">
+            <BreadcrumbNav title="Register"/>
             <RegistrationForm />
         </div>
     );

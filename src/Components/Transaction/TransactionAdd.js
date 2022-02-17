@@ -34,13 +34,14 @@ const TransactionAdd = (props) => {
 
     return (
         <div className="transaction-add">
+            <h3>Add Transaction</h3>
             <Form onSubmit={(e) => addTransaction(e)} id="transaction-add-form">
-                <Form.Group>
-                    <Form.Label>Positive / Négative</Form.Label>
-                    <Form.Check type="switch" id="transaction-add-positive-negative" onChange={(e) => { handlePosiNega(e) }} />
+
+                <Form.Group className="transaction-add-form-positive-negative">
+                    <Form.Check type="switch" id="transaction-add-positive-negative" onChange={(e) => { handlePosiNega(e) }} label="Check if your amount is negative" />
                 </Form.Group>
 
-                <Form.Group>
+                <Form.Group className="transaction-add-form-amount">
                     <Form.Label> Amount </Form.Label>
                     <Form.Control type="number" id="transaction-add-amount"  onChange={(e) => { setAmount(e.target.value) }} />
                 </Form.Group>

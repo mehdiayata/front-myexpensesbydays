@@ -56,8 +56,8 @@ const PasswordEditForm = () => {
     }
 
     return (
-        <div className="password-edit-form">
-            <Form onSubmit={(e) => editPassword(e)}>
+        <div className="password-edit">
+            <Form onSubmit={(e) => editPassword(e)} id="password-edit-form">
                 <Form.Group className="mb-3" controlId="password-edit-form-old-password">
                     <Form.Label>Old Password</Form.Label>
                     <Form.Control type="password" placeholder="old password" onChange={(e) => setOldPassword(e.target.value)} />

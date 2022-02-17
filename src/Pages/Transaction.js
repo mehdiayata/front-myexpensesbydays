@@ -1,12 +1,13 @@
-import Navigation from '../Components/Navigation/Navigation';
+import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
 import TransactionList from '../Components/Transaction/TransactionList';
 
 const Transaction = () => {
 
     return (
         <div className="transaction-page">
-            <Navigation />
-            <TransactionList />
+                <BreadcrumbNav title="Transactions"/>
+                <TransactionList />
+                
         </div>
     );
 };

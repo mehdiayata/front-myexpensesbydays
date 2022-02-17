@@ -4,6 +4,7 @@ import walletService from '../../Services/wallet.service';
 import WalletAdd from './WalletAdd';
 import WalletDelete from './WalletDelete';
 import WalletEdit from './WalletEdit';
+import { GiTrashCan } from 'react-icons/gi';
 
 
 const WalletList = () => {
@@ -86,82 +87,92 @@ const WalletList = () => {
 
     if (isLoading == false) {
         return (
-            <div className="walletList">
-                {quitAdd == true &&
-                    <Button onClick={(e) => handleQuitAddButton(e)}> X </Button>
-                }
+            <div className="wallet">
+                <div className="wallet-list-header">
+                    {quitAdd == true &&
+                        <Button onClick={(e) => handleQuitAddButton(e)}> Close Add </Button>
+                    }
 
-                {quitEdit == true &&
-                    <Button onClick={(e) => handleQuitEditButton(e)}> X </Button>
-                }
+                    {quitEdit == true &&
+                        <Button onClick={(e) => handleQuitEditButton(e)}> Close Edit </Button>
+                    }
 
-                {addWalletButton == true &&
-                    <WalletAdd setOnSubmitWalletAdd={setOnSubmitWalletAdd} />
-                }
+                    {addWalletButton == false &&
+                        <Button onClick={(e) => handleAddButton(e.target.value)}> Add </Button>
+                    }
+                </div>
+                <div className="wallet-list">
 
-                <h1> List of your Wallets </h1>
-
-                {editWalletButton === true &&
-                    <WalletEdit idWalletEdit={idWalletEdit} setOnSubmitWalletEdit={setOnSubmitWalletEdit} />
-                }
-
-                {deleteWalletButton == true &&
-                    <WalletDelete idWalletDelete={idWalletDelete} wallets={wallets} handleDeleteButton={handleDeleteButton} setOnSubmitWalletDelete={setOnSubmitWalletDelete} />
-                }
+                    {addWalletButton == true &&
+                        <WalletAdd setOnSubmitWalletAdd={setOnSubmitWalletAdd} />
+                    }
 
 
+                    {editWalletButton === true &&
+                        <WalletEdit idWalletEdit={idWalletEdit} setOnSubmitWalletEdit={setOnSubmitWalletEdit} />
+                    }
 
+                    {deleteWalletButton == true &&
+                        <WalletDelete idWalletDelete={idWalletDelete} wallets={wallets} handleDeleteButton={handleDeleteButton} setOnSubmitWalletDelete={setOnSubmitWalletDelete} />
+                    }
 
-                {addWalletButton == false &&
-                    <Button onClick={(e) => handleAddButton(e.target.value)}> Add </Button>
-                }
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Amount</th>
+                                <th>Main</th>
+                                <th>Created At</th>
+                                <th>Edited At</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Amount</th>
-                            <th>Main</th>
-                            <th>Created At</th>
-                            <th>Edited At</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                            {wallets.map((wallet) => {
+                                if (wallet.main == true) {
+                                    var test = 'OK'
+                                } else if (wallet.main == false) {
+                                    var test = 'NO'
+                                }
 
-                        {wallets.map((wallet) => {
-                            if (wallet.main == true) {
-                                var test = 'OK'
-                            } else if (wallet.main == false) {
-                                var test = 'NO'
-                            }
+                                return (
+                                    <tr key={wallet.id}>
+                                        <td>{wallet.id}</td>
+                                        <td>{wallet.amount}</td>
+                                        <td>{test}</td>
+                                        <td>{new Date(wallet.createdAt).toUTCString()}</td>
+                                        <td>{wallet.editAt != null && new Date(wallet.editAt).toUTCString()}</td>
 
-                            return (
-                                <tr key={wallet.id}>
-                                    <td>{wallet.id}</td>
-                                    <td>{wallet.amount}</td>
-                                    <td>{test}</td>
-                                    <td>{new Date(wallet.createdAt).toUTCString()}</td>
-                                    <td>{wallet.editAt != null && new Date(wallet.editAt).toUTCString()}</td>
-                                    {editWalletButton == true &&
+                                        {editWalletButton == true &&
 
-                                        <td><Button disabled onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
-                                    }
+                                            <td><Button className="wallet-list-edit-button" disabled onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
+                                        }
 
-                                    {editWalletButton == false &&
+                                        {editWalletButton == false &&
 
-                                        <td><Button onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
-                                    }
-                                    <td><Button onClick={(e) => { handleDeleteButton(e.target.value); setIdWalletDelete(e.target.value); }} value={wallet.id}>Delete</Button></td>
+                                            <td><Button className="wallet-list-edit-button" onClick={(e) => { handleEditButton(e.target.value) }} value={wallet.id}>Edit</Button></td>
+                                        }
 
-                                </tr>
-                            )
-                        })}
+                                        {deleteWalletButton == true &&
 
-                    </tbody>
-                </Table>
+                                            <td><Button className="wallet-list-delete-button" disabled onClick={(e) => { handleDeleteButton(e.target.value); setIdWalletDelete(e.target.value); }} value={wallet.id}><GiTrashCan /></Button></td>
+                                        }
 
+                                        {deleteWalletButton == false &&
+
+                                            <td><Button className="wallet-list-delete-button" onClick={(e) => { handleDeleteButton(e.target.value); setIdWalletDelete(e.target.value); }} value={wallet.id}><GiTrashCan /></Button></td>
+                                        }
+
+                                    </tr>
+                                )
+                            })}
+
+                        </tbody>
+                    </Table>
+
+                </div>
             </div>
         );
     } else {

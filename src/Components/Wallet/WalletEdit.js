@@ -51,23 +51,22 @@ const WalletEdit = (props) => {
     }
 
     return (
-        <div className="walletEdit">
-            <h1> Wallet Edit </h1>
+        <div className="wallet-edit">
+            <h3> Wallet Edit </h3>
 
-            <Form onSubmit={editWallet} method='post' >
-                <Form.Group controlId='form-wallet-edit-amount'>
+            <Form onSubmit={editWallet} method='post' id="wallet-edit-form">
+                <Form.Group id='wallet-edit-form-amount'>
                     <Form.Label>Amount</Form.Label>
-                    <Form.Control required name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
+                    <Form.Control required id="wallet-edit-amount"  name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
                 {main == true &&
-
                     ['checkbox'].map((type) => (
                         <div key={`default-${type}`} className="mb-3">
                             <Form.Check
                                 type={type}
-                                id={`default-${type}`}
-                                label={`default ${type}`}
+                                id="wallet-edit-main"
+                                label={"Wallet Main"}
                                 defaultChecked={main}
                                 onChange={(e) => handleEditMainWallet(e)}
                                 disabled
@@ -81,16 +80,14 @@ const WalletEdit = (props) => {
                         <div key={`default-${type}`} className="mb-3">
                             <Form.Check
                                 type={type}
-                                id={`default-${type}`}
-                                label={`default ${type}`}
+                                id="wallet-edit-main"
+                                label={"Wallet Main"}
                                 defaultChecked={main}
                                 onChange={(e) => handleEditMainWallet(e)}
                             />
                         </div>
                     ))
                 }
-
-
 
                 <Button variant="primary" type="submit">
                     Submit

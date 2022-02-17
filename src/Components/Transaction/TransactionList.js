@@ -18,7 +18,7 @@ const TransactionList = () => {
 
     const [addTransactionButton, setAddTransactionButton] = useState(false);
     const [editTransactionButton, setEditTransactionButton] = useState(false);
-    const [deleteTransactionButton, setDeleteTransactionButton] = useState();
+    const [deleteTransactionButton, setDeleteTransactionButton] = useState(false);
 
     const [idTransactionEdit, setIdTransactionEdit] = useState(null);
     const [idTransactionDelete, setIdTransactionDelete] = useState(null);
@@ -98,7 +98,7 @@ const TransactionList = () => {
     if (isLoading == false) {
         return (
             <div className="transaction">
-                <div class="transaction-list-header">
+                <div className="transaction-list-header">
                     <SelectWalletForm setWalletSelected={setWalletSelected} />
 
                     {addTransactionButton == false &&

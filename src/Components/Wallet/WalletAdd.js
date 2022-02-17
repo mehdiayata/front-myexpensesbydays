@@ -46,25 +46,16 @@ const WalletAdd = (props) => {
 
 
     return (
-        <div className="walletAdd">
-            <h1> Wallet Add </h1>
+        <div className="wallet-add">
+            <h3> Wallet Add </h3>
 
-            <Form onSubmit={addWallet} method='post' >
-                <Form.Group controlId='form-wallet-add-amount'>
+            <Form onSubmit={addWallet} method='post' id="wallet-add-form">
+                <Form.Group controlId='wallet-add-form-amount'>
                     <Form.Label>Amount</Form.Label>
                     <Form.Control required name="amount" type="number" placeholder="352" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
-
-                {['checkbox'].map((type) => (
-                    <div key={type} className="mb-3">
-                        <Form.Check type={type} id={`add-wallet-main-${type}`}>
-                            <Form.Check.Label>{'Main'}</Form.Check.Label>
-                            <Form.Check.Input type={type} isValid onChange={(e) => handleAddMainWallet(e.target.value)} />
-                        </Form.Check>
-                    </div>
-                ))}
-
+                <Form.Check type="switch" id="add-wallet-main" onChange={(e) => handleAddMainWallet(e.target.value)} label="Main" />
 
                 <Button variant="primary" type="submit">
                     Submit

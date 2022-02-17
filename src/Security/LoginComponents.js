@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
 
 const LoginComponents = () => {
@@ -29,7 +29,7 @@ const LoginComponents = () => {
             // Défini le wallet principal après la connexion
             walletService.getMainWallet().then((resp) => {
                 localStorage.setItem("current_wallet", resp.data.id);
-                
+
                 setIsLoading(false);
                 navigate('/transactions');
             });
@@ -46,10 +46,17 @@ const LoginComponents = () => {
 
     }
 
+    const handleNotAccount = () => {
+        console.log('test');
+        navigate('/registration');
+
+    }
+
     return (
-        <div className="form-login">
-            <Form onSubmit={login} method='post' >
-                <Form.Group controlId='form-login-email'>
+        <div className="login">
+
+            <Form onSubmit={login} method='post' id='login-form'>
+                <Form.Group >
                     <Form.Label>Email Adress</Form.Label>
                     <Form.Control required name="formLoginEmail" type="email" placeholder="Ex. test@test.fr" onChange={(e) => setFormEmail(e.target.value)} />
                     <Form.Text className="text-muted">
@@ -61,14 +68,15 @@ const LoginComponents = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setFormPassword(e.target.value)} />
                 </Form.Group>
+
                 {isLoading == false &&
-                    <Button variant="primary" type="submit">
+                    <Button className="login-btn-submit" variant="primary" type="submit">
                         Submit
                     </Button>
                 }
 
                 {isLoading == true &&
-                    <Button variant="primary" disabled>
+                    <Button className="login-btn-submit" variant="primary" disabled>
                         <Spinner
                             as="span"
                             animation="grow"
@@ -79,7 +87,14 @@ const LoginComponents = () => {
                  Loading...
                </Button>
                 }
+
             </Form>
+
+
+
+            <NavLink className="login-btn-new-account" to='/registration' exact='true' activeclassname="nav-active">
+                Create a new account
+                </NavLink>
 
             {loginError}
         </div>
