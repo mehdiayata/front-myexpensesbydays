@@ -39,6 +39,14 @@
         background-color: white;
         padding: 50px;
 
+        h5 {
+            text-align: center;
+            border: 1px solid black;
+            width: 25%;
+            margin: 0px;
+            padding: 5px;
+        }
+
         .wallet-list-edit-button,
         .wallet-list-delete-button {
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
@@ -60,8 +68,9 @@
         .wallet-edit {
             #wallet-add-form,
             #wallet-edit-form {
-                border-bottom: 1px solid black;
+                border: 1px solid black;
                 padding-bottom: 10px;
+                margin-bottom: 10px;
 
                 #wallet-add-form-amount,
                 #wallet-edit-form-amount {

@@ -21,7 +21,8 @@ const WalletAdd = (props) => {
                     setOnSubmitWalletAdd(true);
                     setMain(false);
                 })
-
+                
+                localStorage.setItem('current_wallet', resp.data.id);
             }
 
             setOnSubmitWalletAdd(true);
@@ -47,15 +48,15 @@ const WalletAdd = (props) => {
 
     return (
         <div className="wallet-add">
-            <h3> Wallet Add </h3>
+            <h5> Wallet Add </h5>
 
             <Form onSubmit={addWallet} method='post' id="wallet-add-form">
-                <Form.Group controlId='wallet-add-form-amount'>
+                 <Form.Group controlId='wallet-add-form-amount'>
                     <Form.Label>Amount</Form.Label>
                     <Form.Control required name="amount" type="number" placeholder="352" onChange={(e) => setAmount(e.target.value)} />
-                </Form.Group>
+                </Form.Group> 
 
-                <Form.Check type="switch" id="add-wallet-main" onChange={(e) => handleAddMainWallet(e.target.value)} label="Main" />
+                <Form.Check type="switch" id="add-wallet-main" onChange={(e) => handleAddMainWallet(e.target.value)} label="Check if this wallet is the main one" />
 
                 <Button variant="primary" type="submit">
                     Submit

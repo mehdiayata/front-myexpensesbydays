@@ -33,7 +33,9 @@ const WalletEdit = (props) => {
         walletService.putWallet(idWalletEdit, amount).then((resp) => {
 
             if (main == true) {
-                walletService.putMainWallet(idWalletEdit);
+                walletService.putMainWallet(idWalletEdit).then(
+                    localStorage.setItem('current_wallet', idWalletEdit)
+                );
             }
 
             setOnSubmitWalletEdit(true);
@@ -52,12 +54,12 @@ const WalletEdit = (props) => {
 
     return (
         <div className="wallet-edit">
-            <h3> Wallet Edit </h3>
+            <h5> Wallet Edit </h5>
 
             <Form onSubmit={editWallet} method='post' id="wallet-edit-form">
                 <Form.Group id='wallet-edit-form-amount'>
                     <Form.Label>Amount</Form.Label>
-                    <Form.Control required id="wallet-edit-amount"  name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
+                    <Form.Control id="wallet-edit-amount"  name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
                 {main == true &&

@@ -3,7 +3,6 @@
 
     .select-wallet-form {
         width: 20%;
-        border: 2px solid black;
     }
 
     .transaction {
@@ -19,6 +18,22 @@
     .transaction-list-header {
         display: flex;
         justify-content: space-between;
+
+        .transaction-wallet-amount {
+                display: block;
+                width: 20%;
+                height: calc(1.5em + 0.75rem + 2px);
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 2px solid black;
+                border-radius: 0.25rem;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;   
+        }
 
         button {
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
@@ -43,6 +58,14 @@
         background-color: white;
         padding: 50px;
 
+        h5 {
+            text-align: center;
+            border: 1px solid black;
+            width: 25%;
+            margin: 0px;
+            padding: 5px;
+        }
+
         .transaction-list-edit-button,
         .transaction-list-delete-button {
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
@@ -60,19 +83,23 @@
             }
         }
 
-        .transaction-add, .transaction-edit {
-            
-            #transaction-add-form, #transaction-edit-form {
-                
+        .transaction-add,
+        .transaction-edit {
+            #transaction-add-form,
+            #transaction-edit-form {
                 border: 1px solid black;
-                
-                .transaction-add-form-positive-negative, .transaction-edit-form-positive-negative {
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+
+                .transaction-add-form-positive-negative,
+                .transaction-edit-form-positive-negative {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
                 }
 
-                .transaction-add-form-amount, .transaction-edit-form-amount {
+                .transaction-add-form-amount,
+                .transaction-edit-form-amount {
                     width: 50%;
                     margin-left: auto;
                     margin-right: auto;
@@ -85,7 +112,7 @@
                     border: black;
                     color: #6bf36b;
                     transition: transform 1s;
-        
+
                     &:hover {
                         transform: scale(1.05);
                         background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);

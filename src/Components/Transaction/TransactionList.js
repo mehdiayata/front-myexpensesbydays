@@ -11,6 +11,7 @@ import TransactionEdit from './TransactionEdit';
 const TransactionList = () => {
     const [walletSelected, setWalletSelected] = useState();
     const [transactions, setTransactions] = useState([]);
+    const [walletInfos, setWalletInfos] = useState([]); 
 
     const [onSubmitAdd, setOnSubmitAdd] = useState();
     const [onSubmitEdit, setOnSubmitEdit] = useState();
@@ -47,6 +48,10 @@ const TransactionList = () => {
             walletService.getWalletTransactions(walletSelected).then((resp) => {
                 setTransactions(resp.data['hydra:member']);
                 setIsLoading(false);
+            });
+
+            walletService.getWallet(walletSelected).then((resp) => {
+                setWalletInfos(resp.data);
             });
         }
 
@@ -101,6 +106,9 @@ const TransactionList = () => {
                 <div className="transaction-list-header">
                     <SelectWalletForm setWalletSelected={setWalletSelected} />
 
+                    <div className="transaction-wallet-amount">
+                        <p>Amount : {walletInfos.amount}</p>
+                    </div>
                     {addTransactionButton == false &&
                         <Button onClick={(e) => handleAddButton()}> Add </Button>
                     }
