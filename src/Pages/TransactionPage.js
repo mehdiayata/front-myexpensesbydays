@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
-import TransactionList from '../Components/Transaction/TransactionList';
+import Transaction from '../Components/Transaction/Transaction';
 
-const Transaction = () => {
+const TransactionPage = () => {
 
     const navigate = useNavigate();
 
@@ -16,11 +16,11 @@ const Transaction = () => {
     return (
         <div className="transaction-page">
                 <BreadcrumbNav title="Transactions"/>
-                <TransactionList />
+                <Transaction />
                 
         </div>
     );
 };
 
 
-export default Transaction;
+export default TransactionPage;

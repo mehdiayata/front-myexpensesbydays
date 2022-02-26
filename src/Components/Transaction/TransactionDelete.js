@@ -4,48 +4,37 @@ import transactionService from '../../Services/transaction.service';
 
 const TransactionDelete = (props) => {
     const { idTransactionDelete } = props;
-    const { setOnSubmitDelete} = props;
-    const {handleDeleteButton} = props;
+    const { setOnSubmitDelete } = props;
+    const { setDeleteTransactionButton } = props;
 
-    const [alertTransaction, setAlertTransaction] = useState(true);
 
     const handleValidDeleteButton = (valid) => {
-        handleDeleteButton(false);
 
-        setAlertTransaction(false);
-        
-        if(valid == true) {
+        // Permet de fermer l'alerte
+        setDeleteTransactionButton(false);
+
+        if (valid == true) {
             transactionService.deleteTransaction(idTransactionDelete).then((resp) => {
                 setOnSubmitDelete(true);
             })
         }
     }
 
-    if (alertTransaction == true) {
-        return (
-            <div className="transaction-delete">
-                <Alert variant="danger">
-                    <p>
-                        Do you confirm delete your transaction ?
-                        (Your amount wallet, ...)
-                </p>
+    return (
+        <div className="transaction-delete">
+            <Alert variant="danger">
+                <p>
+                    Do you confirm delete your transaction ? <br />
+                    (Your amount wallet will be recalculed)
+                    </p>
 
-                    <Button onClick={(e) => handleValidDeleteButton(true)}> Yes </Button>
-                    <Button onClick={(e) => handleValidDeleteButton(false)}> No </Button>
-                </Alert>
-
-
-            </div>
-        )
-    } else {
-        return (
-            <div className="transaction-delete" >
-
-            </div >
-        )
-    }
+                <Button variant="danger" onClick={(e) => handleValidDeleteButton(true)}> Yes </Button>
+                <Button variant="secondary" onClick={(e) => handleValidDeleteButton(false)}> No </Button>
+            </Alert>
 
 
+        </div>
+    )
 };
 
 export default TransactionDelete;

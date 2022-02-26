@@ -1,3 +1,7 @@
+.navigation-mobile {
+    display: none;
+}
+
 .navigation {
     top: 0;
     left: 0;
@@ -9,7 +13,7 @@
         color: rgb(124, 255, 112);
         margin-bottom: 50px;
 
-        svg{
+        svg {
             font-size: 45px;
         }
     }
@@ -36,6 +40,38 @@
                 transform: scale(1.2);
                 background-image: linear-gradient(15deg, #b9abab 25%, #5c635c 100%);
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .navigation {
+        display: none;
+    }
+
+    .navigation-mobile {
+        display: flex;
+        width: 100%;
+        position: sticky;
+        bottom: 0;
+
+        background-image: linear-gradient(15deg, #191b19 25%, #838383 100%);
+        border-radius: 0px;
+
+        .nav {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            
+            a {
+                font-size: 30px;
+                transition: transform 1s;
+    
+                svg {
+                    color: rgb(107, 243, 107);
+                }
+            }
+    
         }
     }
 }

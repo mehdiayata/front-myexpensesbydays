@@ -1,10 +1,14 @@
 .breadcrumb-nav {
     flex-direction: row;
+    
+    .display-menu {
+        display: none;
+    }
 
     .breadcrumb {
-        background-image: linear-gradient(15deg,  #191b19  25%, #838383 100%);
+        background-image: linear-gradient(15deg, #191b19 25%, #838383 100%);
         border-radius: 0px;
-        
+
         justify-content: right;
 
         .breadcrumb-item {
@@ -12,6 +16,38 @@
             color: white;
             font-size: 22px;
         }
-        
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .breadcrumb-nav {
+        width: 100%;
+        margin: 0px;
+
+        .display-menu {
+            display: block;
+            float: left;
+
+            button:hover{
+                .navigation {
+                    display: block;
+                }
+               
+            }
+
+        }
+
+        .breadcrumb {
+            background-image: linear-gradient(15deg, #191b19 25%, #838383 100%);
+            border-radius: 0px;
+
+            justify-content: space-between;
+
+            .breadcrumb-item {
+                font-weight: bold;
+                color: white;
+                font-size: 22px;
+            }
+        }
     }
 }
