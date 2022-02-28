@@ -1,0 +1,75 @@
+.wallet-add,
+.wallet-edit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .wallet-add-header,
+    .wallet-edit-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+
+        h5 {
+            border: 1px solid black;
+            margin: 0;
+            width: 20%;
+            background-color: white;
+            padding-top: 5px;
+
+             @media screen and (max-width: 450px) {
+                 width: 60%;
+                 padding: 5px;
+                 
+             }
+        }
+
+        button {
+            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+            border: black;
+            color: #6bf36b;
+            transition: transform 1s;
+
+            &:hover {
+                transform: scale(1.05);
+                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+            }
+        }
+    }
+
+    #wallet-add-form,
+    #wallet-edit-form {
+        border: solid black 1px;
+        border-radius: 5px;
+        background-color: white;
+        padding: 20px;
+
+        button {
+            margin-top: 15px;
+
+            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+            border: black;
+            color: #6bf36b;
+            transition: transform 1s;
+
+            &:hover {
+                transform: scale(1.05);
+                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+            }
+        }
+    }
+
+}
+
+
+.wallet-delete {
+    margin-top: 10px;
+
+    .alert {
+        border: 1px solid black;
+
+        button {
+            margin-right: 20px;
+        }
+    }    
+}

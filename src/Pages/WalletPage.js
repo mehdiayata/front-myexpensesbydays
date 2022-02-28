@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
-import Footer from '../Components/Navigation/Footer';
-import Navigation from '../Components/Navigation/Navigation';
-import WalletList from '../Components/Wallet/WalletList';
+import Wallet from '../Components/Wallet/Wallet';
 
 const WalletPage = () => {
     
@@ -18,7 +16,7 @@ const WalletPage = () => {
     return (
         <div className="wallet-page">
             <BreadcrumbNav title={"Wallets"} />
-            <WalletList />
+            <Wallet />
         </div>
     );
 };

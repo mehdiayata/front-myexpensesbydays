@@ -53,18 +53,14 @@ const Transaction = () => {
                 setEditTransactionButton={setEditTransactionButton}
                 setIdTransactionEdit={setIdTransactionEdit}
                 setDeleteTransactionButton={setDeleteTransactionButton}
-                setIdTransactionDelete={setIdTransactionDelete}
-                editTransactionButton={editTransactionButton}
-                deleteTransactionButton={deleteTransactionButton} />
+                setIdTransactionDelete={setIdTransactionDelete} />
 
             <TransactionListMobile
                 walletSelected={walletSelected} onSubmit={onSubmit}
                 setEditTransactionButton={setEditTransactionButton}
                 setIdTransactionEdit={setIdTransactionEdit}
                 setDeleteTransactionButton={setDeleteTransactionButton}
-                setIdTransactionDelete={setIdTransactionDelete}
-                editTransactionButton={editTransactionButton}
-                deleteTransactionButton={deleteTransactionButton} />
+                setIdTransactionDelete={setIdTransactionDelete} />
         </div>
     );
 

@@ -12,9 +12,20 @@
     .app-title {
         color: rgb(124, 255, 112);
         margin-bottom: 50px;
-
         svg {
             font-size: 45px;
+
+        }
+
+        
+        @media screen and (max-width: 850px) {
+            h1 {
+                font-size: 25px;
+            }
+
+            svg {
+                font-size: 45px;
+            }
         }
     }
 
@@ -23,6 +34,11 @@
         height: 100%;
         padding: 10px;
         margin: 10px;
+
+        @media screen and (max-width: 850px) {
+            padding: 5px;
+            margin: 5px;
+        }
 
         a {
             border: 2px solid rgb(173, 190, 173);
@@ -33,7 +49,7 @@
             margin-bottom: 35px;
 
             svg {
-                color: rgb(107, 243, 107);
+                color: white;
             }
 
             &:hover {
@@ -62,16 +78,15 @@
             display: flex;
             width: 100%;
             justify-content: space-around;
-            
+
             a {
                 font-size: 30px;
                 transition: transform 1s;
-    
+
                 svg {
                     color: rgb(107, 243, 107);
                 }
             }
-    
         }
     }
 }

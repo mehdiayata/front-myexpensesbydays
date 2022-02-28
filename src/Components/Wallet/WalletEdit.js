@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { AiOutlineClose } from 'react-icons/ai';
 import walletService from '../../Services/wallet.service';
 
 const WalletEdit = (props) => {
     const { idWalletEdit } = props;
-    const { setOnSubmitWalletEdit } = props;
-    const { handleOnSubmitWalletEdit } = props;
-    const [walletInfo, setWalletInfo] = useState();
+    const { setOnSubmitEdit } = props;
+    const { editWalletButton } = props;
+    const { setEditWalletButton } = props;
     const [amount, setAmount] = useState();
     const [main, setMain] = useState();
 
@@ -15,7 +16,6 @@ const WalletEdit = (props) => {
     useEffect(() => {
         walletService.getWallet(idWalletEdit).then((resp) => {
 
-            setWalletInfo(resp.data);
             setAmount(resp.data.amount);
 
             if (resp.data.main == true) {
@@ -37,14 +37,12 @@ const WalletEdit = (props) => {
                     localStorage.setItem('current_wallet', idWalletEdit)
                 );
             }
-
-            setOnSubmitWalletEdit(true);
+            setOnSubmitEdit(true);
         })
 
     }
 
     const handleEditMainWallet = (e) => {
-
         if (main == true) {
             setMain(false);
         } else {
@@ -54,12 +52,20 @@ const WalletEdit = (props) => {
 
     return (
         <div className="wallet-edit">
-            <h5> Wallet Edit </h5>
+
+            <div className="wallet-edit-header">
+                <h5>Edit Wallet</h5>
+
+                {editWalletButton == true &&
+
+                    <Button onClick={() => setEditWalletButton(false)}> <AiOutlineClose /> </Button>}
+            </div>
+
 
             <Form onSubmit={editWallet} method='post' id="wallet-edit-form">
                 <Form.Group id='wallet-edit-form-amount'>
                     <Form.Label>Amount</Form.Label>
-                    <Form.Control id="wallet-edit-amount"  name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
+                    <Form.Control id="wallet-edit-amount" name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
                 {main == true &&

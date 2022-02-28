@@ -10,8 +10,6 @@ const TransactionListScreen = (props) => {
     const { setIdTransactionEdit } = props;
     const { setDeleteTransactionButton } = props;
     const { setIdTransactionDelete } = props;
-    const { editTransactionButton} = props;
-    const { deleteTransactionButton } = props;
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
@@ -44,7 +42,6 @@ const TransactionListScreen = (props) => {
                                 
                                 <td>{transaction.createdAt != null && moment(transaction.createdAt).format('DD/MM/YYYY')}</td>
                                 <td>{transaction.editAt != null && moment(transaction.editAt).format('DD/MM/YYYY')}</td>
-
 
 
                                 <td><Button onClick={() => { setEditTransactionButton(true); setIdTransactionEdit(transaction.id); setDeleteTransactionButton(false) }} className="transaction-list-screen-edit-button"> Edit</Button></td>

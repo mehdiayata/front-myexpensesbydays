@@ -9,7 +9,6 @@ const TransactionEdit = (props) => {
     const { setOnSubmitEdit } = props;
     const { editTransactionButton } = props;
     const { setEditTransactionButton } = props;
-    const [amountNegative, setAmountNegative] = useState(false);
 
     const [amount, setAmount] = useState('');
 

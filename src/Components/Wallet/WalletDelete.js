@@ -1,29 +1,33 @@
 import { Alert, Button } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import walletService from '../../Services/wallet.service';
 
 const WalletDelete = (props) => {
-    const {idWalletDelete } = props;
-    const {wallets } = props;
-    const {handleDeleteButton} = props;
-    const {setOnSubmitWalletDelete} = props;
+    const { idWalletDelete } = props;
+    const { setDeleteWalletButton } = props;
+    const { setOnSubmitDelete } = props;
+    const [wallets, setWallets] = useState([]);
 
-    const [alertWallet, setAlertWallet] = useState(true);
+    useEffect(() => {
+        walletService.getWallets().then((resp) => {
+            setWallets(resp.data['hydra:member']);
+        });
+    })
 
     const handleValidDeleteButton = (valid) => {
-        handleDeleteButton(false);
 
-        setAlertWallet(false);
+        setDeleteWalletButton(false);
 
         // si le bouton Yes est cliqué
         if (valid == true) {
 
+            // Si le main wallet est éditer
             if (editMainWallet() != false) {
                 editMainWallet().then((resp) => {
                     walletService.deleteWallet(idWalletDelete).then((resp => {
 
                         // Variable permettant d'actualiser la liste
-                        setOnSubmitWalletDelete(true);
+                        setOnSubmitDelete(true);
 
                     }));
 
@@ -32,7 +36,7 @@ const WalletDelete = (props) => {
                 walletService.deleteWallet(idWalletDelete).then((resp => {
 
                     // Variable permettant d'actualiser la liste
-                    setOnSubmitWalletDelete(true);
+                    setOnSubmitDelete(true);
 
                 }));
             }
@@ -42,12 +46,12 @@ const WalletDelete = (props) => {
 
     const editMainWallet = () => {
 
-        let launchDelte = false;
+        let launchDelete = false;
         let newMainWallet = null;
 
         wallets.map((wallet) => {
             if (wallet.id == idWalletDelete && wallet.main == true) {
-                launchDelte = true;
+                launchDelete = true;
             }
 
             // Attribution d'un wallet
@@ -57,35 +61,27 @@ const WalletDelete = (props) => {
         })
 
 
-        if (launchDelte == true && newMainWallet != null) {
+        if (launchDelete == true && newMainWallet != null) {
             return walletService.putMainWallet(newMainWallet);
         }
 
         return false;
     }
 
-    
-    if (alertWallet == true) {
-        return (
-            <div className="alertWallet">
-                <Alert variant="danger">
-                    <p>
-                        Do you confirm delete your wallet ?
-                        (If your delete, your main wallet, a  new main wallet you will be assigned)
+    return (
+        <div className="wallet-delete">
+            <Alert variant="danger">
+                <p>
+                    Do you confirm delete your wallet <br />
+                    (If your delete, your main wallet, a  new main wallet you will be assigned)
                 </p>
 
-                    <Button onClick={(e) => handleValidDeleteButton(true)}> Yes </Button>
-                    <Button onClick={(e) => handleValidDeleteButton(false)}> No </Button>
-                </Alert>
-            </div>
-        );
-    } else {
-        return (
-            <div className="alertWallet">
+                <Button onClick={(e) => handleValidDeleteButton(true)}> Yes </Button>
+                <Button onClick={(e) => handleValidDeleteButton(false)}> No </Button>
+            </Alert>
+        </div>
+    );
 
-            </div>
-        )
-    }
 };
 
 export default WalletDelete;

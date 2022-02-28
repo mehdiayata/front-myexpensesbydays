@@ -1,98 +1,119 @@
 .wallet-page {
     width: 90%;
+    justify-content: center;
+
+    @media screen and (max-width: 450px) {
+        width: 100%;
+    }
 
     .wallet {
-        margin: auto;
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        
-    }
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
 
-    .wallet-list-header {
-        display: flex;
-        justify-content: space-between;
+        .wallet-list-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
 
-        button {
-            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-            border: black;
-            color: #6bf36b;
-            width: 15%;
-            font-weight: bold;
-            border-bottom-left-radius: 0px;
-            border-bottom-right-radius: 0px;
-            transition: transform 1s;
-
-            &:hover {
-                transform: scale(1.05);
-
-                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
-            }
-        }
-    }
-
-    .wallet-list {
-        border: 2px solid black;
-        background-color: white;
-        padding: 50px;
-
-        h5 {
-            text-align: center;
-            border: 1px solid black;
-            width: 25%;
-            margin: 0px;
-            padding: 5px;
-        }
-
-        .wallet-list-edit-button,
-        .wallet-list-delete-button {
-            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-            border: black;
-            color: #6bf36b;
-            transition: transform 1s;
-
-            &:hover {
-                transform: scale(1.05);
-                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+            @media screen and (max-width: 450px) {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: initial;
             }
 
-            svg {
-                font-size: 20px;
+            button {
+                background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+                border: black;
+                font-weight: bold;
+                
+                &:hover {
+                    transform: scale(1.05);
+                    background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+                }
             }
         }
 
-        .wallet-add,
-        .wallet-edit {
-            #wallet-add-form,
-            #wallet-edit-form {
-                border: 1px solid black;
-                padding-bottom: 10px;
+        .wallet-list-mobile {
+            @media screen and (max-width: 1366px) {
+                display: none;
+            }
+
+            @media screen and (max-width: 450px) {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
                 margin-bottom: 10px;
 
-                #wallet-add-form-amount,
-                #wallet-edit-form-amount {
-                    width: 50%;
-                    margin-left: auto;
-                    margin-right: auto;
+                .table-mobile {
+                    display: flex;
+                    flex-direction: row;
+                    background-color: white;
+                    justify-content: space-around;
+                    border: 1px solid black;
+                    padding: 5px;
+
+                    &:nth-child(2n) {
+                        background-color: #dcdce9;
+                    }
+
+                    .thead-mobile .tr-mobile .th-mobile {
+                        margin-bottom: 10px;
+                    }
+
+                    .tbody-mobile .tr-mobile .td-mobile {
+                        margin-bottom: 10px;
+
+                        button {
+                            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+                            border: black;
+                            color: white;
+                            transition: transform 1s;
+
+                            &:hover {
+                                transform: scale(1.05);
+                                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+                            }
+                        }
+                    }
                 }
+            }
+        }
 
-                button {
-                    margin-top: 10px;
+        .wallet-list-screen {
+            margin-bottom: 10px;
+            margin-top: 10px;
 
-                    background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-                    border: black;
-                    color: #6bf36b;
-                    transition: transform 1s;
+            @media screen and (max-width: 450px) {
+                display: none;
+            }
 
-                    &:hover {
-                        transform: scale(1.05);
-                        background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+            table {
+                tbody {
+                    tr {
+                        td {
+                            button {
+                                background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+                                border: black;
+                                color: white;
+                                transition: transform 1s;
+
+                                &:hover {
+                                    transform: scale(1.05);
+                                    background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
+}
+
+
+.wallet-list-mobile {
+    display: none;
 }

@@ -11,6 +11,12 @@ body {
     flex-wrap: wrap;
     flex-direction: row;
     font-family: 'Sora', sans-serif;
+
+    @media screen and (max-width: 450px) {
+        .footer {
+            display: none;
+        }
+    }
     
 }
 
