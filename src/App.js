@@ -44,8 +44,8 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/transactions" element={<TransactionPage />} />
-
-          <Route path="/registration" element={<RegistrationPage />} />
+{/* 
+          <Route path="/registration" element={<RegistrationPage />} /> */}
           <Route path="/wallets" element={<WalletPage />} />
           <Route path="/password/edit" element={<PasswordEditPage />} />
         </Routes>

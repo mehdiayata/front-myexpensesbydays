@@ -7,6 +7,7 @@ const WalletDelete = (props) => {
     const { setDeleteWalletButton } = props;
     const { setOnSubmitDelete } = props;
     const [wallets, setWallets] = useState([]);
+    const { setSpinner } = props;
 
     useEffect(() => {
         walletService.getWallets().then((resp) => {
@@ -20,6 +21,7 @@ const WalletDelete = (props) => {
 
         // si le bouton Yes est cliqué
         if (valid == true) {
+            setSpinner(true);
 
             // Si le main wallet est éditer
             if (editMainWallet() != false) {
@@ -28,6 +30,7 @@ const WalletDelete = (props) => {
 
                         // Variable permettant d'actualiser la liste
                         setOnSubmitDelete(true);
+                        setSpinner(false);
 
                     }));
 
@@ -37,10 +40,10 @@ const WalletDelete = (props) => {
 
                     // Variable permettant d'actualiser la liste
                     setOnSubmitDelete(true);
+                    setSpinner(false);
 
                 }));
             }
-
         }
     }
 
@@ -76,8 +79,9 @@ const WalletDelete = (props) => {
                     (If your delete, your main wallet, a  new main wallet you will be assigned)
                 </p>
 
-                <Button onClick={(e) => handleValidDeleteButton(true)}> Yes </Button>
-                <Button onClick={(e) => handleValidDeleteButton(false)}> No </Button>
+                <Button variant="danger" onClick={(e) => handleValidDeleteButton(true)}> Yes </Button>
+                <Button variant="secondary" onClick={(e) => handleValidDeleteButton(false)}> No </Button>
+
             </Alert>
         </div>
     );

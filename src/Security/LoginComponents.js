@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Spinner } from 'react-bootstrap';
+import { Alert, Button, Form, Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
 import { NavLink, useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
@@ -55,6 +55,17 @@ const LoginComponents = () => {
     return (
         <div className="login">
 
+            <Alert variant="warning">
+                <Alert.Heading>This application is in a beta test</Alert.Heading>
+                <p>
+
+                    It is not yet possible to use the app, before its final deployment
+
+                </p>
+                <hr />
+                    <p className="mb-0">To subscribe to the beta test, contact us: <strong>tayatodev@gmail.com</strong>
+                </p>
+            </Alert>
             <Form onSubmit={login} method='post' id='login-form'>
                 <Form.Group >
                     <Form.Label>Email Adress</Form.Label>
@@ -91,10 +102,10 @@ const LoginComponents = () => {
             </Form>
 
 
-
+            {/* 
             <NavLink className="login-btn-new-account" to='/registration' exact='true' activeclassname="nav-active">
                 Create a new account
-                </NavLink>
+                </NavLink> */}
 
             {loginError}
         </div>

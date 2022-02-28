@@ -27,7 +27,7 @@
         button {
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
             border: black;
-            color: #6bf36b;
+            color: white;
             transition: transform 1s;
 
             &:hover {
@@ -49,7 +49,7 @@
 
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
             border: black;
-            color: #6bf36b;
+            color: white;
             transition: transform 1s;
 
             &:hover {
@@ -61,8 +61,9 @@
 
 }
 
-
 .wallet-delete {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
 
     .alert {

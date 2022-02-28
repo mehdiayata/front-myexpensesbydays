@@ -9,7 +9,6 @@
         flex-direction: row;
         justify-content: space-between;
         
-
         h5 {
             border: 1px solid black;
             margin: 0;
@@ -22,12 +21,19 @@
                  padding: 5px;
                  
              }
+
+             
+             @media screen and (max-width: 850px) {
+                width: 40%;
+                padding: 5px;
+            }
+
         }
 
         button {
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
             border: black;
-            color: #6bf36b;
+            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
             transition: transform 1s;
 
             &:hover {
@@ -48,8 +54,8 @@
             margin-top: 15px;
 
             background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-            border: black;
-            color: #6bf36b;
+            border: black;            
+            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
             transition: transform 1s;
 
             &:hover {

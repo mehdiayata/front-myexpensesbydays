@@ -8,8 +8,6 @@ const TransactionListHeader = (props) => {
     const { walletSelected } = props;
     const { addTransactionButton } = props;
     const { setAddTransactionButton } = props;
-    const { editTransactionButton } = props;
-    const { setEditTransactionButton } = props;
     const { onSubmit } = props;
     const [walletAmount, setWalletAmount] = useState(null);
 

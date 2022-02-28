@@ -11,6 +11,10 @@
         margin-left: auto;
         margin-right: auto;
 
+        @media screen and (max-width: 850px) {
+            width: 90%;
+        }
+
         .wallet-list-header {
             display: flex;
             flex-direction: row;
@@ -20,7 +24,12 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                align-items: initial;
+            }
+
+            @media screen and (max-width: 850px) {
+                display: flex;
+                flex-direction: row;
+                justify-content: right;
             }
 
             button {

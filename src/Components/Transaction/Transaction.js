@@ -5,6 +5,7 @@ import TransactionListMobile from './TransactionListMobile';
 import TransactionAdd from './TransactionAdd';
 import TransactionEdit from './TransactionEdit';
 import TransactionDelete from './TransactionDelete';
+import { Spinner } from 'react-bootstrap';
 
 const Transaction = () => {
     const [walletSelected, setWalletSelected] = useState(null);
@@ -14,10 +15,12 @@ const Transaction = () => {
     const [idTransactionEdit, setIdTransactionEdit] = useState(null);
     const [idTransactionDelete, setIdTransactionDelete] = useState(null);
     const [onSubmit, setOnSubmit] = useState(false);
+    const [spinner, setSpinner] = useState(false);
 
     useEffect(() => {
         // Initialise onSubmit à false
         setOnSubmit(false);
+
     })
 
     return (
@@ -33,6 +36,7 @@ const Transaction = () => {
                 <TransactionAdd walletSelected={walletSelected} setOnSubmitAdd={setOnSubmit}
                     addTransactionButton={addTransactionButton}
                     setAddTransactionButton={setAddTransactionButton}
+                    setSpinner={setSpinner}
                 />
             }
 
@@ -42,25 +46,45 @@ const Transaction = () => {
                     setOnSubmitEdit={setOnSubmit}
                     editTransactionButton={editTransactionButton}
                     setEditTransactionButton={setEditTransactionButton}
+                    setSpinner={setSpinner}
                 />
             }
 
             {deleteTransactionButton == true &&
-                <TransactionDelete idTransactionDelete={idTransactionDelete} setOnSubmitDelete={setOnSubmit} setDeleteTransactionButton={setDeleteTransactionButton} />
+                <TransactionDelete 
+                idTransactionDelete={idTransactionDelete} 
+                setOnSubmitDelete={setOnSubmit} 
+                setDeleteTransactionButton={setDeleteTransactionButton} 
+                setSpinner={setSpinner}/>
             }
 
-            <TransactionListScreen walletSelected={walletSelected} onSubmit={onSubmit}
-                setEditTransactionButton={setEditTransactionButton}
-                setIdTransactionEdit={setIdTransactionEdit}
-                setDeleteTransactionButton={setDeleteTransactionButton}
-                setIdTransactionDelete={setIdTransactionDelete} />
+            {spinner ?
+                <Spinner animation="border" role="status">
+                </Spinner>
+                :
+                <>
+                    <TransactionListScreen walletSelected={walletSelected} onSubmit={onSubmit}
+                        setEditTransactionButton={setEditTransactionButton}
+                        setIdTransactionEdit={setIdTransactionEdit}
+                        setDeleteTransactionButton={setDeleteTransactionButton}
+                        setIdTransactionDelete={setIdTransactionDelete} />
 
-            <TransactionListMobile
-                walletSelected={walletSelected} onSubmit={onSubmit}
-                setEditTransactionButton={setEditTransactionButton}
-                setIdTransactionEdit={setIdTransactionEdit}
-                setDeleteTransactionButton={setDeleteTransactionButton}
-                setIdTransactionDelete={setIdTransactionDelete} />
+
+
+                    <TransactionListMobile
+                        walletSelected={walletSelected} onSubmit={onSubmit}
+                        setEditTransactionButton={setEditTransactionButton}
+                        setIdTransactionEdit={setIdTransactionEdit}
+                        setDeleteTransactionButton={setDeleteTransactionButton}
+                        setIdTransactionDelete={setIdTransactionDelete}
+                    />
+
+                </>
+            }
+
+
+
+
         </div>
     );
 

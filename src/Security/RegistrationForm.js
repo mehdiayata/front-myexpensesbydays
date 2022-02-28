@@ -42,7 +42,7 @@ const RegistrationForm = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Confirm Password</Form.Label>
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
 

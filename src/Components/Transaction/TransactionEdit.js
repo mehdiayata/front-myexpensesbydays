@@ -9,7 +9,7 @@ const TransactionEdit = (props) => {
     const { setOnSubmitEdit } = props;
     const { editTransactionButton } = props;
     const { setEditTransactionButton } = props;
-
+    const { setSpinner} = props;
     const [amount, setAmount] = useState('');
 
     useEffect(() => {
@@ -22,10 +22,13 @@ const TransactionEdit = (props) => {
 
 
     const editTransaction = (e) => {
+        
+        setSpinner(true);
+    
         e.preventDefault();
         transactionService.putTransaction(amount, idTransactionEdit).then((resp) => {
             setOnSubmitEdit(true);
-
+            setSpinner(false);
         })
     }
 

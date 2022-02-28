@@ -34,7 +34,7 @@
                 }
 
                 @media screen and (max-width: 850px) {
-                   width: 100%;
+                   width: 30%;
                 }
             }
 
@@ -44,6 +44,7 @@
                 border: 1px solid black;
                 padding-left: 4px;
                 padding-right: 4px;
+                padding-top: 10px;
 
                 @media screen and (max-width: 450px) {
                     p {

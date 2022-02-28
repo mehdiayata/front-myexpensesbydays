@@ -19,7 +19,6 @@ const Navigation = () => {
 
               <div className="app-title">
                     <h1>mEbD</h1>
-                    <GiCash />
                 </div>
 
             <Nav className="flex-column">

@@ -10,12 +10,9 @@
     width: 10%;
 
     .app-title {
+        margin-top: 15px;
         color: rgb(124, 255, 112);
         margin-bottom: 50px;
-        svg {
-            font-size: 45px;
-
-        }
 
         
         @media screen and (max-width: 850px) {

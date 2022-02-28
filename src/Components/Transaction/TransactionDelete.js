@@ -6,7 +6,7 @@ const TransactionDelete = (props) => {
     const { idTransactionDelete } = props;
     const { setOnSubmitDelete } = props;
     const { setDeleteTransactionButton } = props;
-
+    const { setSpinner } = props;
 
     const handleValidDeleteButton = (valid) => {
 
@@ -14,8 +14,11 @@ const TransactionDelete = (props) => {
         setDeleteTransactionButton(false);
 
         if (valid == true) {
+
+            setSpinner(true);
             transactionService.deleteTransaction(idTransactionDelete).then((resp) => {
                 setOnSubmitDelete(true);
+                setSpinner(false);
             })
         }
     }

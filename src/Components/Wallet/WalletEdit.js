@@ -10,6 +10,7 @@ const WalletEdit = (props) => {
     const { setEditWalletButton } = props;
     const [amount, setAmount] = useState();
     const [main, setMain] = useState();
+    const { setSpinner } = props;
 
 
     // Récupérer les infos du wallet à éditer 
@@ -30,6 +31,8 @@ const WalletEdit = (props) => {
     const editWallet = (e) => {
         e.preventDefault();
 
+        setSpinner(true);
+
         walletService.putWallet(idWalletEdit, amount).then((resp) => {
 
             if (main == true) {
@@ -38,6 +41,8 @@ const WalletEdit = (props) => {
                 );
             }
             setOnSubmitEdit(true);
+            setSpinner(false);
+
         })
 
     }

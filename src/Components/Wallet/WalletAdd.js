@@ -6,12 +6,13 @@ import walletService from '../../Services/wallet.service';
 const WalletAdd = (props) => {
     const { addWalletButton } = props;
     const { setAddWalletButton } = props;
-    const [amount, setAmount] = useState();
+    const [amount, setAmount] = useState('0');
     const [main, setMain] = useState(false);
     const { setOnSubmitAdd } = props;
-
+    const { setSpinner } = props;
 
     const addWallet = (e) => {
+        setSpinner(true);
 
         e.preventDefault();
 
@@ -28,6 +29,7 @@ const WalletAdd = (props) => {
 
             setMain(false);
 
+            setSpinner(false);
             // Reset
             setAmount(null);
             e.target.reset();
@@ -59,7 +61,7 @@ const WalletAdd = (props) => {
             <Form onSubmit={addWallet} method='post' id="wallet-add-form">
                 <Form.Group controlId='wallet-add-form-amount'>
                     <Form.Label>Amount</Form.Label>
-                    <Form.Control required name="amount" type="number" defaultValue="0" placeholder="352" onChange={(e) => setAmount(e.target.value)} />
+                    <Form.Control required name="amount" type="number" defaultValue={amount} placeholder="352" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
                 <Form.Check type="switch" id="add-wallet-main" onChange={(e) => handleAddMainWallet(e.target.value)} label="Check if this wallet is the main one" />

@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="footer">
 
             <div className="image-footer">
-                <h3>mEbD</h3>
-                <GiCash />
+            <img className="navigation_logo" src={process.env.PUBLIC_URL + "/images/logo.svg"}></img>
+             
             </div>
 
             <div className="contents">
@@ -24,10 +24,14 @@ const Footer = () => {
 
             <div className="footer-rs">
                 <ul>
-                    <h4>Social Network</h4>
+                    {/* <h4>Social Network</h4>
                     <li> <a href="#"> <AiFillFacebook /> </a> </li>
                     <li> <a href="#"> <AiFillTwitterCircle /> </a> </li>
-                    <li> <a href="#"> <AiFillInstagram /> </a></li>
+                    <li> <a href="#"> <AiFillInstagram /> </a></li> */}
+                    <h4>
+                      Contact
+                    </h4>
+                    <li>tayatodev@gmail.com</li>
                 </ul>
             </div>
         </div>

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import RegistrationForm from '../Security/RegistrationForm';
 import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
 
-
 const RegistrationPage = () => {
     const navigate = useNavigate();
 
