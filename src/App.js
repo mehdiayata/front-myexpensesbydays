@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import NotFound from './Pages/NotFound';
 import LoginPage from './Pages/LoginPage';
 import walletService from './Services/wallet.service';
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Navigation />
         <Routes>
           <Route component={NotFound} />
@@ -52,7 +52,7 @@ function App() {
 
         <NavigationMobile />
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
 
 
     </div>
