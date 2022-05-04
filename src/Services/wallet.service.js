@@ -1,8 +1,9 @@
 import axios from 'axios';
+import host from "./server.service"
 
 const getWallets = () => {
 
-    return axios.get('http://127.0.0.1:8000/api/wallets/', {
+    return axios.get(host + '/wallets/', {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
         }
@@ -13,7 +14,7 @@ const getWallets = () => {
 
 const getWallet = (idWallet) => {
 
-    return axios.get('http://127.0.0.1:8000/api/wallets/'+idWallet, {
+    return axios.get(host + '/wallets/'+idWallet, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
         }
@@ -23,7 +24,7 @@ const getWallet = (idWallet) => {
 
 
 const getMainWallet = () => {
-    return axios.get('http://127.0.0.1:8000/api/wallets/main', {
+    return axios.get(host + '/wallets/main', {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
         }
@@ -31,7 +32,7 @@ const getMainWallet = () => {
 }
 
 const getWalletTransactions = (idCurrentWallet) => {
-    return axios.get('http://127.0.0.1:8000/api/wallets/' + idCurrentWallet + '/transactions', {
+    return axios.get(host + '/wallets/' + idCurrentWallet + '/transactions', {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
         }
@@ -41,7 +42,7 @@ const getWalletTransactions = (idCurrentWallet) => {
 
 const postWallet = (amount) => {
 
-    return axios.post('http://127.0.0.1:8000/api/wallets', {
+    return axios.post(host + '/wallets', {
         amount: amount,
         createdAt: new Date().toJSON()
     }, {
@@ -53,7 +54,7 @@ const postWallet = (amount) => {
 }
 
 const putMainWallet = (idCurrentWallet) => {
-    return axios.put('http://127.0.0.1:8000/api/wallets/'+idCurrentWallet+'/main', {
+    return axios.put(host + '/wallets/'+idCurrentWallet+'/main', {
 
     }, {
         headers: {
@@ -63,7 +64,7 @@ const putMainWallet = (idCurrentWallet) => {
 }
 
 const putWallet = (idWallet, amount) => {
-    return axios.put('http://127.0.0.1:8000/api/wallets/'+idWallet, {
+    return axios.put(host + '/wallets/'+idWallet, {
         amount: amount,
         editAt: new Date().toJSON()
     }, {
@@ -74,7 +75,7 @@ const putWallet = (idWallet, amount) => {
 }
 
 const deleteWallet = (idWallet) => {
-    return axios.delete('http://127.0.0.1:8000/api/wallets/'+idWallet, {}, {
+    return axios.delete(host + '/wallets/'+idWallet, {}, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
         },

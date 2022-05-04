@@ -1,7 +1,8 @@
 import axios from "axios";
+import host from "./server.service"
 
 const getTransaction = (idTransaction) => {
-    return axios.get('http://127.0.0.1:8000/api/transactions/' + idTransaction, {
+    return axios.get(host + '/transactions/' + idTransaction, {
 
     }, {
         headers: {
@@ -18,7 +19,7 @@ const postTransactions = (amount, idTransaction) => {
     let date = new Date();
     //console.log(date.toJSON());
 
-    return axios.post('http://127.0.0.1:8000/api/transactions', {
+    return axios.post(host + '/transactions', {
         amount: amount,
         createdAt: date.toJSON(),
         wallet: "/api/wallets/" + idTransaction
@@ -34,14 +35,14 @@ const putTransaction = (amount, idTransaction) => {
     amount = amount.toString();
     let date = new Date();
 
-    return axios.put('http://127.0.0.1:8000/api/transactions/'+idTransaction, {
+    return axios.put(host + '/transactions/'+idTransaction, {
         amount: amount,
         editAt: date.toJSON(),
     })
 }
 
 const deleteTransaction = (idTransaction) => {
-    return axios.delete('http://127.0.0.1:8000/api/transactions/'+idTransaction);
+    return axios.delete(host + '/transactions/'+idTransaction);
 }
 
 export default {
