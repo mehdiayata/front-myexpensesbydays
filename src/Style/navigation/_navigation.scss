@@ -37,13 +37,14 @@
             margin: 5px;
         }
 
-        a {
+        a, button {
             border: 2px solid rgb(173, 190, 173);
             border-radius: 10px;
             font-size: 52px;
             width: 100%;
             transition: transform 1s;
             margin-bottom: 35px;
+            background: none;
 
             svg {
                 color: white;
@@ -77,9 +78,10 @@
             width: 100%;
             justify-content: space-around;
 
-            a {
+            a, button {
                 font-size: 30px;
                 transition: transform 1s;
+                background: none;
 
                 svg {
                     color: rgb(107, 243, 107);

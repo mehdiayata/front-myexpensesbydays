@@ -1,5 +1,5 @@
 import React from 'react';
-import {Nav } from 'react-bootstrap';
+import {Button, Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AiOutlineDisconnect, AiOutlineDollarCircle, AiOutlineUser, AiOutlineWallet } from 'react-icons/ai';
 
@@ -38,9 +38,9 @@ const Navigation = () => {
                 </NavLink>
 
 
-                <a href='/disconnect' onClick={(e) => handleDisconnect()} >
+                <Button onClick={(e) => handleDisconnect()} >
                     <AiOutlineDisconnect />
-                </a>
+                </Button>
             </Nav>
 
 
