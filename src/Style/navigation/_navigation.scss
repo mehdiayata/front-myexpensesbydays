@@ -82,7 +82,15 @@
                 font-size: 30px;
                 transition: transform 1s;
                 background: none;
-
+                border: none;
+                margin: auto;
+                
+                &:active, &:focus
+                {
+                    background: none !important;
+                    outline: none !important;
+                    box-shadow: none !important;
+                }
                 svg {
                     color: rgb(107, 243, 107);
                 }
