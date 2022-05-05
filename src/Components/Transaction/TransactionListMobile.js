@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import {Button } from 'react-bootstrap';
 import walletService from '../../Services/wallet.service';
 
 const TransactionListScreen = (props) => {
@@ -24,7 +24,6 @@ const TransactionListScreen = (props) => {
 
             {transactions.map((transaction) => {
                 return (
-
                     <div className="table-mobile">
                         <div className="thead-mobile">
                             <div className="tr-mobile">

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
-import { NavLink, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
 
 const LoginComponents = () => {
 
     const [formEmail, setFormEmail] = useState();
     const [formPassword, setFormPassword] = useState();
-    const [idCurrentWallet, setIdCurrentWallet] = useState();
-    const [credentialValid, setCrendentailValid] = useState();
+    const [setCrendentailValid] = useState();
     const [loginError, setLoginError] = useState("");
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -46,11 +45,12 @@ const LoginComponents = () => {
 
     }
 
-    const handleNotAccount = () => {
-        console.log('test');
-        navigate('/registration');
+    // Permettre à l'utilisateur de se créer un compte (Redirection vers registration)
+    // const handleNotAccount = () => {
+    //     console.log('test');
+    //     navigate('/registration');
 
-    }
+    // }
 
     return (
         <div className="login">
@@ -63,7 +63,7 @@ const LoginComponents = () => {
 
                 </p>
                 <hr />
-                    <p className="mb-0">To subscribe to the beta test, contact us: <strong>tayatodev@gmail.com</strong>
+                    <p className="mb-0">To subscribe to the beta test, contact us: <strong>ayatadev@outlook.com</strong>
                 </p>
             </Alert>
             <Form onSubmit={login} method='post' id='login-form'>
@@ -80,13 +80,13 @@ const LoginComponents = () => {
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setFormPassword(e.target.value)} />
                 </Form.Group>
 
-                {isLoading == false &&
+                {isLoading === false &&
                     <Button className="login-btn-submit" variant="primary" type="submit">
                         Submit
                     </Button>
                 }
 
-                {isLoading == true &&
+                {isLoading === true &&
                     <Button className="login-btn-submit" variant="primary" disabled>
                         <Spinner
                             as="span"

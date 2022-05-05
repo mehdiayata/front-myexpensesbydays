@@ -46,13 +46,13 @@ const RegistrationForm = () => {
                     <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
 
-                {isLoading == false &&
+                {isLoading === false &&
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 }
 
-                {isLoading == true &&
+                {isLoading === true &&
                     <Button variant="primary" disabled>
                         <Spinner
                             as="span"

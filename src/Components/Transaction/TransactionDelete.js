@@ -1,5 +1,5 @@
 import { Alert, Button } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React from 'react';
 import transactionService from '../../Services/transaction.service';
 
 const TransactionDelete = (props) => {
@@ -13,7 +13,7 @@ const TransactionDelete = (props) => {
         // Permet de fermer l'alerte
         setDeleteTransactionButton(false);
 
-        if (valid == true) {
+        if (valid === true) {
 
             setSpinner(true);
             transactionService.deleteTransaction(idTransactionDelete).then((resp) => {

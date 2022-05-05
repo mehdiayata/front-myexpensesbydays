@@ -5,7 +5,7 @@ import LoginPage from './Pages/LoginPage';
 import walletService from './Services/wallet.service';
 import { useEffect } from 'react';
 import securityService from './Services/security.service';
-import RegistrationPage from './Pages/RegistrationPage';
+//import RegistrationPage from './Pages/RegistrationPage';
 import WalletPage from './Pages/WalletPage';
 import PasswordEditPage from './Pages/PasswordEditPage';
 import Footer from './Components/Navigation/Footer';

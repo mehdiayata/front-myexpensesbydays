@@ -19,13 +19,13 @@ const WalletEdit = (props) => {
 
             setAmount(resp.data.amount);
 
-            if (resp.data.main == true) {
+            if (resp.data.main === true) {
                 setMain(true);
             } else {
                 setMain(false);
             }
         })
-    }, [])
+    }, [idWalletEdit])
 
 
     const editWallet = (e) => {
@@ -35,7 +35,7 @@ const WalletEdit = (props) => {
 
         walletService.putWallet(idWalletEdit, amount).then((resp) => {
 
-            if (main == true) {
+            if (main === true) {
                 walletService.putMainWallet(idWalletEdit).then(
                     localStorage.setItem('current_wallet', idWalletEdit)
                 );
@@ -48,7 +48,7 @@ const WalletEdit = (props) => {
     }
 
     const handleEditMainWallet = (e) => {
-        if (main == true) {
+        if (main === true) {
             setMain(false);
         } else {
             setMain(true)
@@ -61,7 +61,7 @@ const WalletEdit = (props) => {
             <div className="wallet-edit-header">
                 <h5>Edit Wallet</h5>
 
-                {editWalletButton == true &&
+                {editWalletButton === true &&
 
                     <Button onClick={() => setEditWalletButton(false)}> <AiOutlineClose /> </Button>}
             </div>
@@ -73,7 +73,7 @@ const WalletEdit = (props) => {
                     <Form.Control id="wallet-edit-amount" name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
-                {main == true &&
+                {main === true &&
                     ['checkbox'].map((type) => (
                         <div key={`default-${type}`} className="mb-3">
                             <Form.Check
@@ -88,7 +88,7 @@ const WalletEdit = (props) => {
                     ))
                 }
 
-                {main == false &&
+                {main === false &&
                     ['checkbox'].map((type) => (
                         <div key={`default-${type}`} className="mb-3">
                             <Form.Check

@@ -57,7 +57,7 @@ const refreshTokenResponse = () => {
                     originalConfig._retry = true;
 
                     // Si les TokenRefresh est invalid redirige vers login
-                    if (err.response.data.message == "JWT Refresh Token Not Found") {
+                    if (err.response.data.message === "JWT Refresh Token Not Found") {
                         localStorage.clear()
                         window.location.href = "/login";
                     }
@@ -91,6 +91,8 @@ const editPassword = (idUser, newPassword) => {
         })
 }
 
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     getToken,
     refreshToken,

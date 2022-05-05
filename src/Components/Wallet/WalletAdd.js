@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { AiOutlineClose } from 'react-icons/ai';
 import walletService from '../../Services/wallet.service';
@@ -19,7 +19,7 @@ const WalletAdd = (props) => {
         walletService.postWallet(amount).then((resp) => {
 
             // Change le wallet principal (resp.data.id = id nouveau wallet principal)
-            if (main == true) {
+            if (main === true) {
                 walletService.putMainWallet(resp.data.id).then((resp) => {
                     setMain(false);
                 })
@@ -42,7 +42,7 @@ const WalletAdd = (props) => {
 
     // Définit si le wallet est principal ou pas
     const handleAddMainWallet = () => {
-        if (main == false) {
+        if (main === false) {
             setMain(true);
         } else {
             setMain(false);
@@ -53,7 +53,7 @@ const WalletAdd = (props) => {
         <div className="wallet-add">
             <div className="wallet-add-header">
                 <h5>Add Wallet</h5>
-                {addWalletButton == true &&
+                {addWalletButton === true &&
                     <Button onClick={() => setAddWalletButton(false)}> <AiOutlineClose /> </Button>
                 }
             </div>

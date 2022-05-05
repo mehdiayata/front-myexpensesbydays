@@ -28,7 +28,7 @@ const TransactionListHeader = (props) => {
             </div>
 
 
-            {addTransactionButton == false && <Button onClick={() => setAddTransactionButton(true)}> Add </Button>}
+            {addTransactionButton === false && <Button onClick={() => setAddTransactionButton(true)}> Add </Button>}
 
         </div>
 

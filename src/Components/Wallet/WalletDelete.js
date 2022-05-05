@@ -20,11 +20,11 @@ const WalletDelete = (props) => {
         setDeleteWalletButton(false);
 
         // si le bouton Yes est cliqué
-        if (valid == true) {
+        if (valid === true) {
             setSpinner(true);
 
             // Si le main wallet est éditer
-            if (editMainWallet() != false) {
+            if (editMainWallet() !== false) {
                 editMainWallet().then((resp) => {
                     walletService.deleteWallet(idWalletDelete).then((resp => {
 
@@ -53,18 +53,18 @@ const WalletDelete = (props) => {
         let newMainWallet = null;
 
         wallets.map((wallet) => {
-            if (wallet.id == idWalletDelete && wallet.main == true) {
+            if (wallet.id === idWalletDelete && wallet.main === true) {
                 launchDelete = true;
             }
 
             // Attribution d'un wallet
-            if (wallet.id != idWalletDelete) {
+            if (wallet.id !== idWalletDelete) {
                 newMainWallet = wallet.id;
             }
         })
 
 
-        if (launchDelete == true && newMainWallet != null) {
+        if (launchDelete === true && newMainWallet !== null) {
             return walletService.putMainWallet(newMainWallet);
         }
 

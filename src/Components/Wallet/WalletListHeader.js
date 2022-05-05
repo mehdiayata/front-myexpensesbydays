@@ -8,7 +8,7 @@ const WalletListHeader = (props) => {
     return (
         <div className="wallet-list-header">
             
-            {addWalletButton == false && <Button onClick={() => setAddWalletButton(true)}> Add </Button>}
+            {addWalletButton === false && <Button onClick={() => setAddWalletButton(true)}> Add </Button>}
             
         </div>
     );

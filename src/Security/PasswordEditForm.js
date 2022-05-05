@@ -1,20 +1,20 @@
 import jwtDecode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import securityService from '../Services/security.service';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 
 const PasswordEditForm = () => {
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [confirmMessage, setConfirmMessage] = useState(false);
 
     const verifyNewPassword = () => {
-        if (newPassword == confirmPassword) {
+        if (newPassword === confirmPassword) {
             return true;
         } else {
             return false;
@@ -31,7 +31,7 @@ const PasswordEditForm = () => {
         let jwt = jwtDecode(localStorage.getItem('JWT'));
         let user = jwt;
 
-        if (validEdit == true) {
+        if (validEdit === true) {
             securityService.getToken(user['username'], oldPassword).then((resp) => {
                 securityService.editPassword(user['id'], newPassword).then((resp) => {
                     securityService.getToken(user['username'], newPassword).then((resp) => {
@@ -73,13 +73,13 @@ const PasswordEditForm = () => {
                     <Form.Control type="password" placeholder="confirm password" onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
                 
-                {isLoading == false &&
+                {isLoading === false &&
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 }
 
-                {isLoading == true &&
+                {isLoading === true &&
                     <Button variant="primary" disabled>
                         <Spinner
                             as="span"
@@ -93,7 +93,7 @@ const PasswordEditForm = () => {
                 }
             </Form>
 
-            {confirmMessage == true &&
+            {confirmMessage === true &&
                 <p> Your password is edited </p>
             }
         </div>

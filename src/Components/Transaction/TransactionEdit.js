@@ -18,7 +18,7 @@ const TransactionEdit = (props) => {
             setAmount(resp.data.amount);
 
         })
-    }, [])
+    }, [idTransactionEdit])
 
 
     const editTransaction = (e) => {
@@ -37,7 +37,7 @@ const TransactionEdit = (props) => {
             <div className="transaction-edit-header">
                 <h5> Transaction Edit</h5>
 
-                {editTransactionButton == true && <Button onClick={() => setEditTransactionButton(false)}> <AiOutlineClose />  </Button>}
+                {editTransactionButton === true && <Button onClick={() => setEditTransactionButton(false)}> <AiOutlineClose />  </Button>}
             </div>
             <Form onSubmit={(e) => { editTransaction(e) }} id="transaction-edit-form">
 

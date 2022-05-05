@@ -1,6 +1,5 @@
 import React from 'react';
-import { AiFillFacebook, AiFillInstagram, AiFillTwitterCircle } from 'react-icons/ai';
-import { GiCash } from 'react-icons/gi';
+// import { AiFillFacebook, AiFillInstagram, AiFillTwitterCircle } from 'react-icons/ai';
 import {NavLink} from 'react-router-dom';
 
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
         <div className="footer">
 
             <div className="image-footer">
-            <img className="navigation_logo" src={process.env.PUBLIC_URL + "/images/logo.svg"}></img>
+            <img className="navigation_logo" alt="navigation logo" src={process.env.PUBLIC_URL + "/images/logo.svg"}></img>
              
             </div>
 
@@ -31,7 +30,7 @@ const Footer = () => {
                     <h4>
                       Contact
                     </h4>
-                    <li>tayatodev@gmail.com</li>
+                    <li>ayatadev@outlook.com</li>
                 </ul>
             </div>
         </div>

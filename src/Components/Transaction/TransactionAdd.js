@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import transactionService from '../../Services/transaction.service';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -33,7 +33,7 @@ const TransactionAdd = (props) => {
         <div className="transaction-add">
             <div className="transaction-add-header">
                 <h5>Add Transaction</h5>
-                {addTransactionButton == true &&
+                {addTransactionButton === true &&
 
                     <Button onClick={() => setAddTransactionButton(false)}> <AiOutlineClose /> </Button>}
 

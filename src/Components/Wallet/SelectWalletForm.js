@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import walletService from '../../Services/wallet.service';
 
 
@@ -24,7 +24,7 @@ const SelectWalletForm = (props) => {
             setWallets(res.data['hydra:member']);
         })
 
-    }, [idCurrentWallet]);
+    }, [idCurrentWallet, setWalletSelected]);
 
 
     return (

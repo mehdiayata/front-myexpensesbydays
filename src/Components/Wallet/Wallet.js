@@ -19,7 +19,7 @@ const Wallet = () => {
     useEffect(() => {
         // Initialise onSubmit à false
         setOnSubmit(false);
-    })
+    }, [onSubmit])
 
     return (
         <div className="wallet">
@@ -29,11 +29,11 @@ const Wallet = () => {
 
 
             {/* Add */}
-            {addWalletButton == true &&
+            {addWalletButton === true &&
                 <WalletAdd addWalletButton={addWalletButton} setAddWalletButton={setAddWalletButton} setOnSubmitAdd={setOnSubmit} setSpinner={setSpinner}/>
             }
 
-            {editWalletButton == true &&
+            {editWalletButton === true &&
                 <WalletEdit editWalletButton={editWalletButton}
                     setEditWalletButton={setEditWalletButton}
                     idWalletEdit={idWalletEdit}
@@ -44,7 +44,7 @@ const Wallet = () => {
             }
 
 
-            {deleteWalletButton == true &&
+            {deleteWalletButton === true &&
                 <WalletDelete setDeleteWalletButton={setDeleteWalletButton}
                     idWalletDelete={idWalletDelete}
                     setOnSubmitDelete={setOnSubmit}

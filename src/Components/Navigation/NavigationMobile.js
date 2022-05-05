@@ -1,8 +1,8 @@
 import React from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AiOutlineDisconnect, AiOutlineDollarCircle, AiOutlineUser, AiOutlineWallet } from 'react-icons/ai';
-import { GiCash, GiWallet } from 'react-icons/gi'
+
 
 const NavigationMobile = () => {
 
@@ -32,7 +32,7 @@ const NavigationMobile = () => {
                     </NavLink>
 
 
-                    <a to='/disconnect' onClick={(e) => handleDisconnect()} >
+                    <a href='/disconnect' onClick={(e) => handleDisconnect()} >
                         <AiOutlineDisconnect />
                     </a>
                 </Nav>

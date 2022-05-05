@@ -21,7 +21,7 @@ const Transaction = () => {
         // Initialise onSubmit à false
         setOnSubmit(false);
 
-    })
+    }, [setOnSubmit])
 
     return (
         <div className="transaction">
@@ -32,7 +32,7 @@ const Transaction = () => {
                 onSubmit={onSubmit} />
 
 
-            {addTransactionButton == true &&
+            {addTransactionButton === true &&
                 <TransactionAdd walletSelected={walletSelected} setOnSubmitAdd={setOnSubmit}
                     addTransactionButton={addTransactionButton}
                     setAddTransactionButton={setAddTransactionButton}
@@ -40,7 +40,7 @@ const Transaction = () => {
                 />
             }
 
-            {editTransactionButton == true &&
+            {editTransactionButton === true &&
                 <TransactionEdit walletSelected={walletSelected}
                     idTransactionEdit={idTransactionEdit}
                     setOnSubmitEdit={setOnSubmit}
@@ -50,7 +50,7 @@ const Transaction = () => {
                 />
             }
 
-            {deleteTransactionButton == true &&
+            {deleteTransactionButton === true &&
                 <TransactionDelete 
                 idTransactionDelete={idTransactionDelete} 
                 setOnSubmitDelete={setOnSubmit} 

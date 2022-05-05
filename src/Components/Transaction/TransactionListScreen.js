@@ -11,7 +11,7 @@ const TransactionListScreen = (props) => {
     const { setDeleteTransactionButton } = props;
     const { setIdTransactionDelete } = props;
     const [transactions, setTransactions] = useState([]);
-    const { spinner } = props; 
+    //const { spinner } = props; 
 
     useEffect(() => {
         walletService.getWalletTransactions(walletSelected).then((resp) => {
