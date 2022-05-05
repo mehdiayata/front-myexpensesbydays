@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/front-myexpensesbydays/static/css/main.c08670be.css",
-    "main.js": "/front-myexpensesbydays/static/js/main.3c94bdb7.js",
+    "main.css": "/front-myexpensesbydays/static/css/main.5d263774.css",
+    "main.js": "/front-myexpensesbydays/static/js/main.23fa6f00.js",
     "static/js/787.4b5ad850.chunk.js": "/front-myexpensesbydays/static/js/787.4b5ad850.chunk.js",
     "index.html": "/front-myexpensesbydays/index.html",
-    "main.c08670be.css.map": "/front-myexpensesbydays/static/css/main.c08670be.css.map",
-    "main.3c94bdb7.js.map": "/front-myexpensesbydays/static/js/main.3c94bdb7.js.map",
+    "main.5d263774.css.map": "/front-myexpensesbydays/static/css/main.5d263774.css.map",
+    "main.23fa6f00.js.map": "/front-myexpensesbydays/static/js/main.23fa6f00.js.map",
     "787.4b5ad850.chunk.js.map": "/front-myexpensesbydays/static/js/787.4b5ad850.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c08670be.css",
-    "static/js/main.3c94bdb7.js"
+    "static/css/main.5d263774.css",
+    "static/js/main.23fa6f00.js"
   ]
 }
