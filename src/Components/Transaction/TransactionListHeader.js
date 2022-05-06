@@ -17,7 +17,7 @@ const TransactionListHeader = (props) => {
             setWalletAmount(resp.data.amount);
         });
 
-    }, [walletSelected, onSubmit])
+    }, [walletSelected, onSubmit, walletAmount])
 
     return (
         <div className="transaction-list-header">

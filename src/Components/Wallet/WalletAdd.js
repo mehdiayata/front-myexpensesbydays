@@ -31,7 +31,7 @@ const WalletAdd = (props) => {
 
             setSpinner(false);
             // Reset
-            setAmount(null);
+            setAmount('0');
             e.target.reset();
 
             setOnSubmitAdd(true);

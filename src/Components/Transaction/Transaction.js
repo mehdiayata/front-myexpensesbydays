@@ -21,7 +21,7 @@ const Transaction = () => {
         // Initialise onSubmit à false
         setOnSubmit(false);
 
-    }, [setOnSubmit])
+    }, [onSubmit])
 
     return (
         <div className="transaction">

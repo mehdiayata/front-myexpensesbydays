@@ -36,13 +36,21 @@ const WalletDelete = (props) => {
 
                 });
             } else {
-                walletService.deleteWallet(idWalletDelete).then((resp => {
+                walletService.deleteWallet(idWalletDelete)
+                    .then((resp => {
 
-                    // Variable permettant d'actualiser la liste
-                    setOnSubmitDelete(true);
-                    setSpinner(false);
+                        // Variable permettant d'actualiser la liste
+                        setOnSubmitDelete(true);
+                        setSpinner(false);
 
-                }));
+                    })
+                    ).catch((error) => {
+                        if(error.response.data["hydra:description"] === "Unable to delete your only wallet") {
+                            alert(error.response.data["hydra:description"]);
+                        }
+
+                        setSpinner(false);
+                    })
             }
         }
     }
