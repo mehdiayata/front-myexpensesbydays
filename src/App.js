@@ -12,6 +12,7 @@ import Footer from './Components/Navigation/Footer';
 import Navigation from './Components/Navigation/Navigation';
 import NavigationMobile from './Components/Navigation/NavigationMobile';
 import TransactionPage from './Pages/TransactionPage';
+import IncomePage from './Pages/IncomePage';
 
 function App() {
 
@@ -48,6 +49,8 @@ function App() {
           <Route path="/registration" element={<RegistrationPage />} /> */}
           <Route path="/wallets" element={<WalletPage />} />
           <Route path="/password/edit" element={<PasswordEditPage />} />
+          
+          <Route path="/income" element={<IncomePage />} />
         </Routes>
 
         <NavigationMobile />
