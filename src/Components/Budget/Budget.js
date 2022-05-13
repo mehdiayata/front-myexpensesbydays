@@ -8,7 +8,6 @@ const Budget = (props) => {
 
     return (
         <div className='budget'>
-
             <BudgetAdd walletSelected={walletSelected}/>
         </div>
     );

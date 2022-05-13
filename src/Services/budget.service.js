@@ -1,10 +1,11 @@
 import axios from "axios"
 import host from "./server.service"
 
-const postBudget = (amount, idWallet) => {
+const postBudget = (amount, arrayDate, idWallet) => {
     return axios.post(host + '/budgets', {
         amount: amount,
-        wallet: 'api/wallets/' + idWallet
+        wallet: 'api/wallets/' + idWallet,
+        dueDate: arrayDate
     },
         {
             headers: {

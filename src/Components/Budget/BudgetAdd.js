@@ -1,35 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import budgetService from '../../Services/budget.service';
+import DatePicker from "react-multi-date-picker"
+
 
 const BudgetAdd = (props) => {
     const [formFields, setFormFields] = useState([
-        { amount: '' },
+        { amount: '', date: [] },
     ]);
 
     const { walletSelected } = props;
+    const [dateValue, setDateValue] = useState([]);
 
     const handleFormChange = (event, index) => {
+      
         let data = [...formFields];
         data[index][event.target.name] = event.target.value;
         setFormFields(data);
     }
 
+    const handleDateChange = (event, index) => {
+        
+         let data = [...formFields];
+
+         // Config array date 
+         let dateFormat = [];
+
+         event.forEach(date => {
+            dateFormat.push(date.day);    
+         });
+         
+        data[index]['date'] = dateFormat;
+         setFormFields(data);
+    }
+
     const submit = (e) => {
-        console.log('test');
         e.preventDefault();
 
         for (let i = 0; i < formFields.length; i++) {
             // Si le champs est remplie
             if (formFields[i].amount) {
-                budgetService.postBudget(formFields[i].amount, walletSelected).then((resp) => { console.log(resp); })
+                budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected).then((resp) => { console.log(resp); })
             }
         }
     }
 
     const addFields = () => {
         let object = {
-            amount: ''
+            amount: '',
+            date: []
         }
 
         setFormFields([...formFields, object])
@@ -57,10 +76,24 @@ const BudgetAdd = (props) => {
                                 value={form.amount}
 
                             />
+
+                            <DatePicker
+                                buttons={false}
+                                hideYear="true"
+                                hideMonth="true"
+                                hideWeekDays="true"
+                                multiple
+                                format="DD"
+                                value={dateValue}
+                                onChange={event => handleDateChange(event, index)}
+                                 />
                             <Button variant="primary" onClick={() => removeFields(index)}>Remove</Button>
+
+
                         </Form.Group>
                     )
                 })}
+
 
                 <Button variant="primary" onClick={addFields}>+</Button>
                 <Button type="submit" variant="primary">Submit</Button>
