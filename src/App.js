@@ -13,6 +13,9 @@ import Navigation from './Components/Navigation/Navigation';
 import NavigationMobile from './Components/Navigation/NavigationMobile';
 import TransactionPage from './Pages/TransactionPage';
 import IncomePage from './Pages/IncomePage';
+import CoastPage from './Pages/CoastPage';
+import SavingPage from './Pages/SavingPage';
+import HomePage from './Pages/HomePage';
 
 function App() {
 
@@ -51,6 +54,11 @@ function App() {
           <Route path="/password/edit" element={<PasswordEditPage />} />
           
           <Route path="/income" element={<IncomePage />} />
+          <Route path="/coast" element={<CoastPage />} />
+          
+          <Route path="/saving" element={<SavingPage />} />
+          
+          <Route path="/home" element={<HomePage />} />
         </Routes>
 
         <NavigationMobile />

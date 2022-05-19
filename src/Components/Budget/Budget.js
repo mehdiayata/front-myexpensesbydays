@@ -5,10 +5,11 @@ import BudgetAdd from './BudgetAdd';
 
 const Budget = (props) => {
     const { walletSelected } = props;
+    const {coast} = props;
 
     return (
         <div className='budget'>
-            <BudgetAdd walletSelected={walletSelected}/>
+            <BudgetAdd coast={coast} walletSelected={walletSelected}/>
         </div>
     );
 };

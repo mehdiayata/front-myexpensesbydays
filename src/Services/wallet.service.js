@@ -39,12 +39,26 @@ const getWalletTransactions = (idCurrentWallet) => {
     })
 }
 
+const getWalletBudgets = (idCurrentWallet) => {
+    return axios.get(host + '/wallets/' + idCurrentWallet + '/budgets', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        }
+    })
+}
 
-const postWallet = (amount) => {
+
+const postWallet = (amount, saving) => {
+
+    if(!saving) {
+        saving = '0';
+    }
 
     return axios.post(host + '/wallets', {
         amount: amount,
-        createdAt: new Date().toJSON()
+        createdAt: new Date().toJSON(),
+        saving: saving,
+        savingReal: '0'
     }, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
@@ -63,10 +77,24 @@ const putMainWallet = (idCurrentWallet) => {
     })
 }
 
-const putWallet = (idWallet, amount) => {
+const putWallet = (idWallet, amount, saving) => {
+
     return axios.put(host + '/wallets/'+idWallet, {
         amount: amount,
-        editAt: new Date().toJSON()
+        editAt: new Date().toJSON(),
+        saving: saving
+    }, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        },
+    })
+}
+
+
+const putSavingWallet = (idWallet, saving) => {
+
+    return axios.put(host + '/wallets/'+idWallet, {
+        saving: saving
     }, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('JWT')
@@ -83,6 +111,7 @@ const deleteWallet = (idWallet) => {
 }
 
 
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     getWallets,
@@ -92,6 +121,8 @@ export default {
     postWallet,
     putMainWallet,
     putWallet,
-    deleteWallet
+    putSavingWallet,
+    deleteWallet,
+    getWalletBudgets
 };
 

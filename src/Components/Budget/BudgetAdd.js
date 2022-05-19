@@ -10,28 +10,29 @@ const BudgetAdd = (props) => {
     ]);
 
     const { walletSelected } = props;
+    const { coast } = props;
     const [dateValue, setDateValue] = useState([]);
 
     const handleFormChange = (event, index) => {
-      
+
         let data = [...formFields];
         data[index][event.target.name] = event.target.value;
         setFormFields(data);
     }
 
     const handleDateChange = (event, index) => {
-        
-         let data = [...formFields];
 
-         // Config array date 
-         let dateFormat = [];
+        let data = [...formFields];
 
-         event.forEach(date => {
-            dateFormat.push(date.day);    
-         });
-         
+        // Config array date 
+        let dateFormat = [];
+
+        event.forEach(date => {
+            dateFormat.push(date.day);
+        });
+
         data[index]['date'] = dateFormat;
-         setFormFields(data);
+        setFormFields(data);
     }
 
     const submit = (e) => {
@@ -40,7 +41,12 @@ const BudgetAdd = (props) => {
         for (let i = 0; i < formFields.length; i++) {
             // Si le champs est remplie
             if (formFields[i].amount) {
-                budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected).then((resp) => { console.log(resp); })
+                if(coast == true) {
+                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, true).then((resp) => { console.log(resp); })
+                } else {
+                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, false).then((resp) => { console.log(resp); })
+                }
+                
             }
         }
     }
@@ -86,7 +92,7 @@ const BudgetAdd = (props) => {
                                 format="DD"
                                 value={dateValue}
                                 onChange={event => handleDateChange(event, index)}
-                                 />
+                            />
                             <Button variant="primary" onClick={() => removeFields(index)}>Remove</Button>
 
 
