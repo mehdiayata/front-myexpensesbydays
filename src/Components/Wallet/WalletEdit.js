@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import { AiOutlineClose } from 'react-icons/ai';
 import walletService from '../../Services/wallet.service';
 
@@ -11,20 +11,29 @@ const WalletEdit = (props) => {
     const [amount, setAmount] = useState();
     const [main, setMain] = useState();
     const { setSpinner } = props;
+    const { spinner } = props;
 
 
     // Récupérer les infos du wallet à éditer 
     useEffect(() => {
-        walletService.getWallet(idWalletEdit).then((resp) => {
+        setSpinner(true);
 
-            setAmount(resp.data.amount);
+        if (idWalletEdit) {
+            walletService.getWallet(idWalletEdit).then((resp) => {
 
-            if (resp.data.main === true) {
-                setMain(true);
-            } else {
-                setMain(false);
-            }
-        })
+                setAmount(resp.data.amount);
+
+                if (resp.data.main === true) {
+                    setMain(true);
+                } else {
+                    setMain(false);
+                }
+
+
+                setSpinner(false);
+            })
+        }
+
     }, [idWalletEdit])
 
 
@@ -56,57 +65,61 @@ const WalletEdit = (props) => {
     }
 
     return (
-        <div className="wallet-edit">
+        spinner ?
+            <Spinner animation="border" />
+            :
 
-            <div className="wallet-edit-header">
-                <h5>Edit Wallet</h5>
+            <div className="wallet-edit">
 
-                {editWalletButton === true &&
+                <div className="wallet-edit-header">
+                    <h5>Edit Wallet</h5>
 
-                    <Button onClick={() => setEditWalletButton(false)}> <AiOutlineClose /> </Button>}
+                    {editWalletButton === true &&
+
+                        <Button onClick={() => setEditWalletButton(false)}> <AiOutlineClose /> </Button>}
+                </div>
+
+
+                <Form onSubmit={editWallet} method='post' id="wallet-edit-form">
+                    <Form.Group id='wallet-edit-form-amount'>
+                        <Form.Label>Amount</Form.Label>
+                        <Form.Control id="wallet-edit-amount" step=".01" name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
+                    </Form.Group>
+
+                    {main === true &&
+                        ['checkbox'].map((type) => (
+                            <div key={`default-${type}`} className="mb-3">
+                                <Form.Check
+                                    type={type}
+                                    id="wallet-edit-main"
+                                    label={"Wallet Main"}
+                                    defaultChecked={main}
+                                    onChange={(e) => handleEditMainWallet(e)}
+                                    disabled
+                                />
+                            </div>
+                        ))
+                    }
+
+                    {main === false &&
+                        ['checkbox'].map((type) => (
+                            <div key={`default-${type}`} className="mb-3">
+                                <Form.Check
+                                    type={type}
+                                    id="wallet-edit-main"
+                                    label={"Wallet Main"}
+                                    defaultChecked={main}
+                                    onChange={(e) => handleEditMainWallet(e)}
+                                />
+                            </div>
+                        ))
+                    }
+
+                    <Button variant="success" type="submit">
+                        Save
+                    </Button>
+                </Form>
             </div>
-
-
-            <Form onSubmit={editWallet} method='post' id="wallet-edit-form">
-                <Form.Group id='wallet-edit-form-amount'>
-                    <Form.Label>Amount</Form.Label>
-                    <Form.Control id="wallet-edit-amount" name="amount" defaultValue={amount} type="number" onChange={(e) => setAmount(e.target.value)} />
-                </Form.Group>
-
-                {main === true &&
-                    ['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
-                            <Form.Check
-                                type={type}
-                                id="wallet-edit-main"
-                                label={"Wallet Main"}
-                                defaultChecked={main}
-                                onChange={(e) => handleEditMainWallet(e)}
-                                disabled
-                            />
-                        </div>
-                    ))
-                }
-
-                {main === false &&
-                    ['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
-                            <Form.Check
-                                type={type}
-                                id="wallet-edit-main"
-                                label={"Wallet Main"}
-                                defaultChecked={main}
-                                onChange={(e) => handleEditMainWallet(e)}
-                            />
-                        </div>
-                    ))
-                }
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        </div>
     );
 };
 

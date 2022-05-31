@@ -9,7 +9,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (localStorage.getItem('JWT') && localStorage.getItem('refresh_token')) {
-            navigate('/transactions');
+            navigate('/');
         } else {
 
             localStorage.clear();

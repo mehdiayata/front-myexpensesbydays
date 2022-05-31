@@ -16,6 +16,8 @@ import IncomePage from './Pages/IncomePage';
 import CoastPage from './Pages/CoastPage';
 import SavingPage from './Pages/SavingPage';
 import HomePage from './Pages/HomePage';
+import TutoPage from './Pages/TutoPage';
+import BudgetPage from './Pages/BudgetPage';
 
 function App() {
 
@@ -31,8 +33,6 @@ function App() {
       // Get wallet by default and add in localStorage 
       walletService.getMainWallet().then((resp) => {
         localStorage.setItem('current_wallet', resp.data.id);
-
-
       });
     }
 
@@ -45,7 +45,7 @@ function App() {
         <Routes>
           <Route component={NotFound} />
 
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/transactions" element={<TransactionPage />} />
 {/* 
@@ -59,6 +59,10 @@ function App() {
           <Route path="/saving" element={<SavingPage />} />
           
           <Route path="/home" element={<HomePage />} />
+          
+          <Route path="/tuto" element={<TutoPage />} />
+          <Route path="/budget" element={<BudgetPage />} />
+          
         </Routes>
 
         <NavigationMobile />

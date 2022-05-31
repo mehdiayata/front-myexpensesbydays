@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { AiOutlineDisconnect, AiOutlineDollarCircle, AiOutlineUser, AiOutlineWallet } from 'react-icons/ai';
+import { AiOutlineDollarCircle, AiOutlineWallet, AiOutlineHome } from 'react-icons/ai';
+import { BsFileBarGraph } from 'react-icons/bs';
 
 
 const NavigationMobile = () => {
@@ -16,26 +17,27 @@ const NavigationMobile = () => {
 
     return (
         <div className="navigation-mobile">
-                <Nav className="flex-row">
-
-                    <NavLink to='/transactions' exact='true' activeclassname="nav-active">
-                        <AiOutlineDollarCircle />
-                    </NavLink>
-
-                    <NavLink to='/wallets' exact='true' activeclassname="nav-active">
-                        <AiOutlineWallet />
-                    </NavLink>
+            <Nav className="flex-row">
 
 
-                    <NavLink to='/password/edit' exact='true' activeclassname="nav-active">
-                        <AiOutlineUser />
-                    </NavLink>
+                <NavLink to='/home' exact='true' activeclassname="nav-active">
+                    <AiOutlineHome />
+                </NavLink>
+
+                <NavLink to='/transactions' exact='true' activeclassname="nav-active">
+                    <AiOutlineDollarCircle />
+                </NavLink>
+
+                <NavLink to='/wallets' exact='true' activeclassname="nav-active">
+                    <AiOutlineWallet />
+                </NavLink>
 
 
-                    <Button onClick={(e) => handleDisconnect()} >
-                    <AiOutlineDisconnect />
-                </Button>
-                </Nav>
+                <NavLink to='/budget' exact='true' activeclassname="nav-active">
+                    <BsFileBarGraph />
+                </NavLink>
+
+            </Nav>
         </div>
     );
 };

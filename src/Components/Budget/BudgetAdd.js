@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import budgetService from '../../Services/budget.service';
-import DatePicker from "react-multi-date-picker"
+import DatePicker, { Calendar } from "react-multi-date-picker"
 
 
 const BudgetAdd = (props) => {
@@ -12,6 +12,12 @@ const BudgetAdd = (props) => {
     const { walletSelected } = props;
     const { coast } = props;
     const [dateValue, setDateValue] = useState([]);
+    const { setOnSubmitBudget } = props;
+    const { setSpinner } = props;
+
+    useEffect(() => {
+        setOnSubmitBudget(false);
+    });
 
     const handleFormChange = (event, index) => {
 
@@ -36,17 +42,27 @@ const BudgetAdd = (props) => {
     }
 
     const submit = (e) => {
+        setOnSubmitBudget(true);
         e.preventDefault();
+
+        setSpinner(true);
 
         for (let i = 0; i < formFields.length; i++) {
             // Si le champs est remplie
             if (formFields[i].amount) {
-                if(coast == true) {
-                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, true).then((resp) => { console.log(resp); })
+                if (coast == true) {
+                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, true).then((resp) => {
+
+                        setSpinner(false);
+
+                    })
                 } else {
-                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, false).then((resp) => { console.log(resp); })
+                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, false).then((resp) => {
+
+                        setSpinner(false);
+                    })
                 }
-                
+
             }
         }
     }
@@ -67,42 +83,62 @@ const BudgetAdd = (props) => {
     }
 
     return (
-        <div className="App">
-            <Form onSubmit={submit}>
+        <div className="budget-add">
+            <div className="budget-add-text-info">
+
+                {coast ? 
+                    <p> Please indicate your coast that you have each month ?</p>
+                    :
+                    <p> Please indicate your cash inflows that you have each month ?</p>
+                }
+            </div>
+            <Form onSubmit={submit} className="budget-form">
                 {formFields.map((form, index) => {
                     return (
-                        <Form.Group key={index}>
+                        <Form.Group key={index} className="budget-add-container">
+
+                            <Form.Label> Amount </Form.Label>
                             <Form.Control
                                 required
                                 type="number" step=".01"
                                 className="budget-add-amount"
                                 name='amount'
-                                placeholder='Amount'
+                                placeholder='Ex: 250'
                                 onChange={event => handleFormChange(event, index)}
                                 value={form.amount}
 
                             />
 
-                            <DatePicker
-                                buttons={false}
-                                hideYear="true"
-                                hideMonth="true"
-                                hideWeekDays="true"
-                                multiple
-                                format="DD"
-                                value={dateValue}
-                                onChange={event => handleDateChange(event, index)}
-                            />
-                            <Button variant="primary" onClick={() => removeFields(index)}>Remove</Button>
+                            <div className="budget-add-date">
+                                <Form.Label className="budget_add_label_date">Choice your due date</Form.Label>
+                                <br />
+                                <Calendar className='budget-add-calendar'
+                                    buttons={false}
+                                    hideYear="true"
+                                    hideMonth="true"
+                                    hideWeekDays="true"
+                                    multiple
+                                    format="DD"
+                                    value={dateValue}
+                                    onChange={event => handleDateChange(event, index)}
+                                />
+                            </div>
 
+                            {index !== 0 &&
+                                <Button variant="outline-danger" onClick={() => removeFields(index)}>Remove</Button>
+
+                            }
 
                         </Form.Group>
                     )
                 })}
 
 
-                <Button variant="primary" onClick={addFields}>+</Button>
-                <Button type="submit" variant="primary">Submit</Button>
+                <div className='budget-add-button-group'>
+                    <Button variant="info" onClick={addFields} className="budget-add-button-addFields">+</Button>
+
+                    <Button type="submit" variant="success" className="budget-add-button-submit">Save</Button>
+                </div>
             </Form>
         </div>
     );

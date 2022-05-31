@@ -47,7 +47,6 @@ const authorizedExpense = (budget, saving, savingReal) => {
 
     
     authorizedExpense = ((parseFloat(budget) - parseFloat(saving) + parseFloat(savingReal)) / parseInt(remainingDays)).toFixed(2);
-    console.log(budget, saving, savingReal);
     return parseFloat(authorizedExpense);
 }
 

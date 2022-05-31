@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import calculatorService from '../../Services/calculator.service';
 import walletService from '../../Services/wallet.service';
 
-const BudgetPreviewCalcul = () => {
+const BudgetPreviewCalcul = (props) => {
     const [coasts, setCoasts] = useState([]);
     const [incomes, setIncomes] = useState([]);
     const [previewBudget, setPreviewBudget] = useState();
+    const { setSpinner } = props;
 
     useEffect(() => {
         if (localStorage.getItem('current_wallet')) {
@@ -24,18 +26,16 @@ const BudgetPreviewCalcul = () => {
 
                 localStorage.setItem('budget_preview', calculatorService.budgetPreviewCalcul(incomes, coasts));
 
+                setSpinner(false);
             })
-        } else {
-            console.log('You are not connected');
         }
-
-
 
     }, [])
 
     return (
         <div className='budget-preview-calcul'>
-            <h1>{previewBudget}</h1>
+            <p className="budget-preview-label">Vos revenu estimé par mois sont de :</p>
+            <p className="budget-preview-amount">{previewBudget === undefined ? <Spinner animation='border' /> : previewBudget.toFixed(2) } €</p>
         </div>
     );
 };

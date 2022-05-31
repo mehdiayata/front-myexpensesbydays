@@ -12,15 +12,14 @@ const WalletRead = (props) => {
             setWallet(resp.data);
             setSaving(resp.data.saving);
             setSavingReal(resp.data.savingReal)
-        
         })
     }, [onSubmitAdd])
     
     return (
         
         <div className="wallet-read">
-            <h3> Wallet Amount</h3>
-            <p>{wallet.amount}</p>
+            <h5> Wallet Amount</h5>
+            <p>{wallet.amount} €</p>
         </div>
     );
 };

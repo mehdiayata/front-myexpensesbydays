@@ -8,13 +8,10 @@ const TransactionAdd = (props) => {
     const { setOnSubmitAdd } = props;
     const { addTransactionButton } = props;
     const { setAddTransactionButton } = props;
-    const { setSpinner } = props;
     const [amount, setAmount] = useState('0');
 
     // Post amount 
     const addTransaction = (e) => {
-        
-        setSpinner(true);
 
         e.preventDefault();
         transactionService.postTransactions(amount, walletSelected).then((resp) => {
@@ -24,15 +21,13 @@ const TransactionAdd = (props) => {
             document.querySelector('#transaction-add-form').reset();
 
             setAmount('0');
-
-            setSpinner(false);
         })
     }
 
     return (
         <div className="transaction-add">
             <div className="transaction-add-header">
-                <h5>Add Transaction</h5>
+                <h5>Add new transaction</h5>
                 {addTransactionButton === true &&
 
                     <Button onClick={() => setAddTransactionButton(false)}> <AiOutlineClose /> </Button>}
@@ -47,8 +42,8 @@ const TransactionAdd = (props) => {
                     <Form.Control type="number" step=".01" defaultValue={amount} id="transaction-add-amount" onChange={(e) => { setAmount(e.target.value) }} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button variant="success" type="submit">
+                    Save
                 </Button>
             </Form>
         </div>
