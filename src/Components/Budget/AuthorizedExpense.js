@@ -4,7 +4,7 @@ import calculatorService from '../../Services/calculator.service';
 import walletService from '../../Services/wallet.service';
 
 const AuthorizedExpense = (props) => {
-    const [authorizedExpense, setAuthorizedExpense] = useState();
+    const [authorizedExpense, setAuthorizedExpense] = useState(null);
     const {onSubmitAdd} = props;
     const {saving} = props;
     const {savingReal} = props;
@@ -12,7 +12,7 @@ const AuthorizedExpense = (props) => {
     useEffect(() => {
         setAuthorizedExpense(calculatorService.authorizedExpense(localStorage.getItem('budget_preview'), saving, savingReal));
         localStorage.setItem('authorized_expense', calculatorService.authorizedExpense(localStorage.getItem('budget_preview'), saving, savingReal));
-    }, [onSubmitAdd, saving, savingReal, authorizedExpense])
+    }, [saving, savingReal, authorizedExpense])
 
     const overdraft = () => {
         if(authorizedExpense < 0) {
@@ -26,7 +26,7 @@ const AuthorizedExpense = (props) => {
         <div className='authrorized-expense'>
             <h5>Vous pouvez dépenser par jour : </h5>
              
-            <h1>{isNaN(authorizedExpense) ? <Spinner animation='border' /> : authorizedExpense + '€'} </h1>
+            <h1>{authorizedExpense === null || isNaN(authorizedExpense) ? <Spinner animation='border' /> : authorizedExpense + '€'} </h1>
             {overdraft()}
              
 

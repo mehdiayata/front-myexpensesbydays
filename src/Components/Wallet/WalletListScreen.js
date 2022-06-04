@@ -42,7 +42,7 @@ const WalletListScreen = (props) => {
 
                                 <td>{wallet.id}</td>
                                 <td>{wallet.amount}</td>
-                                <td>{ wallet.main ? <AiFillHeart /> : <AiOutlineClose /> }</td>
+                                <td>{wallet.main ? <AiFillHeart /> : <AiOutlineClose /> }</td>
                                 
                                 <td>{wallet.createdAt != null && moment(wallet.createdAt).format('DD/MM/YYYY')}</td>
                                 <td>{wallet.editAt != null && moment(wallet.editAt).format('DD/MM/YYYY')}</td>

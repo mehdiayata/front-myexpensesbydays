@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import transactionService from '../../Services/transaction.service';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -9,14 +9,19 @@ const TransactionAdd = (props) => {
     const { addTransactionButton } = props;
     const { setAddTransactionButton } = props;
     const [amount, setAmount] = useState('0');
+    const { setSpinner } = props;
 
     // Post amount 
     const addTransaction = (e) => {
+        setSpinner(true);
+        
+        setOnSubmitAdd(true);
 
         e.preventDefault();
         transactionService.postTransactions(amount, walletSelected).then((resp) => {
-
-            setOnSubmitAdd(true);
+            
+            setSpinner(false);
+            setOnSubmitAdd(false);
 
             document.querySelector('#transaction-add-form').reset();
 

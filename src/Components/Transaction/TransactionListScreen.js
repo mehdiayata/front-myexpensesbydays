@@ -11,12 +11,13 @@ const TransactionListScreen = (props) => {
     const { setDeleteTransactionButton } = props;
     const { setIdTransactionDelete } = props;
     const [transactions, setTransactions] = useState([]);
-    //const { spinner } = props; 
 
     useEffect(() => {
-        walletService.getWalletTransactions(walletSelected).then((resp) => {
-            setTransactions(resp.data['hydra:member']);
-        });
+        if (walletSelected !== null) {
+            walletService.getWalletTransactions(walletSelected).then((resp) => {
+                setTransactions(resp.data['hydra:member']);
+            });
+        }
     }, [walletSelected, onSubmit])
 
 
@@ -36,20 +37,21 @@ const TransactionListScreen = (props) => {
 
                 <tbody>
                     {transactions.map((transaction) => {
-                        return (
-                            <tr key={transaction.id}>
-                                <td>{transaction.id}</td>
-                                <td>{transaction.amount}</td>
-                                
-                                <td>{transaction.createdAt != null && moment(transaction.createdAt).format('DD/MM/YYYY')}</td>
-                                <td>{transaction.editAt != null && moment(transaction.editAt).format('DD/MM/YYYY')}</td>
+                            return (
+                                <tr key={transaction.id}>
+                                    <td>{transaction.id}</td>
+                                    <td>{transaction.amount}</td>
+
+                                    <td>{transaction.createdAt != null && moment(transaction.createdAt).format('DD/MM/YYYY')}</td>
+                                    <td>{transaction.editAt != null && moment(transaction.editAt).format('DD/MM/YYYY')}</td>
 
 
-                                <td><Button onClick={() => { setEditTransactionButton(true); setIdTransactionEdit(transaction.id); setDeleteTransactionButton(false) }} className="transaction-list-screen-edit-button"> Edit</Button></td>
-                                <td><Button onClick={() => { setDeleteTransactionButton(true); setIdTransactionDelete(transaction.id); setEditTransactionButton(false) }} className="transaction-list-screen-delete-button"> Delete </Button></td>
-                            </tr>
-                        )
+                                    <td><Button onClick={() => { setEditTransactionButton(true); setIdTransactionEdit(transaction.id); setDeleteTransactionButton(false) }} className="transaction-list-screen-edit-button"> Edit</Button></td>
+                                    <td><Button onClick={() => { setDeleteTransactionButton(true); setIdTransactionDelete(transaction.id); setEditTransactionButton(false) }} className="transaction-list-screen-delete-button"> Delete </Button></td>
+                                </tr>
+                            )
                     })}
+
                 </tbody>
             </Table>
         </div >

@@ -16,38 +16,25 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+    justify-content: space-around;
+    margin-top: 150px;
 
     @media screen and (max-width: 450px) {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 10px;
-        height: 90%;
+        margin: 10px;
     }
 
     a {
         border: 1px solid black;
-        width: 300px;
-        height: 300px;
-        line-height: 300px; /* same as height! */
-        margin: 20px;
-        border-radius: 150px;
-        font-size: 32px;
         color: black;
         box-shadow: 2px 2px 10px gray;
-        -moz-box-shadow: 2px 2px 10px gray;
-        -webkit-box-shadow: 2px 2px 10px gray;
-        background: linear-gradient(white, #107080);
         transition: transform 1s;
+        padding: 20px;
+
 
         @media screen and (max-width: 450px) {
-            width: 200px;
-            height: 200px;
-            line-height: 200px; /* same as height! */
-            border-radius: 150px;
+            margin-bottom: 10px;
         }
 
         &:hover {
@@ -55,6 +42,15 @@
             text-decoration: none;
             font-weight: bold;
             color: black;
+        }
+
+        svg {
+            font-size: 120px;
+            margin: 20px;
+        }
+
+        p {
+            font-size: 26px;
         }
     }
 }

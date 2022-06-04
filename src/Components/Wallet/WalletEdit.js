@@ -16,7 +16,6 @@ const WalletEdit = (props) => {
 
     // Récupérer les infos du wallet à éditer 
     useEffect(() => {
-        setSpinner(true);
 
         if (idWalletEdit) {
             walletService.getWallet(idWalletEdit).then((resp) => {

@@ -27,8 +27,6 @@ const WalletAdd = (props) => {
                 localStorage.setItem('current_wallet', resp.data.id);
             }
 
-            setMain(false);
-
             setSpinner(false);
             // Reset
             setAmount('0');
@@ -36,18 +34,13 @@ const WalletAdd = (props) => {
 
             setOnSubmitAdd(true);
         })
-
-
     }
 
-    // Définit si le wallet est principal ou pas
-    const handleAddMainWallet = () => {
-        if (main === false) {
-            setMain(true);
-        } else {
-            setMain(false);
-        }
+    const test = () => {
+        console.log(main);
+        setMain(!main);
     }
+
 
     return (
         <div className="wallet-add">
@@ -64,7 +57,7 @@ const WalletAdd = (props) => {
                     <Form.Control required name="amount" type="number" defaultValue={amount} placeholder="352" onChange={(e) => setAmount(e.target.value)} />
                 </Form.Group>
 
-                <Form.Check type="switch" id="add-wallet-main" onChange={(e) => handleAddMainWallet(e.target.value)} label="Check if this wallet is the main one" />
+                <Form.Check type="checkbox" value={main} id="add-wallet-main" onClick={() => test()} label="Check if this wallet is the main one" />
 
                 <Button variant="primary" type="submit">
                     Submit

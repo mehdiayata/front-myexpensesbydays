@@ -13,8 +13,8 @@ const HomePage = () => {
   const [onSubmitAdd, setOnSubmitAdd] = useState(false);
   const [addTransactionButton, setAddTransactionButton] = useState(false);
   const [spinner, setSpinner] = useState(false);
-  const [saving, setSaving] = useState();
-  const [savingReal, setSavingReal] = useState();
+  const [saving, setSaving] = useState(null);
+  const [savingReal, setSavingReal] = useState(null);
   const [coasts, setCoasts] = useState([]);
   const [incomes, setIncomes] = useState([]);
   
@@ -39,11 +39,13 @@ const HomePage = () => {
           }
         })
 
+
         localStorage.setItem('budget_preview', calculatorService.budgetPreviewCalcul(incomes, coasts));
+
       })
     }
 
-  }, [onSubmitAdd])
+  }, [onSubmitAdd, spinner])
 
   return (
     <div className='homepage'>
@@ -54,15 +56,17 @@ const HomePage = () => {
       <div className="homepage-container">
         <div className='homepage-container-1'>
           <WalletRead setSaving={setSaving} setSavingReal={setSavingReal} onSubmitAdd={onSubmitAdd} />
+
           <AuthorizedExpense onSubmitAdd={onSubmitAdd}
             saving={saving}
-            savingReal={savingReal} setSpinner={setSpinner} />
+            savingReal={savingReal} />
         </div>
 
         <div className="homepage-container-2">
           <TransactionAdd walletSelected={walletSelected} setOnSubmitAdd={setOnSubmitAdd}
             addTransactionButton={addTransactionButton}
             setAddTransactionButton={setAddTransactionButton}
+            setSpinner={setSpinner}
           />
         </div>
       </div>

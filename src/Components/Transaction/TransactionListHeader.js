@@ -13,9 +13,11 @@ const TransactionListHeader = (props) => {
 
     useEffect(() => {
         // GET amount du wallet sélectionner
-        walletService.getWallet(walletSelected).then((resp) => {
-            setWalletAmount(resp.data.amount);
-        });
+        if (walletSelected !== null) {
+            walletService.getWallet(walletSelected).then((resp) => {
+                setWalletAmount(resp.data.amount);
+            });
+        }
 
     }, [walletSelected, onSubmit, walletAmount])
 

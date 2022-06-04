@@ -17,7 +17,7 @@ const Footer = () => {
                     <li><NavLink to='/' exact='true'> Home </NavLink></li>
                     <li> <NavLink to='/wallets' exact='true'> Wallets </NavLink></li>
                     <li> <NavLink to='/transactions' exact='true'> Transactions </NavLink></li>
-                    <li> <NavLink to='/password/edit' exact='true'> User </NavLink></li>
+                    <li> <NavLink to='/budget' exact='true'> Budget </NavLink></li>
                 </ul>
             </div>
 

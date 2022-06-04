@@ -26,7 +26,7 @@ const WalletListMobile = (props) => {
             {wallets.map((wallet) => {
                 return (
 
-                    <div className="table-mobile">
+                    <div className="table-mobile" key={wallet.id}>
                         <div className="thead-mobile">
                             <div className="tr-mobile">
                                 <div className="th-mobile"> #</div>

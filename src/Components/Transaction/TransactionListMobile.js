@@ -1,9 +1,9 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import {Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import walletService from '../../Services/wallet.service';
 
-const TransactionListScreen = (props) => {
+const TransactionListMobile = (props) => {
     const { walletSelected } = props;
     const { onSubmit } = props;
     const { setEditTransactionButton } = props;
@@ -13,9 +13,11 @@ const TransactionListScreen = (props) => {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
-        walletService.getWalletTransactions(walletSelected).then((resp) => {
-            setTransactions(resp.data['hydra:member']);
-        });
+        if (walletSelected !== null) {
+            walletService.getWalletTransactions(walletSelected).then((resp) => {
+                setTransactions(resp.data['hydra:member']);
+            });
+        }
     }, [walletSelected, onSubmit])
 
 
@@ -24,7 +26,7 @@ const TransactionListScreen = (props) => {
 
             {transactions.map((transaction) => {
                 return (
-                    <div className="table-mobile">
+                    <div className="table-mobile" key={transaction.id}>
                         <div className="thead-mobile">
                             <div className="tr-mobile">
                                 <div className="th-mobile"> #</div>
@@ -37,7 +39,7 @@ const TransactionListScreen = (props) => {
                         </div>
 
 
-                        <div className="tbody-mobile">
+                        <div className="tbody-mobile" >
 
                             <div className="tr-mobile">
                                 <div className="td-mobile"> {transaction.id}</div>
@@ -65,4 +67,4 @@ const TransactionListScreen = (props) => {
     );
 };
 
-export default TransactionListScreen;
+export default TransactionListMobile;

@@ -27,6 +27,7 @@ function App() {
   }
 
   useEffect(() => {
+    
     // Si l'user n'est pas connecté
     if (localStorage.getItem('JWT') !== 'undefined' && localStorage.getItem('JWT') !== null) {
 
