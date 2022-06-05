@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
+import Cookies from 'js-cookie';
 
 const LoginComponents = () => {
 
@@ -30,7 +31,19 @@ const LoginComponents = () => {
                 localStorage.setItem("current_wallet", resp.data.id);
 
                 setIsLoading(false);
-                navigate('/transactions');
+                console.log(Cookies.get('first_use'));
+
+                // Vérifie et créer le cookie first_use + redirection selon la valeur du cookie
+                if (Cookies.get('first_use') === undefined) {
+                    Cookies.set('first_use', true, { expires: 3650 })
+                    navigate('/tuto');
+                } else {
+                    if (Cookies.get('first_use') === true) {
+                        navigate('/tuto');
+                    } else {
+                        navigate('/home')
+                    }
+                }
             });
 
         }).catch((error) => {
@@ -62,7 +75,7 @@ const LoginComponents = () => {
 
                 </p>
                 <hr />
-                    <p className="mb-0">To subscribe to the beta test, contact us: <strong>ayatadev@outlook.com</strong>
+                <p className="mb-0">To subscribe to the beta test, contact us: <strong>ayatadev@outlook.com</strong>
                 </p>
             </Alert>
             <Form onSubmit={login} method='post' id='login-form'>
@@ -71,7 +84,7 @@ const LoginComponents = () => {
                     <Form.Control required name="formLoginEmail" type="email" placeholder="Ex. test@test.fr" onChange={(e) => setFormEmail(e.target.value)} />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
-                 </Form.Text>
+                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
@@ -94,8 +107,8 @@ const LoginComponents = () => {
                             role="status"
                             aria-hidden="true"
                         />
-                 Loading...
-               </Button>
+                        Loading...
+                    </Button>
                 }
 
             </Form>
