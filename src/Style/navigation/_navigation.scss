@@ -1,14 +1,15 @@
+$background-nav : #0d1b2a;
+
 .navigation-mobile {
     display: none;
 }
 
 .navigation {
-    background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
+    background: $background-nav;
     width: 10%;
-
     .app-title {
         margin-top: 15px;
-        color: rgb(124, 255, 112);
+        color: #e0e1dd;
         margin-bottom: 50px;
 
         @media screen and (max-width: 850px) {
@@ -23,7 +24,6 @@
     }
 
     .nav {
-        flex-grow: 1;
 
         @media screen and (max-width: 850px) {
             padding: 5px;
@@ -51,11 +51,13 @@
         .button-disconnect {
             background: black;
             border: none;
+            border-radius: none;
         }
 
         .active {
+            font-weight: bold;
             svg {
-                color: #107080;
+                color: $text-color;
             }
         }
 
@@ -68,20 +70,17 @@
     }
 
     .navigation-mobile {
-        display: flex;
+        display: block;
+        overflow: hidden;
         width: 100%;
         position: fixed;
         bottom: 0;
-        margin: auto;
-
-        background-image: linear-gradient(15deg, #191b19 25%, #838383 100%);
+        background: $background-nav;
         border-radius: 0px;
+        height: 55px;
+
 
         .nav {
-            display: flex;
-            width: 100%;
-            justify-content: space-around;
-
             a,
             button {
                 font-size: 30px;

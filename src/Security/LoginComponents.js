@@ -89,11 +89,11 @@ const LoginComponents = () => {
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setFormPassword(e.target.value)} />
+                    <Form.Control type="password" placeholder="Ex. myPassword1375.!*" onChange={(e) => setFormPassword(e.target.value)} />
                 </Form.Group>
 
                 {isLoading == false &&
-                    <Button className="login-btn-submit" variant="primary" type="submit">
+                    <Button className="login-btn-submit" variant="info" type="submit">
                         Submit
                     </Button>
                 }

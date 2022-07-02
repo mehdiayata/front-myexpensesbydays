@@ -50,8 +50,8 @@ const HomePage = () => {
   return (
     <div className='homepage'>
       <BreadcrumbNav title={'HomePage'} />
-
-      <p className="text-info">Amet do ullamco anim eiusmod veniam ut.</p>
+{/* 
+      <p className="text-info">Amet do ullamco anim eiusmod veniam ut.</p> */}
 
       <div className="homepage-container">
         <div className='homepage-container-1'>

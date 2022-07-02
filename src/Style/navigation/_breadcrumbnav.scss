@@ -1,12 +1,15 @@
 .breadcrumb-nav {
     flex-direction: row;
     
+    width: 100%;
+    
     .display-menu {
         display: none;
     }
 
     .breadcrumb {
-        background-image: linear-gradient(15deg, #191b19 25%, #838383 100%);
+        
+        background-image: linear-gradient(15deg, #191b19 25%, $text-color 100%);
         border-radius: 0px;
 
         justify-content: right;

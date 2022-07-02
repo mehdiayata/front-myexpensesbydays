@@ -1,12 +1,14 @@
+$main-color : #e0e1dd;
+$secondary-color: #778da9;
+$text-color : #415a77;
+$title-color: #1b263b;
+$secondary-color : #0d1b2a;
+
 body {
-    background: #e4e4e4 !important;
-    width: 100%;
-    margin: 0;    
-    font-family: 'Sora', sans-serif;
+    background: white;
 }
 
 .App {
-    
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;

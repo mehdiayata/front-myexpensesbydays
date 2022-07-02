@@ -59,8 +59,8 @@ const WalletAdd = (props) => {
 
                 <Form.Check type="checkbox" value={main} id="add-wallet-main" onClick={() => test()} label="Check if this wallet is the main one" />
 
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button variant="success" type="submit">
+                    Save
                 </Button>
             </Form>
         </div>
