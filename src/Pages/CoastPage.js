@@ -12,7 +12,7 @@ const CoastPage = () => {
             
             <BreadcrumbNav title="Coast" />
 
-            <Coast setOnSubmitBudget={setOnSubmit} spinner={spinner} setSpinner={setSpinner}/>
+            <Coast setOnSubmitBudget={setOnSubmit} onSubmit={onSubmit} spinner={spinner} setSpinner={setSpinner}/>
         </div>
     );
 };

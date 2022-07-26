@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
+import budgetService from '../../Services/budget.service';
 import Budget from './Budget';
 import BudgetAdd from './BudgetAdd';
 
@@ -9,27 +10,37 @@ const Coast = (props) => {
     const { setOnSubmitBudget } = props;
     const { setSpinner } = props;
     const { spinner } = props;
-
+    const [coasts, setCoasts] = useState(null);
+    const { onSubmit } = props;
 
     useEffect(() => {
         setSpinner(true);
+        
+        setOnSubmitBudget(false);
+        setCoasts(null);
 
         // GET wallet if not null
         if (walletSelected === null) {
             setWalletSelected(localStorage.getItem('current_wallet'));
-            setSpinner(false);
         } else {
-            alert('Erreur, aucun wallet par défaut est défini');
+            budgetService.getCoast(walletSelected).then((resp) => {
+                
+                setCoasts(resp.data['hydra:member'])
+
+                setSpinner(false);
+            })
+
         }
-    }, []);
+
+    }, [walletSelected, onSubmit]);
 
     return (spinner ?
-            <Spinner animation="border" />
-            :
-            <div className="coast">
+        <Spinner animation="border" />
+        :
+        <div className="coast">
 
-                <BudgetAdd setOnSubmitBudget={setOnSubmitBudget} coast={coast} walletSelected={walletSelected} setSpinner={setSpinner} />
-            
+            <BudgetAdd setOnSubmitBudget={setOnSubmitBudget} onSubmit={onSubmit} coast={coast} walletSelected={walletSelected} setSpinner={setSpinner} coasts={coasts} />
+
         </div>
     );
 };

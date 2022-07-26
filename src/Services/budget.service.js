@@ -10,13 +10,22 @@ const postBudget = (amount, arrayDate, idWallet, coast) => {
     },
         {
             headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('JWT') //the token is a variable which holds the token
+                Authorization: 'Bearer ' + localStorage.getItem('JWT') 
             }
         })
+}
+
+const getCoast = (idWallet) => {
+    return axios.get(host + '/wallets/' + idWallet + '/budgets/coasts', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT') 
+        }
+    })
 }
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     postBudget,
+    getCoast
 }

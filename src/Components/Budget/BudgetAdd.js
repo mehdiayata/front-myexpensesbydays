@@ -5,22 +5,48 @@ import DatePicker, { Calendar } from "react-multi-date-picker"
 
 
 const BudgetAdd = (props) => {
-    const [formFields, setFormFields] = useState([
-        { amount: '', date: [] },
-    ]);
+    // const [formFields, setFormFields] = useState([
+    //     { amount: '', date: [] },
+    // ]);
 
+    const [formFields, setFormFields] = useState([])
     const { walletSelected } = props;
     const { coast } = props;
     const [dateValue, setDateValue] = useState([]);
     const { setOnSubmitBudget } = props;
+    // const {onSubmit} = props;
     const { setSpinner } = props;
+    const { coasts } = props;
+    const [test, setTest] = useState();
 
     useEffect(() => {
-        setOnSubmitBudget(false);
-    });
+        setTest( Date.now());
+
+        if (Array.isArray(coasts) && coasts.length) {
+            initFormFields();
+        } else {
+            setFormFields([{ amount: '', date: [] }]);
+        }
+
+    }, [coasts]);
+
+    const initFormFields = () => {
+        let object = [];
+
+        coasts.map((coast, index) => {
+            object[index] = {
+                amount: coast.amount,
+                date: coast.dueDate
+            }
+        })
+
+
+        setFormFields(object)
+
+        console.log(formFields);
+    }
 
     const handleFormChange = (event, index) => {
-
         let data = [...formFields];
         data[index][event.target.name] = event.target.value;
         setFormFields(data);
@@ -42,7 +68,6 @@ const BudgetAdd = (props) => {
     }
 
     const submit = (e) => {
-        setOnSubmitBudget(true);
         e.preventDefault();
 
         setSpinner(true);
@@ -53,13 +78,13 @@ const BudgetAdd = (props) => {
                 if (coast == true) {
                     budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, true).then((resp) => {
 
-                        setSpinner(false);
+                        setOnSubmitBudget(true);
 
                     })
                 } else {
                     budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, false).then((resp) => {
 
-                        setSpinner(false);
+                        setOnSubmitBudget(true);
                     })
                 }
 
@@ -86,14 +111,17 @@ const BudgetAdd = (props) => {
         <div className="budget-add">
             <div className="budget-add-text-info">
 
-                {coast ? 
+                {coast ?
                     <p> Please indicate your coast that you have each month ?</p>
                     :
                     <p> Please indicate your cash inflows that you have each month ?</p>
                 }
             </div>
+
             <Form onSubmit={submit} className="budget-form">
+
                 {formFields.map((form, index) => {
+                    console.log(form)
                     return (
                         <Form.Group key={index} className="budget-add-container">
 
@@ -119,7 +147,8 @@ const BudgetAdd = (props) => {
                                     hideWeekDays="true"
                                     multiple
                                     format="DD"
-                                    value={dateValue}
+                                    value="5"
+                                    default={test}
                                     onChange={event => handleDateChange(event, index)}
                                 />
                             </div>
