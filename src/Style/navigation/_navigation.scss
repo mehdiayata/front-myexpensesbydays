@@ -77,12 +77,10 @@ $background-nav : #0d1b2a;
         bottom: 0;
         background: $background-nav;
         border-radius: 0px;
-        height: 55px;
 
 
         .nav {
-            a,
-            button {
+            a, button {
                 font-size: 30px;
                 transition: transform 1s;
                 background: none;

@@ -79,10 +79,21 @@
         display: flex;
         width: 100%;
         padding: 5px;
+        flex-direction: column;
 
         p {
             align-items: center;
             font-size: 22px;
         }
+
+        .budget-add-example {
+            font-size: 12px
+        }
+    }
+    
+    .budget-add-info-bottom {
+        font-style: italic;
+        margin-top: 20px;
+        font-size: 12px;
     }
 }

@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import budgetService from '../../Services/budget.service';
-import DatePicker, { Calendar } from "react-multi-date-picker"
+import DatePicker, { Calendar, DateObject } from "react-multi-date-picker"
 
 
 const BudgetAdd = (props) => {
-    // const [formFields, setFormFields] = useState([
-    //     { amount: '', date: [] },
-    // ]);
 
     const [formFields, setFormFields] = useState([])
     const { walletSelected } = props;
     const { coast } = props;
     const [dateValue, setDateValue] = useState([]);
     const { setOnSubmitBudget } = props;
-    // const {onSubmit} = props;
     const { setSpinner } = props;
     const { coasts } = props;
-    const [test, setTest] = useState();
 
     useEffect(() => {
-        setTest( Date.now());
 
         if (Array.isArray(coasts) && coasts.length) {
             initFormFields();
@@ -33,17 +27,38 @@ const BudgetAdd = (props) => {
     const initFormFields = () => {
         let object = [];
 
+        let dateArray = initDate();
+
         coasts.map((coast, index) => {
             object[index] = {
                 amount: coast.amount,
-                date: coast.dueDate
+                date: dateArray[index]
             }
         })
-
 
         setFormFields(object)
 
         console.log(formFields);
+    }
+
+    const initDate = () => {
+        // Récupère les dates de l'utilisateur est le format pour le calendrier (mois de février)
+        let dateArray = [];
+
+        coasts.map((coast, index) => {
+            dateArray[index] = [];
+            coast.dueDate.map((date) => {
+                dateArray[index].push(
+                    new DateObject({
+                        year: 2022,
+                        month: 2,
+                        day: date
+                    })
+                )
+            })
+        })
+
+        return dateArray;
     }
 
     const handleFormChange = (event, index) => {
@@ -60,8 +75,13 @@ const BudgetAdd = (props) => {
         let dateFormat = [];
 
         event.forEach(date => {
-            dateFormat.push(date.day);
+            dateFormat.push(new DateObject({
+                year: 2022,
+                month: 2,
+                day: date
+            }));
         });
+
 
         data[index]['date'] = dateFormat;
         setFormFields(data);
@@ -72,17 +92,27 @@ const BudgetAdd = (props) => {
 
         setSpinner(true);
 
+        // Format date pour envoyer en bdd (Récupère seulement les jour)
+        let newDate = []
+
         for (let i = 0; i < formFields.length; i++) {
-            // Si le champs est remplie
+            newDate[i] = [];
+
+            formFields[i].date.map((date) => {
+                newDate[i].push(date.day);
+            })
+
+
+            //Si le champs est remplie
             if (formFields[i].amount) {
                 if (coast == true) {
-                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, true).then((resp) => {
+                    budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
 
                         setOnSubmitBudget(true);
 
                     })
                 } else {
-                    budgetService.postBudget(formFields[i].amount, formFields[i].date, walletSelected, false).then((resp) => {
+                    budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
 
                         setOnSubmitBudget(true);
                     })
@@ -113,15 +143,17 @@ const BudgetAdd = (props) => {
 
                 {coast ?
                     <p> Please indicate your coast that you have each month ?</p>
+                    
                     :
                     <p> Please indicate your cash inflows that you have each month ?</p>
                 }
+                
+                <p className="budget-add-example"> <strong>Example.</strong> Name : "Subscription", Amount: 20€, Due date: 5, 12, 19, 26  </p>
             </div>
 
             <Form onSubmit={submit} className="budget-form">
 
                 {formFields.map((form, index) => {
-                    console.log(form)
                     return (
                         <Form.Group key={index} className="budget-add-container">
 
@@ -147,8 +179,15 @@ const BudgetAdd = (props) => {
                                     hideWeekDays="true"
                                     multiple
                                     format="DD"
-                                    value="5"
-                                    default={test}
+                                    value={form.date}
+                                    currentDate={
+                                        new DateObject({
+                                            year: 2022,
+                                            month: 2,
+                                            day: 1
+                                        })
+                                    }
+
                                     onChange={event => handleDateChange(event, index)}
                                 />
                             </div>
@@ -169,6 +208,8 @@ const BudgetAdd = (props) => {
                     <Button type="submit" variant="success" className="budget-add-button-submit">Save</Button>
                 </div>
             </Form>
+
+            <p className="budget-add-info-bottom">The days of the month range from 1 to 28 because, the month of February only has 28 days</p>
         </div>
     );
 };
