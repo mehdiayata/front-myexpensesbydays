@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import budgetService from '../../Services/budget.service';
 import DatePicker, { Calendar, DateObject } from "react-multi-date-picker"
+import ConfirmationDelete from './ConfirmationDelete';
 
 
 const BudgetAdd = (props) => {
@@ -9,10 +10,12 @@ const BudgetAdd = (props) => {
     const [formFields, setFormFields] = useState([])
     const { walletSelected } = props;
     const { coast } = props;
-    const [dateValue, setDateValue] = useState([]);
     const { setOnSubmitBudget } = props;
     const { setSpinner } = props;
     const { coasts } = props;
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [idBudgetDelete, setIdBudgetDelete] = useState(null);
+    const [indexDelete, setIndexDelete] = useState(null); // Pour les budget qui ne sont pas enregistrer en BDD
 
     useEffect(() => {
         // Si il y a déjà des budget enregistré
@@ -24,6 +27,7 @@ const BudgetAdd = (props) => {
 
     }, [coasts]);
 
+    // Créer les différents formulaire par rapport à la BDD
     const initFormFields = () => {
         let object = [];
 
@@ -36,13 +40,11 @@ const BudgetAdd = (props) => {
                 date: dateArray[index]
             }
         })
-
-        console.log(object);
         setFormFields(object)
     }
 
+    // Récupère les dates de l'utilisateur est le format pour le calendrier (mois de février)
     const initDate = () => {
-        // Récupère les dates de l'utilisateur est le format pour le calendrier (mois de février)
         let dateArray = [];
 
         coasts.map((coast, index) => {
@@ -108,12 +110,14 @@ const BudgetAdd = (props) => {
 
                 // Si le dans le champs du formulaire il y a un id (permet de différencier si c'est un create ou update)
                 if (formFields[i].id) {
+                    // Si c'est un coast
                     if (coast == true) {
                         budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], true).then((resp) => {
 
                             setOnSubmitBudget(true);
 
                         })
+                        // Si c'est un income
                     } else {
                         budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], false).then((resp) => {
 
@@ -122,6 +126,7 @@ const BudgetAdd = (props) => {
                         })
                     }
 
+                    // Si c'est un create
                 } else {
                     if (coast == true) {
                         budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
@@ -151,14 +156,20 @@ const BudgetAdd = (props) => {
         setFormFields([...formFields, object])
     }
 
-    const removeFields = (index) => {
-        let data = [...formFields];
-        data.splice(index, 1)
-        setFormFields(data)
+    const removeFields = (id, index) => {
+        setIndexDelete(index);
+
+        setShowDeleteConfirm(true)
+        setIdBudgetDelete(id);
+
     }
 
     return (
         <div className="budget-add">
+
+            <ConfirmationDelete show={showDeleteConfirm} setShow={setShowDeleteConfirm}
+                idBudget={idBudgetDelete} setOnSubmit={setOnSubmitBudget} indexDelete={indexDelete} formFields={formFields} setFormFields={setFormFields}/>
+
             <div className="budget-add-text-info">
 
                 {coast ?
@@ -213,9 +224,9 @@ const BudgetAdd = (props) => {
                             </div>
 
                             {index !== 0 &&
-                                <Button variant="outline-danger" onClick={() => removeFields(index)}>Remove</Button>
-
+                                <Button variant="outline-danger" onClick={() => removeFields(form.id, index)}>Remove</Button>
                             }
+
 
                         </Form.Group>
                     )

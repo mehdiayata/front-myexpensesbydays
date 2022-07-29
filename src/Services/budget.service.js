@@ -35,10 +35,19 @@ const putCoast = (idBudget, amount, arrayDate, coast) => {
     })
 }
 
+const deleteBudget = (idBudget) => {
+    return axios.delete(host + '/budgets/' + idBudget, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        }
+    })
+}
+
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     postBudget,
     getCoast,
     putCoast,
+    deleteBudget
 }
