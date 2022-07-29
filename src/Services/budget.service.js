@@ -10,7 +10,7 @@ const postBudget = (amount, arrayDate, idWallet, coast) => {
     },
         {
             headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('JWT') 
+                Authorization: 'Bearer ' + localStorage.getItem('JWT')
             }
         })
 }
@@ -18,7 +18,19 @@ const postBudget = (amount, arrayDate, idWallet, coast) => {
 const getCoast = (idWallet) => {
     return axios.get(host + '/wallets/' + idWallet + '/budgets/coasts', {
         headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('JWT') 
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        }
+    })
+}
+
+const putCoast = (idBudget, amount, arrayDate, coast) => {
+    return axios.put(host + '/budgets/' + idBudget, {
+        amount: amount,
+        dueDate: arrayDate,
+        coast: coast
+    }, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
         }
     })
 }
@@ -27,5 +39,6 @@ const getCoast = (idWallet) => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     postBudget,
-    getCoast
+    getCoast,
+    putCoast,
 }

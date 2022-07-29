@@ -15,7 +15,7 @@ const BudgetAdd = (props) => {
     const { coasts } = props;
 
     useEffect(() => {
-
+        // Si il y a déjà des budget enregistré
         if (Array.isArray(coasts) && coasts.length) {
             initFormFields();
         } else {
@@ -31,14 +31,14 @@ const BudgetAdd = (props) => {
 
         coasts.map((coast, index) => {
             object[index] = {
+                id: coast.id,
                 amount: coast.amount,
                 date: dateArray[index]
             }
         })
 
+        console.log(object);
         setFormFields(object)
-
-        console.log(formFields);
     }
 
     const initDate = () => {
@@ -105,17 +105,37 @@ const BudgetAdd = (props) => {
 
             //Si le champs est remplie
             if (formFields[i].amount) {
-                if (coast == true) {
-                    budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
 
-                        setOnSubmitBudget(true);
+                // Si le dans le champs du formulaire il y a un id (permet de différencier si c'est un create ou update)
+                if (formFields[i].id) {
+                    if (coast == true) {
+                        budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], true).then((resp) => {
 
-                    })
+                            setOnSubmitBudget(true);
+
+                        })
+                    } else {
+                        budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], false).then((resp) => {
+
+                            setOnSubmitBudget(true);
+
+                        })
+                    }
+
                 } else {
-                    budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
+                    if (coast == true) {
+                        budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
 
-                        setOnSubmitBudget(true);
-                    })
+                            setOnSubmitBudget(true);
+
+                        })
+                    } else {
+                        budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
+
+                            setOnSubmitBudget(true);
+                        })
+                    }
+
                 }
 
             }
@@ -143,11 +163,11 @@ const BudgetAdd = (props) => {
 
                 {coast ?
                     <p> Please indicate your coast that you have each month ?</p>
-                    
+
                     :
                     <p> Please indicate your cash inflows that you have each month ?</p>
                 }
-                
+
                 <p className="budget-add-example"> <strong>Example.</strong> Name : "Subscription", Amount: 20€, Due date: 5, 12, 19, 26  </p>
             </div>
 
