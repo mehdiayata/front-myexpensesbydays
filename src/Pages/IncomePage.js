@@ -5,11 +5,12 @@ import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
 const IncomePage = () => {
     const [onSubmit, setOnSubmit] = useState(false);
     const [spinner, setSpinner] = useState(false);
+    
     return (
         <div className='income-page'>
             <BreadcrumbNav title="Income" />
 
-            <Income setOnSubmitBudget={setOnSubmit} spinner={spinner} setSpinner={setSpinner}/>
+            <Income setOnSubmitBudget={setOnSubmit} onSubmit={onSubmit} spinner={spinner} setSpinner={setSpinner}/>
 
         </div>
     );

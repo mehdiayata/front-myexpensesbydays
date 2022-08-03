@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import budgetService from '../../Services/budget.service';
-import Budget from './Budget';
 import BudgetAdd from './BudgetAdd';
 
 const Coast = (props) => {
@@ -39,7 +38,7 @@ const Coast = (props) => {
         :
         <div className="coast">
 
-            <BudgetAdd setOnSubmitBudget={setOnSubmitBudget} onSubmit={onSubmit} coast={coast} walletSelected={walletSelected} setSpinner={setSpinner} coasts={coasts} />
+            <BudgetAdd setOnSubmitBudget={setOnSubmitBudget} onSubmit={onSubmit} coast={1} walletSelected={walletSelected} setSpinner={setSpinner} coasts={coasts} />
 
         </div>
     );

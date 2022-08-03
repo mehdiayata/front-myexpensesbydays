@@ -13,16 +13,28 @@ const BudgetAdd = (props) => {
     const { setOnSubmitBudget } = props;
     const { setSpinner } = props;
     const { coasts } = props;
+    const { incomes } = props;
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [idBudgetDelete, setIdBudgetDelete] = useState(null);
     const [indexDelete, setIndexDelete] = useState(null); // Pour les budget qui ne sont pas enregistrer en BDD
 
     useEffect(() => {
-        // Si il y a déjà des budget enregistré
-        if (Array.isArray(coasts) && coasts.length) {
-            initFormFields();
+        if (coast === 0) {
+            if (Array.isArray(incomes) && incomes.length) {
+                initFormFields();
+            } else {
+                setFormFields([{ amount: '', date: [] }]);
+            }
+        }
+        else if (coast === 1) {
+            // Si il y a déjà des budget enregistré
+            if (Array.isArray(coasts) && coasts.length) {
+                initFormFields();
+            } else {
+                setFormFields([{ amount: '', date: [] }]);
+            }
         } else {
-            setFormFields([{ amount: '', date: [] }]);
+
         }
 
     }, [coasts]);
@@ -33,13 +45,26 @@ const BudgetAdd = (props) => {
 
         let dateArray = initDate();
 
-        coasts.map((coast, index) => {
-            object[index] = {
-                id: coast.id,
-                amount: coast.amount,
-                date: dateArray[index]
-            }
-        })
+        if(coast === 0) {
+            incomes.map((coast, index) => {
+                object[index] = {
+                    id: coast.id,
+                    amount: coast.amount,
+                    date: dateArray[index]
+                }
+            })
+
+        } else {
+            coasts.map((coast, index) => {
+                object[index] = {
+                    id: coast.id,
+                    amount: coast.amount,
+                    date: dateArray[index]
+                }
+            })
+
+        }
+    
         setFormFields(object)
     }
 
@@ -47,18 +72,34 @@ const BudgetAdd = (props) => {
     const initDate = () => {
         let dateArray = [];
 
-        coasts.map((coast, index) => {
-            dateArray[index] = [];
-            coast.dueDate.map((date) => {
-                dateArray[index].push(
-                    new DateObject({
-                        year: 2022,
-                        month: 2,
-                        day: date
-                    })
-                )
+        if (coast === 0) {
+            incomes.map((coast, index) => {
+                dateArray[index] = [];
+                coast.dueDate.map((date) => {
+                    dateArray[index].push(
+                        new DateObject({
+                            year: 2022,
+                            month: 2,
+                            day: date
+                        })
+                    )
+                })
             })
-        })
+
+        } else {
+            coasts.map((coast, index) => {
+                dateArray[index] = [];
+                coast.dueDate.map((date) => {
+                    dateArray[index].push(
+                        new DateObject({
+                            year: 2022,
+                            month: 2,
+                            day: date
+                        })
+                    )
+                })
+            })
+        }
 
         return dateArray;
     }
@@ -136,7 +177,7 @@ const BudgetAdd = (props) => {
                         })
                     } else {
                         budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
-
+                            
                             setOnSubmitBudget(true);
                         })
                     }
@@ -168,7 +209,7 @@ const BudgetAdd = (props) => {
         <div className="budget-add">
 
             <ConfirmationDelete show={showDeleteConfirm} setShow={setShowDeleteConfirm}
-                idBudget={idBudgetDelete} setOnSubmit={setOnSubmitBudget} indexDelete={indexDelete} formFields={formFields} setFormFields={setFormFields}/>
+                idBudget={idBudgetDelete} setOnSubmit={setOnSubmitBudget} indexDelete={indexDelete} formFields={formFields} setFormFields={setFormFields} />
 
             <div className="budget-add-text-info">
 

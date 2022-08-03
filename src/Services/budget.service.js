@@ -43,11 +43,20 @@ const deleteBudget = (idBudget) => {
     })
 }
 
+const getIncome = (idWallet) => {
+    return axios.get(host + '/wallets/' + idWallet + '/budgets/incomes', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        }
+    })
+}
+
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     postBudget,
     getCoast,
     putCoast,
-    deleteBudget
+    deleteBudget,
+    getIncome
 }
