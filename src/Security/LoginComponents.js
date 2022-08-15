@@ -4,6 +4,7 @@ import walletService from '../Services/wallet.service';
 import { useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
 import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 
 const LoginComponents = (props) => {
 
@@ -24,28 +25,39 @@ const LoginComponents = (props) => {
         // Get token and add in local storage (à changer par un système plus sécurisé)
         securityService.getToken(formEmail, formPassword).then(resp => {
 
-            localStorage.setItem("JWT", resp.data.token);
-            localStorage.setItem("refresh_token", resp.data.refresh_token);
+            // Check account if is verified
+            let checkAccount = jwtDecode(resp.data.token);
 
-            // Défini le wallet principal après la connexion
-            walletService.getMainWallet().then((resp) => {
-                localStorage.setItem("current_wallet", resp.data.id);
+            if (checkAccount.verified === true) {
 
-                setIsLoading(false);
-                console.log(Cookies.get('first_use'));
+                localStorage.setItem("JWT", resp.data.token);
+                localStorage.setItem("refresh_token", resp.data.refresh_token);
 
-                // Vérifie et créer le cookie first_use + redirection selon la valeur du cookie
-                if (Cookies.get('first_use') === undefined) {
-                    Cookies.set('first_use', true, { expires: 3650 })
-                    navigate('/tuto');
-                } else {
-                    if (Cookies.get('first_use') === true) {
+                // Défini le wallet principal après la connexion
+                walletService.getMainWallet().then((resp) => {
+                    localStorage.setItem("current_wallet", resp.data.id);
+
+                    setIsLoading(false);
+                    console.log(Cookies.get('first_use'));
+
+                    // Vérifie et créer le cookie first_use + redirection selon la valeur du cookie
+                    if (Cookies.get('first_use') === undefined) {
+                        Cookies.set('first_use', true, { expires: 3650 })
                         navigate('/tuto');
                     } else {
-                        navigate('/home')
+                        if (Cookies.get('first_use') === true) {
+                            navigate('/tuto');
+                        } else {
+                            navigate('/home')
+                        }
                     }
-                }
-            });
+                });
+
+            } else {
+
+                setLoginError("Your account is not validate, please check your email for validate your account or contact support");
+                setIsLoading(false);
+            }
 
         }).catch((error) => {
             if (error.response.status === 401) {
@@ -57,6 +69,7 @@ const LoginComponents = (props) => {
             }
         })
 
+
     }
 
     // const handleNotAccount = () => {
@@ -64,6 +77,9 @@ const LoginComponents = (props) => {
     //     navigate('/registration');
 
     // }
+
+
+
 
     const checkAccount = () => {
         if (accountCheck !== null) {
@@ -92,7 +108,7 @@ const LoginComponents = (props) => {
                     <Alert variant="danger">
                         <Alert.Heading>Sorry, but we have an error !</Alert.Heading>
                         <p>
-                            An error has occurred please contact support, or try to log. 
+                            An error has occurred please contact support, or try to log.
 
                         </p>
                     </Alert>
@@ -160,7 +176,14 @@ const LoginComponents = (props) => {
                 Create a new account
                 </NavLink> */}
 
-            {loginError}
+            {loginError.length > 0 &&
+                <Alert variant="danger">
+                    <Alert.Heading> Error </Alert.Heading>
+                    <p>
+                        {loginError}
+                    </p>
+                </Alert>
+            }
         </div>
     );
 };
