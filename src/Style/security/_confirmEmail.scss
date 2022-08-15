@@ -1,0 +1,15 @@
+.confirm-email-registration {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    
+    @media screen and (max-width: 450px) {
+        width: 100%;
+    }
+
+    .alert {
+        margin: auto;
+        margin-top: 80px;
+        width: 90%;
+    }
+}

@@ -5,7 +5,7 @@ import LoginPage from './Pages/LoginPage';
 import walletService from './Services/wallet.service';
 import { useEffect } from 'react';
 import securityService from './Services/security.service';
-//import RegistrationPage from './Pages/RegistrationPage';
+import RegistrationPage from './Pages/RegistrationPage';
 import WalletPage from './Pages/WalletPage';
 import PasswordEditPage from './Pages/PasswordEditPage';
 import Footer from './Components/Navigation/Footer';
@@ -18,6 +18,8 @@ import SavingPage from './Pages/SavingPage';
 import HomePage from './Pages/HomePage';
 import TutoPage from './Pages/TutoPage';
 import BudgetPage from './Pages/BudgetPage';
+import ConfirmEmailRegistration from './Pages/ConfirmEmailRegistration';
+import CheckEmail from './Pages/CheckEmail';
 
 function App() {
 
@@ -49,8 +51,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/transactions" element={<TransactionPage />} />
-{/* 
-          <Route path="/registration" element={<RegistrationPage />} /> */}
+
+          <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/wallets" element={<WalletPage />} />
           <Route path="/password/edit" element={<PasswordEditPage />} />
           
@@ -63,6 +65,9 @@ function App() {
           
           <Route path="/tuto" element={<TutoPage />} />
           <Route path="/budget" element={<BudgetPage />} />
+          <Route path="/confirmRegistration" element={<ConfirmEmailRegistration />} />
+          
+          <Route path="/checkEmail" element={<CheckEmail />} />
           
         </Routes>
 

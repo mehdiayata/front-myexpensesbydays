@@ -1,0 +1,19 @@
+.check-email {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+
+    @media screen and (max-width: 450px) {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        
+    }
+
+    .spinner-border {
+        width: 100px;
+        height: 100px;
+    }
+}

@@ -91,6 +91,13 @@ const editPassword = (idUser, newPassword) => {
         })
 }
 
+const checkEmail = (email, key) => {
+    return axios.post(host + '/checkAccount', {
+        email: email,
+        verifyEmail: key
+    })
+}
+
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -99,5 +106,6 @@ export default {
     registration,
     refreshTokenResponse,
     refreshTokenRequest,
-    editPassword
+    editPassword,
+    checkEmail
 }

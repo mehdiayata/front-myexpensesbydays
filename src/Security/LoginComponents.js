@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
 import Cookies from 'js-cookie';
 
-const LoginComponents = () => {
+const LoginComponents = (props) => {
 
     const [formEmail, setFormEmail] = useState();
     const [formPassword, setFormPassword] = useState();
@@ -13,6 +13,7 @@ const LoginComponents = () => {
     const [loginError, setLoginError] = useState("");
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const { accountCheck } = props;
 
 
     const login = (e) => {
@@ -64,8 +65,48 @@ const LoginComponents = () => {
 
     // }
 
+    const checkAccount = () => {
+        if (accountCheck !== null) {
+            if (accountCheck === 1) {
+                return (
+                    <Alert variant="success">
+                        <Alert.Heading>Welcome in myExpensesByDays !</Alert.Heading>
+                        <p>
+                            Your account is validated, you can log in
+
+                        </p>
+                    </Alert>
+                )
+            } else if (accountCheck === 2) {
+                return (
+                    <Alert variant="primary">
+                        <Alert.Heading>Welcome in myExpensesByDays !</Alert.Heading>
+                        <p>
+                            Your account is already validated, you can log in
+
+                        </p>
+                    </Alert>
+                )
+            } else if (accountCheck === 3) {
+                return (
+                    <Alert variant="danger">
+                        <Alert.Heading>Sorry, but we have an error !</Alert.Heading>
+                        <p>
+                            An error has occurred please contact support, or try to log. 
+
+                        </p>
+                    </Alert>
+                )
+
+            }
+        }
+
+    }
+
     return (
         <div className="login">
+
+            {checkAccount()}
 
             <Alert variant="warning">
                 <Alert.Heading>This application is in a beta test</Alert.Heading>
