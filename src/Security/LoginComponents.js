@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import securityService from '../Services/security.service';
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
@@ -147,6 +147,9 @@ const LoginComponents = (props) => {
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Ex. myPassword1375.!*" onChange={(e) => setFormPassword(e.target.value)} />
+                    <NavLink  to='/registration' exact='true' activeclassname="nav-active">
+                        I forgot my password
+                    </NavLink>
                 </Form.Group>
 
                 {isLoading == false &&
@@ -171,10 +174,10 @@ const LoginComponents = (props) => {
             </Form>
 
 
-            {/* 
+
             <NavLink className="login-btn-new-account" to='/registration' exact='true' activeclassname="nav-active">
-                Create a new account
-                </NavLink> */}
+                If you don't have an account, create a new account.
+            </NavLink>
 
             {loginError.length > 0 &&
                 <Alert variant="danger">

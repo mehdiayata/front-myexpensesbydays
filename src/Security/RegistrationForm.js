@@ -11,6 +11,7 @@ const RegistrationForm = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [registerError, setRegisterError] = useState(false);
+    const [mailAlreadyExist, setMailAlreadyExist] = useState(false);
 
 
     const registration = (e) => {
@@ -23,6 +24,9 @@ const RegistrationForm = () => {
 
                 navigate('/confirmRegistration');
             }).catch((err) => {
+                if(err.response.data.message == 'Your email is already use') {
+                    setMailAlreadyExist(true);
+                }
                 setIsLoading(false);
             })
         } else {
@@ -45,6 +49,20 @@ const RegistrationForm = () => {
         }
     }
 
+    const displayErrorMailAlreadyExist = (e) => {
+        if (mailAlreadyExist === true) {
+            return (
+                <Alert variant="warning">
+                    <Alert.Heading> Error </Alert.Heading>
+                    <p>
+                        Your email is already use. Please change your email.
+                    </p>
+                </Alert>
+            )
+        }
+
+    }
+
     return (
         <div className="registration">
             <Form onSubmit={registration} method='post' id="registration-form" >
@@ -58,7 +76,10 @@ const RegistrationForm = () => {
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setPassword(e.target.value)} />
+                    <Form.Control type="password" placeholder="myPassword1375" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minLength="8" onChange={(e) => setPassword(e.target.value)} />
+                    <Form.Text className="text-muted">
+                    8 or more characters that are of at least one number, and one uppercase and lowercase letter
+                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
@@ -89,6 +110,7 @@ const RegistrationForm = () => {
 
 
             {displayError()}
+            {displayErrorMailAlreadyExist()}
 
 
             <NavLink className="registration-btn-login" to='/login' exact='true' activeclassname="nav-active">
