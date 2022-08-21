@@ -20,6 +20,8 @@ import TutoPage from './Pages/TutoPage';
 import BudgetPage from './Pages/BudgetPage';
 import ConfirmEmailRegistration from './Pages/ConfirmEmailRegistration';
 import CheckEmail from './Pages/CheckEmail';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 function App() {
 
@@ -68,6 +70,10 @@ function App() {
           <Route path="/confirmRegistration" element={<ConfirmEmailRegistration />} />
           
           <Route path="/checkEmail" element={<CheckEmail />} />
+          
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+
+          <Route path="/resetPassword" element={<ResetPassword />} />
           
         </Routes>
 

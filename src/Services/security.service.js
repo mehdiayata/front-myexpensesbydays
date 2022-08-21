@@ -98,6 +98,19 @@ const checkEmail = (email, key) => {
     })
 }
 
+const forgotPassword = (email) => {
+    return axios.post(host + '/forgotPassword', {
+        email: email
+    })
+}
+
+const resetPassword = (email, newPassword, resetPasswordKey) => {
+    return axios.post(host + '/resetPassword', {
+        email: email,
+        password: newPassword,
+        resetPassword: resetPasswordKey
+    })
+}
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -107,5 +120,7 @@ export default {
     refreshTokenResponse,
     refreshTokenRequest,
     editPassword,
-    checkEmail
+    checkEmail,
+    forgotPassword,
+    resetPassword
 }

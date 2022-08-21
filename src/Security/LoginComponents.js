@@ -15,6 +15,7 @@ const LoginComponents = (props) => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const { accountCheck } = props;
+    const { passwordReset } = props;
 
 
     const login = (e) => {
@@ -68,17 +69,7 @@ const LoginComponents = (props) => {
                 console.log(error);
             }
         })
-
-
     }
-
-    // const handleNotAccount = () => {
-    //     console.log('test');
-    //     navigate('/registration');
-
-    // }
-
-
 
 
     const checkAccount = () => {
@@ -119,10 +110,26 @@ const LoginComponents = (props) => {
 
     }
 
+
+    const displayPasswordReset = () => {
+        if (passwordReset !== null && passwordReset === 1) {
+            return (
+                <Alert variant="primary">
+                    <Alert.Heading>Password edit</Alert.Heading>
+                    <p>
+                        your password has been edited, you can log in.
+
+                    </p>
+                </Alert>
+            )
+        }
+    }
+
     return (
         <div className="login">
 
             {checkAccount()}
+            {displayPasswordReset()}
 
             <Alert variant="warning">
                 <Alert.Heading>This application is in a beta test</Alert.Heading>
@@ -147,7 +154,7 @@ const LoginComponents = (props) => {
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Ex. myPassword1375.!*" onChange={(e) => setFormPassword(e.target.value)} />
-                    <NavLink  to='/registration' exact='true' activeclassname="nav-active">
+                    <NavLink to='/forgotPassword' exact='true' activeclassname="nav-active">
                         I forgot my password
                     </NavLink>
                 </Form.Group>
@@ -173,8 +180,6 @@ const LoginComponents = (props) => {
 
             </Form>
 
-
-
             <NavLink className="login-btn-new-account" to='/registration' exact='true' activeclassname="nav-active">
                 If you don't have an account, create a new account.
             </NavLink>
@@ -187,7 +192,10 @@ const LoginComponents = (props) => {
                     </p>
                 </Alert>
             }
+
+            
         </div>
+
     );
 };
 

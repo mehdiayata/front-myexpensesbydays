@@ -9,12 +9,16 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [accountCheck, setAccountCheck] = useState(null);
+    const [passwordReset, setPasswordReset] = useState(null);
 
     useEffect(() => {
 
         if (state) {
             setAccountCheck(state.emailValid);
+            setPasswordReset(state.passwordReset);
+
         }
+
         if (localStorage.getItem('JWT') && localStorage.getItem('refresh_token')) {
             navigate('/');
         } else {
@@ -26,7 +30,7 @@ const LoginPage = () => {
     return (
         <div className="login-page">
             <BreadcrumbNav title="Login" />
-            <LoginComponents accountCheck={accountCheck} />
+            <LoginComponents accountCheck={accountCheck} passwordReset={passwordReset}/>
         </div>
     );
 };
