@@ -16,6 +16,7 @@ const LoginComponents = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const { accountCheck } = props;
     const { passwordReset } = props;
+    const { accountDelete } = props;
 
 
     const login = (e) => {
@@ -125,11 +126,26 @@ const LoginComponents = (props) => {
         }
     }
 
+    const displayAccountDelete = () => {
+        if (accountDelete === 1) {
+            return (
+                <Alert variant="primary">
+                    <Alert.Heading>Account Delete</Alert.Heading>
+                    <p>
+                        Your account is deleting, good bye.
+
+                    </p>
+                </Alert>
+            )
+        }
+    }
+
     return (
         <div className="login">
 
             {checkAccount()}
             {displayPasswordReset()}
+            {displayAccountDelete()}
 
             <Alert variant="warning">
                 <Alert.Heading>This application is in a beta test</Alert.Heading>

@@ -22,6 +22,7 @@ import ConfirmEmailRegistration from './Pages/ConfirmEmailRegistration';
 import CheckEmail from './Pages/CheckEmail';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
+import DeleteAccountPage from './Pages/DeleteAccountPage';
 
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
 
           <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/deleteAccount" element={<DeleteAccountPage />} />
           
         </Routes>
 

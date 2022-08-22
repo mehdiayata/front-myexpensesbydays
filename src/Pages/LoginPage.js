@@ -10,13 +10,14 @@ const LoginPage = () => {
     const { state } = useLocation();
     const [accountCheck, setAccountCheck] = useState(null);
     const [passwordReset, setPasswordReset] = useState(null);
+    const [accountDelete, setAccountDelete] = useState(null);
 
     useEffect(() => {
 
         if (state) {
             setAccountCheck(state.emailValid);
             setPasswordReset(state.passwordReset);
-
+            setAccountDelete(state.accountDelete);
         }
 
         if (localStorage.getItem('JWT') && localStorage.getItem('refresh_token')) {
@@ -30,7 +31,7 @@ const LoginPage = () => {
     return (
         <div className="login-page">
             <BreadcrumbNav title="Login" />
-            <LoginComponents accountCheck={accountCheck} passwordReset={passwordReset}/>
+            <LoginComponents accountDelete={accountDelete} accountCheck={accountCheck} passwordReset={passwordReset} />
         </div>
     );
 };

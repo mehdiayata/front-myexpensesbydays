@@ -28,7 +28,7 @@ const refreshTokenRequest = () => {
     return axios.interceptors.request.use(
 
         (config) => {
-            
+
             const token = localStorage.getItem('JWT');
             if (token) {
                 config.headers["Authorization"] = 'Bearer ' + token;
@@ -112,6 +112,14 @@ const resetPassword = (email, newPassword, resetPasswordKey) => {
     })
 }
 
+const deleteAccount = (idUser) => {
+    return axios.delete(host + '/users/' + idUser, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT')
+        }
+    });
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     getToken,
@@ -122,5 +130,6 @@ export default {
     editPassword,
     checkEmail,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    deleteAccount
 }

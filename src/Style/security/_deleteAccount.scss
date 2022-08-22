@@ -1,0 +1,25 @@
+.delete-account-page {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 450px) {
+        width: 100%;
+    }
+
+    #delete-account-form{
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        .btn {
+            margin-top: 10px;
+        }
+    }
+
+    .alert {
+        width: 70%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10px;
+    }
+}
