@@ -28,9 +28,9 @@ const LoginComponents = (props) => {
         securityService.getToken(formEmail, formPassword).then(resp => {
 
             // Check account if is verified
-            let checkAccount = jwtDecode(resp.data.token);
+            let jwtUserData = jwtDecode(resp.data.token);
 
-            if (checkAccount.verified === true) {
+            if (jwtUserData.verified === true) {
 
                 localStorage.setItem("JWT", resp.data.token);
                 localStorage.setItem("refresh_token", resp.data.refresh_token);
@@ -39,20 +39,15 @@ const LoginComponents = (props) => {
                 walletService.getMainWallet().then((resp) => {
                     localStorage.setItem("current_wallet", resp.data.id);
 
-                    setIsLoading(false);
-                    console.log(Cookies.get('first_use'));
-
-                    // Vérifie et créer le cookie first_use + redirection selon la valeur du cookie
-                    if (Cookies.get('first_use') === undefined) {
-                        Cookies.set('first_use', true, { expires: 3650 })
+                    if(jwtUserData.firstUse === true) {
                         navigate('/tuto');
                     } else {
-                        if (Cookies.get('first_use') === true) {
-                            navigate('/tuto');
-                        } else {
-                            navigate('/home')
-                        }
+                        navigate('/home')
                     }
+
+                    setIsLoading(false);
+                   
+
                 });
 
             } else {

@@ -7,6 +7,8 @@ import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
 import { Button, ProgressBar, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
+import securityService from '../Services/security.service';
+import jwtDecode from 'jwt-decode';
 
 const TutoPage = () => {
     const [idWalletEdit, setIdWalletEdit] = useState();
@@ -17,6 +19,15 @@ const TutoPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        let jwtUserData = jwtDecode(localStorage.getItem('JWT'));
+        console.log(jwtUserData);
+
+        // Vérifie si l'utilisateur est à sa première connexion
+        if(jwtUserData.firstUse === true) {
+            securityService.editFirstUse(jwtUserData.id, false);
+        }
+
+
         if (onSubmit == true) {
             setStep(step + 1);
         }
@@ -26,7 +37,7 @@ const TutoPage = () => {
 
         // Défini le cookie first_use à false
         if (Cookies.get('first_use') !== undefined && Cookies.get('first_use') === true) {
-            Cookies.set('first_use', false, {expires: 3650})
+            Cookies.set('first_use', false, { expires: 3650 })
         }
 
 

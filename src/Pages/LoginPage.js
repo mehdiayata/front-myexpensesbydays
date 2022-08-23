@@ -14,6 +14,7 @@ const LoginPage = () => {
 
     useEffect(() => {
 
+        // Notification
         if (state) {
             setAccountCheck(state.emailValid);
             setPasswordReset(state.passwordReset);

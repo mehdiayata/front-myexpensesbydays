@@ -91,6 +91,18 @@ const editPassword = (idUser, newPassword) => {
         })
 }
 
+const editFirstUse = (idUser, firstUse) => {
+    return axios.put(host + '/users/' + idUser, {
+        firstUse: firstUse
+    },
+        {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('JWT') //the token is a variable which holds the token
+            }
+        })
+}
+
+
 const checkEmail = (email, key) => {
     return axios.post(host + '/checkAccount', {
         email: email,
@@ -131,5 +143,6 @@ export default {
     checkEmail,
     forgotPassword,
     resetPassword,
-    deleteAccount
+    deleteAccount,
+    editFirstUse
 }
