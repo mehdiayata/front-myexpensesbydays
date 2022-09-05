@@ -32,7 +32,7 @@ function App() {
   }
 
   useEffect(() => {
-    
+
     // Si l'user n'est pas connecté
     if (localStorage.getItem('JWT') !== 'undefined' && localStorage.getItem('JWT') !== null) {
 
@@ -58,25 +58,25 @@ function App() {
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/wallets" element={<WalletPage />} />
           <Route path="/password/edit" element={<PasswordEditPage />} />
-          
+
           <Route path="/income" element={<IncomePage />} />
           <Route path="/coast" element={<CoastPage />} />
-          
+
           <Route path="/saving" element={<SavingPage />} />
-          
+
           <Route path="/home" element={<HomePage />} />
-          
+
           <Route path="/tuto" element={<TutoPage />} />
           <Route path="/budget" element={<BudgetPage />} />
           <Route path="/confirmRegistration" element={<ConfirmEmailRegistration />} />
-          
+
           <Route path="/checkEmail" element={<CheckEmail />} />
-          
+
           <Route path="/forgotPassword" element={<ForgotPassword />} />
 
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/deleteAccount" element={<DeleteAccountPage />} />
-          
+
         </Routes>
 
         <NavigationMobile />

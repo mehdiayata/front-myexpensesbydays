@@ -5,73 +5,85 @@ import WalletRead from '../Components/Wallet/WalletRead';
 import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
 import { Spinner } from 'react-bootstrap';
 import walletService from '../Services/wallet.service';
-import calculatorService from '../Services/calculator.service';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
-  const [walletSelected, setWalletSelected] = useState();
+  const [wallet, setWallet] = useState(null);
   const [onSubmitAdd, setOnSubmitAdd] = useState(false);
   const [addTransactionButton, setAddTransactionButton] = useState(false);
   const [spinner, setSpinner] = useState(false);
-  const [saving, setSaving] = useState(null);
-  const [savingReal, setSavingReal] = useState(null);
-  const [coasts, setCoasts] = useState([]);
-  const [incomes, setIncomes] = useState([]);
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    let currentWallet = localStorage.getItem('current_wallet');
+    // Redirecting if not connecting
     if (localStorage.getItem('JWT') == null) {
       navigate('/login');
     }
 
-    setWalletSelected(localStorage.getItem('current_wallet'));
 
     if (localStorage.getItem('current_wallet')) {
-
-      walletService.getWalletBudgets(localStorage.getItem('current_wallet')).then((resp) => {
-        // Assign budget
-        resp.data['hydra:member'].map((budget) => {
-          if (budget.coast === false) {
-            incomes.push(budget)
-          } else {
-            coasts.push(budget)
-          }
-        })
-
-
-        localStorage.setItem('budget_preview', calculatorService.budgetPreviewCalcul(incomes, coasts));
-
+      walletService.getWallet(currentWallet).then((resp) => {
+        setWallet(resp.data);
+        setIsLoading(false);
       })
     }
 
-  }, [onSubmitAdd, spinner])
+  }, [onSubmitAdd])
 
-  return (
-    <div className='homepage'>
-      <BreadcrumbNav title={'HomePage'} />
-{/* 
-      <p className="text-info">Amet do ullamco anim eiusmod veniam ut.</p> */}
+  const displayWalletRead = () => {
+    if (wallet !== null) {
+      return (
+        <WalletRead onSubmitAdd={onSubmitAdd} amount={wallet.amount} />
+      )
+    }
+  }
 
-      <div className="homepage-container">
-        <div className='homepage-container-1'>
-          <WalletRead setSaving={setSaving} setSavingReal={setSavingReal} onSubmitAdd={onSubmitAdd} />
+  const displayAuthorizedExpense = () => {
+    if (wallet !== null) {
+      return (
+        <AuthorizedExpense onSubmitAdd={onSubmitAdd} authorizedExpenses={wallet.authorizedExpenses} />
+      )
+    }
+  }
 
-          <AuthorizedExpense onSubmitAdd={onSubmitAdd}
-            saving={saving}
-            savingReal={savingReal} />
-        </div>
+  const displayTransactionAdd = () => {
+    if (wallet !== null) {
+      return (
+        <TransactionAdd walletSelected={wallet.id} setOnSubmitAdd={setOnSubmitAdd}
+          addTransactionButton={addTransactionButton}
+          setAddTransactionButton={setAddTransactionButton}
+        />
+      )
+    }
+  }
 
-        <div className="homepage-container-2">
-          <TransactionAdd walletSelected={walletSelected} setOnSubmitAdd={setOnSubmitAdd}
-            addTransactionButton={addTransactionButton}
-            setAddTransactionButton={setAddTransactionButton}
-            setSpinner={setSpinner}
-          />
+  if (isLoading == false) {
+    return (
+      <div className='homepage'>
+        <BreadcrumbNav title={'HomePage'} />
+
+        <div className="homepage-container">
+          <div className='homepage-container-1'>
+            {displayWalletRead()}
+            {displayAuthorizedExpense()}
+          </div>
+
+          <div className="homepage-container-2">
+            {displayTransactionAdd()}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className='spinner-page'>
+        <Spinner animation='border' className="spinner" />
+      </div>
+    )
+  }
 };
 
 export default HomePage;
