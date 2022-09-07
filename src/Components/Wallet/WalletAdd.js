@@ -37,7 +37,7 @@ const WalletAdd = (props) => {
     }
 
     const test = () => {
-        console.log(main);
+
         setMain(!main);
     }
 

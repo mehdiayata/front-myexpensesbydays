@@ -36,8 +36,11 @@
         margin-top: 100px;
         border: 1px solid #b6afaf;
         border-radius: 30px;
+        
 
         @media screen and (max-width: 450px) {
+            
+            margin-top: 0px;
             flex-direction: column;
             width: 100%;
             border: none;

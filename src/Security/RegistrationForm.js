@@ -76,7 +76,7 @@ const RegistrationForm = () => {
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="myPassword1375" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minLength="8" onChange={(e) => setPassword(e.target.value)} />
+                    <Form.Control type="password" placeholder="myPassword1375" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required minLength="8" onChange={(e) => setPassword(e.target.value)} />
                     <Form.Text className="text-muted">
                     8 or more characters that are of at least one number, and one uppercase and lowercase letter
                     </Form.Text>
@@ -84,7 +84,7 @@ const RegistrationForm = () => {
 
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
                     <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="password" placeholder="myPassword1375" onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <Form.Control type="password" placeholder="myPassword1375" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
 
                 {isLoading == false &&

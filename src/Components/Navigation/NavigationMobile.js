@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { AiOutlineDollarCircle, AiOutlineWallet, AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineDollarCircle, AiOutlineWallet, AiOutlineHome, AiOutlineDisconnect } from 'react-icons/ai';
 import { BsFileBarGraph } from 'react-icons/bs';
 
 
@@ -13,6 +13,23 @@ const NavigationMobile = () => {
 
         localStorage.clear();
         navigate('/login');
+    }
+
+    const displayDisconect = () => {
+        if (localStorage.getItem('JWT') !== null) {
+            return (
+                <Button className="button-disconnect" onClick={(e) => handleDisconnect()} >
+                    <AiOutlineDisconnect />
+                </Button>
+            )
+        } else {
+            return (
+                <Button className="button-disconnect" disabled onClick={(e) => handleDisconnect()} >
+                    <AiOutlineDisconnect />
+                </Button>
+            )
+
+        }
     }
 
     return (
@@ -36,6 +53,8 @@ const NavigationMobile = () => {
                 <NavLink to='/budget' exact='true' activeclassname="nav-active">
                     <BsFileBarGraph />
                 </NavLink>
+
+                {displayDisconect()}
 
             </Nav>
         </div>

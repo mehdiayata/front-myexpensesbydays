@@ -114,7 +114,7 @@ const WalletEdit = (props) => {
                         ))
                     }
 
-                    <Button variant="success" type="submit">
+                    <Button variant="primary" type="submit">
                         Save
                     </Button>
                 </Form>

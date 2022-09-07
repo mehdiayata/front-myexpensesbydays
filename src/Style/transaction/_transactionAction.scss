@@ -17,18 +17,15 @@
             background-color: white;
             padding-top: 5px;
 
-             @media screen and (max-width: 450px) {
-                 width: 60%;
-                 padding: 5px;
-                 
-             }
-
-             
-             @media screen and (max-width: 850px) {
-                width: 40%;
+            @media screen and (max-width: 450px) {
+                width: 60%;
                 padding: 5px;
             }
 
+            @media screen and (max-width: 850px) {
+                width: 40%;
+                padding: 5px;
+            }
         }
 
         button {
@@ -44,6 +41,12 @@
         }
     }
 
+    
+    .spinner {
+        margin-top: 50px;
+        align-items: center;
+    }
+
     #transaction-add-form,
     #transaction-edit-form {
         border-radius: 5px;
@@ -54,9 +57,9 @@
         -webkit-box-shadow: 2px 2px 10px gray;
 
         button {
-            margin-top: 15px;   
+            margin-top: 15px;
             transition: transform 1s;
-            
+
             width: 50%;
             border-radius: 50%;
             font-weight: bold;
@@ -68,10 +71,9 @@
                 transform: scale(1.05);
             }
         }
+
     }
-
 }
-
 
 .transaction-delete {
     margin-top: 10px;
@@ -82,5 +84,5 @@
         button {
             margin-right: 20px;
         }
-    }    
+    }
 }

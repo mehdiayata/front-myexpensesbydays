@@ -4,11 +4,11 @@ import Income from '../Components/Budget/Income';
 import WalletEdit from '../Components/Wallet/WalletEdit'
 import WalletSaving from '../Components/Wallet/WalletSaving';
 import BreadcrumbNav from '../Components/Navigation/BreadcrumbNav';
-import { Button, ProgressBar, Spinner } from 'react-bootstrap';
+import {ProgressBar, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
-import Cookies from 'js-cookie';
 import securityService from '../Services/security.service';
 import jwtDecode from 'jwt-decode';
+import walletService from '../Services/wallet.service';
 
 const TutoPage = () => {
     const [idWalletEdit, setIdWalletEdit] = useState();
@@ -19,8 +19,8 @@ const TutoPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        setOnSubmit(false);
         let jwtUserData = jwtDecode(localStorage.getItem('JWT'));
-        console.log(jwtUserData);
 
         // Vérifie si l'utilisateur est à sa première connexion
         if(jwtUserData.firstUse === true) {
@@ -28,24 +28,17 @@ const TutoPage = () => {
         }
 
 
-        if (onSubmit == true) {
+        if (onSubmit === true) {
             setStep(step + 1);
         }
 
-        setOnSubmit(false);
         setIdWalletEdit(localStorage.getItem('current_wallet'));
-
-        // Défini le cookie first_use à false
-        if (Cookies.get('first_use') !== undefined && Cookies.get('first_use') === true) {
-            Cookies.set('first_use', false, { expires: 3650 })
-        }
 
 
     }, [step, onSubmit]);
 
 
     const displayPage = () => {
-
         if (step === 0) {
 
             {/* Wallet Amount */ }
@@ -91,10 +84,9 @@ const TutoPage = () => {
                 <div className='tuto-step'>
                     <ProgressBar now={75} animated variant="info" />
                 </div>
-                <WalletSaving setOnSubmitSaving={setOnSubmit} setSpinner={setSpinner} spinner={spinner} />
+                <WalletSaving setOnSubmit={setOnSubmit} setSpinner={setSpinner} spinner={spinner} saving={0}/>
             </div>
         } else {
-
             navigate('/home');
         }
     }

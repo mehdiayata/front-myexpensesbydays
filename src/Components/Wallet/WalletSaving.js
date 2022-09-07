@@ -4,16 +4,14 @@ import BudgetPreviewCalcul from '../Budget/BudgetPreviewCalcul';
 import SavingForm from '../Budget/SavingForm';
 
 const WalletSaving = (props) => {
-    const { setOnSubmitSaving } = props;
-    const { setSpinner } = props;
-    const { spinner } = props;
+    // const {authorizedExpenses} = props;
+    const {saving} = props;
+    const {setOnSubmit} = props;
 
-    return (spinner ?
-            <Spinner />
-            :
+    return (
             <div className='wallet-saving'>
-                <BudgetPreviewCalcul setSpinner={setSpinner}/>
-                <SavingForm setOnSubmitSaving={setOnSubmitSaving} setSpinner={setSpinner}/>
+                {/* <BudgetPreviewCalcul authorizedExpenses={authorizedExpenses} /> */}
+                <SavingForm setOnSubmit={setOnSubmit} saving={saving} />
 
             </div>
     );

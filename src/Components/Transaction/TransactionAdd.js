@@ -33,7 +33,7 @@ const TransactionAdd = (props) => {
     const displayForm = () => {
         if (isLoading === true) {
             return (
-                <Spinner animation='border' />
+                <Spinner className="spinner" animation='border' />
             )
         } else {
             return (
@@ -41,10 +41,10 @@ const TransactionAdd = (props) => {
 
                     <Form.Group className="transaction-add-form-amount">
                         <Form.Label> Amount </Form.Label>
-                        <Form.Control type="number" step=".01" defaultValue={amount} id="transaction-add-amount" onChange={(e) => { setAmount(e.target.value) }} />
+                        <Form.Control required type="number" step=".01" defaultValue={amount} id="transaction-add-amount" onChange={(e) => { setAmount(e.target.value) }} />
                     </Form.Group>
 
-                    <Button variant="success" type="submit">
+                    <Button variant="primary" type="submit">
                         Save
                     </Button>
                 </Form>

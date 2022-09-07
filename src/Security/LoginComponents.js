@@ -39,14 +39,14 @@ const LoginComponents = (props) => {
                 walletService.getMainWallet().then((resp) => {
                     localStorage.setItem("current_wallet", resp.data.id);
 
-                    if(jwtUserData.firstUse === true) {
+                    if (jwtUserData.firstUse === true) {
                         navigate('/tuto');
                     } else {
                         navigate('/home')
                     }
 
                     setIsLoading(false);
-                   
+
 
                 });
 
@@ -62,7 +62,6 @@ const LoginComponents = (props) => {
                 setCrendentailValid(false);
                 setLoginError("Sorry your email or your password is not correct");
             } else {
-                console.log(error);
             }
         })
     }
@@ -164,7 +163,7 @@ const LoginComponents = (props) => {
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Ex. myPassword1375.!*" onChange={(e) => setFormPassword(e.target.value)} />
+                    <Form.Control required type="password" placeholder="Ex. myPassword1375.!*" onChange={(e) => setFormPassword(e.target.value)} />
                     <NavLink to='/forgotPassword' exact='true' activeclassname="nav-active">
                         I forgot my password
                     </NavLink>
@@ -172,7 +171,7 @@ const LoginComponents = (props) => {
 
                 {isLoading == false &&
                     <Button className="login-btn-submit" variant="info" type="submit">
-                        Submit
+                        Log In
                     </Button>
                 }
 
@@ -192,7 +191,7 @@ const LoginComponents = (props) => {
             </Form>
 
             <NavLink className="login-btn-new-account" to='/registration' exact='true' activeclassname="nav-active">
-                If you don't have an account, create a new account.
+                Create new account
             </NavLink>
 
             {loginError.length > 0 &&
@@ -204,7 +203,7 @@ const LoginComponents = (props) => {
                 </Alert>
             }
 
-            
+
         </div>
 
     );

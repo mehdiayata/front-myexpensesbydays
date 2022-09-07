@@ -14,6 +14,25 @@ const Navigation = () => {
         navigate('/login');
     }
 
+    const displayDisconect = () => {
+        if (localStorage.getItem('JWT') !== null) {
+            return (
+                <Button className="button-disconnect" onClick={(e) => handleDisconnect()} >
+                    <AiOutlineDisconnect />
+                    <p> Disconnect </p>
+                </Button>
+            )
+        } else {
+            return (
+                <Button className="button-disconnect" disabled onClick={(e) => handleDisconnect()} >
+                    <AiOutlineDisconnect />
+                    <p> Disconnect </p>
+                </Button>
+            )
+
+        }
+    }
+
     return (
         <div className="navigation">
 
@@ -31,7 +50,7 @@ const Navigation = () => {
                     <AiOutlineHome />
                     <p> Home </p>
                 </NavLink>
-                        
+
                 <NavLink to='/transactions' exact='true' activeclassname="nav-active" style={({ isActive }) => ({
 
                     background: isActive ? '#FFFFFF' : 'black',
@@ -41,7 +60,7 @@ const Navigation = () => {
                     <p> Transactions </p>
                 </NavLink>
 
-                <NavLink to='/wallets'  exact='true' activeclassname="nav-active" style={({ isActive }) => ({
+                <NavLink to='/wallets' exact='true' activeclassname="nav-active" style={({ isActive }) => ({
 
                     background: isActive ? '#FFFFFF' : 'black',
                     color: isActive ? 'black' : 'white',
@@ -50,7 +69,7 @@ const Navigation = () => {
                     <p> Wallet </p>
                 </NavLink>
 
-                <NavLink to='/budget'  exact='true' activeclassname="nav-active" style={({ isActive }) => ({
+                <NavLink to='/budget' exact='true' activeclassname="nav-active" style={({ isActive }) => ({
 
                     background: isActive ? '#FFFFFF' : 'black',
                     color: isActive ? 'black' : 'white',
@@ -58,12 +77,8 @@ const Navigation = () => {
                     <AiOutlineWallet />
                     <p> Budget </p>
                 </NavLink>
+                {displayDisconect()}
 
-                
-                <Button className="button-disconnect" onClick={(e) => handleDisconnect()} >
-                    <AiOutlineDisconnect />
-                    <p> Disconnect </p>
-                </Button>
             </Nav>
 
 

@@ -43,7 +43,6 @@ const ResetPassword = () => {
 
             }).catch((err) => {
                 setIsValid(false);
-                console.log(err.response)
             })
         } else {
             setIsLoading(false);

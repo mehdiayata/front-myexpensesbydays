@@ -16,7 +16,6 @@ const DaysPicker = (props) => {
 
     const addDaysInArray = (days) => {
         setDaysArray([...daysArray, days]);
-        console.log(daysArray);
     }
 
     return (

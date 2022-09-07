@@ -45,7 +45,7 @@ const BudgetAdd = (props) => {
 
         let dateArray = initDate();
 
-        if(coast === 0) {
+        if (coast === 0) {
             incomes.map((coast, index) => {
                 object[index] = {
                     id: coast.id,
@@ -64,7 +64,7 @@ const BudgetAdd = (props) => {
             })
 
         }
-    
+
         setFormFields(object)
     }
 
@@ -155,14 +155,13 @@ const BudgetAdd = (props) => {
                     if (coast == true) {
                         budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], true).then((resp) => {
 
-                            setOnSubmitBudget(true);
 
                         })
                         // Si c'est un income
                     } else {
+
                         budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], false).then((resp) => {
 
-                            setOnSubmitBudget(true);
 
                         })
                     }
@@ -170,15 +169,15 @@ const BudgetAdd = (props) => {
                     // Si c'est un create
                 } else {
                     if (coast == true) {
+
                         budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
 
-                            setOnSubmitBudget(true);
 
                         })
                     } else {
+
                         budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
-                            
-                            setOnSubmitBudget(true);
+
                         })
                     }
 
@@ -186,6 +185,8 @@ const BudgetAdd = (props) => {
 
             }
         }
+        setOnSubmitBudget(true);
+
     }
 
     const addFields = () => {
@@ -277,7 +278,7 @@ const BudgetAdd = (props) => {
                 <div className='budget-add-button-group'>
                     <Button variant="info" onClick={addFields} className="budget-add-button-addFields">+</Button>
 
-                    <Button type="submit" variant="success" className="budget-add-button-submit">Save</Button>
+                    <Button type="submit" variant="primary" className="budget-add-button-submit">Save</Button>
                 </div>
             </Form>
 

@@ -21,18 +21,14 @@ const Income = (props) => {
 
         // GET wallet if not null
         if (walletSelected === null) {
-            console.log('test999');
             setWalletSelected(localStorage.getItem('current_wallet'));
         } else {
             
-            console.log('test54');
             budgetService.getIncome(walletSelected).then((resp) => {
 
                 setIncomes(resp.data['hydra:member'])
-
                 setSpinner(false);
             }).catch((err) => {
-                console.log(err);
             })
 
         }

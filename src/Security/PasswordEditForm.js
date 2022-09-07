@@ -51,7 +51,6 @@ const PasswordEditForm = () => {
 
             });
         } else {
-            console.log('ERROR');
         }
     }
 
