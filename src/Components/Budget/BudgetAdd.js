@@ -17,6 +17,7 @@ const BudgetAdd = (props) => {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [idBudgetDelete, setIdBudgetDelete] = useState(null);
     const [indexDelete, setIndexDelete] = useState(null); // Pour les budget qui ne sont pas enregistrer en BDD
+    const [calendarValid, setCalendarValid] = useState(null);
 
     useEffect(() => {
         if (coast === 0) {
@@ -131,61 +132,77 @@ const BudgetAdd = (props) => {
     }
 
     const submit = (e) => {
+        let calendarValid = null;
+
         e.preventDefault();
 
-        setSpinner(true);
-
-        // Format date pour envoyer en bdd (Récupère seulement les jour)
-        let newDate = []
-
+        // Test si le calendrier n'est pas vide
         for (let i = 0; i < formFields.length; i++) {
-            newDate[i] = [];
+            if (formFields[i].date.length === 0) {
+                alert('One of your due dates is missing. Please enter your due date');
+                calendarValid = false;
+                break;
+            } else {
+                calendarValid = true;
+            }
+        }
 
-            formFields[i].date.map((date) => {
-                newDate[i].push(date.day);
-            })
+        if (calendarValid === true) {
+            setSpinner(true);
+
+            // Format date pour envoyer en bdd (Récupère seulement les jour)
+            let newDate = []
+
+            for (let i = 0; i < formFields.length; i++) {
+                newDate[i] = [];
+
+                formFields[i].date.map((date) => {
+                    newDate[i].push(date.day);
+                })
 
 
-            //Si le champs est remplie
-            if (formFields[i].amount) {
+                //Si le champs est remplie
+                if (formFields[i].amount) {
 
-                // Si le dans le champs du formulaire il y a un id (permet de différencier si c'est un create ou update)
-                if (formFields[i].id) {
-                    // Si c'est un coast
-                    if (coast == true) {
-                        budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], true).then((resp) => {
+                    // Si le dans le champs du formulaire il y a un id (permet de différencier si c'est un create ou update)
+                    if (formFields[i].id) {
+                        // Si c'est un coast
+                        if (coast == true) {
+                            budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], true).then((resp) => {
 
 
-                        })
-                        // Si c'est un income
+                            })
+                            // Si c'est un income
+                        } else {
+
+                            budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], false).then((resp) => {
+
+
+                            })
+                        }
+
+                        // Si c'est un create
                     } else {
+                        if (coast == true) {
 
-                        budgetService.putCoast(formFields[i].id, formFields[i].amount, newDate[i], false).then((resp) => {
-
-
-                        })
-                    }
-
-                    // Si c'est un create
-                } else {
-                    if (coast == true) {
-
-                        budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
+                            budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, true).then((resp) => {
 
 
-                        })
-                    } else {
+                            })
+                        } else {
 
-                        budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
+                            budgetService.postBudget(formFields[i].amount, newDate[i], walletSelected, false).then((resp) => {
 
-                        })
+                            })
+                        }
+
                     }
 
                 }
-
             }
+            setOnSubmitBudget(true);
         }
-        setOnSubmitBudget(true);
+
 
     }
 
@@ -204,6 +221,18 @@ const BudgetAdd = (props) => {
         setShowDeleteConfirm(true)
         setIdBudgetDelete(id);
 
+    }
+
+    const displayAlert = () => {
+        if (calendarValid === true) {
+            return (
+                console.log('if'))
+        } else {
+            return (
+                console.log('else')
+
+            )
+        }
     }
 
     return (

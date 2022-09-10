@@ -15,6 +15,7 @@ const Coast = (props) => {
     useEffect(() => {
         setSpinner(true);
         setCoasts(null);
+        setOnSubmitBudget(false);
 
         // GET wallet if not null
         if (walletSelected === null) {
