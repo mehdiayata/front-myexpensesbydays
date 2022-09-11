@@ -47,7 +47,7 @@ const WalletAdd = (props) => {
             <div className="wallet-add-header">
                 <h5>Add Wallet</h5>
                 {addWalletButton === true &&
-                    <Button onClick={() => setAddWalletButton(false)}> <AiOutlineClose /> </Button>
+                    <Button variant='dark' onClick={() => setAddWalletButton(false)}> close </Button>
                 }
             </div>
 
@@ -59,7 +59,7 @@ const WalletAdd = (props) => {
 
                 <Form.Check type="checkbox" value={main} id="add-wallet-main" onClick={() => test()} label="Check if this wallet is the main one" />
 
-                <Button variant="success" type="submit">
+                <Button variant="info" type="submit">
                     Save
                 </Button>
             </Form>

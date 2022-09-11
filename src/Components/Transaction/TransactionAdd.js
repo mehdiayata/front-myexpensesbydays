@@ -59,7 +59,7 @@ const TransactionAdd = (props) => {
                 <h5>Add new transaction</h5>
                 {addTransactionButton === true &&
 
-                    <Button onClick={() => setAddTransactionButton(false)}> <AiOutlineClose /> </Button>
+                    <Button onClick={() => setAddTransactionButton(false)}> close </Button>
                 }
 
             </div>

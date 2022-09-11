@@ -28,7 +28,6 @@ const Income = (props) => {
 
                 setIncomes(resp.data['hydra:member'])
                 setSpinner(false);
-            }).catch((err) => {
             })
 
         }

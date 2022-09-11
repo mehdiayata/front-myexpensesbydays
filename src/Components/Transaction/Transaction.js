@@ -69,21 +69,8 @@ const Transaction = () => {
                         setDeleteTransactionButton={setDeleteTransactionButton}
                         setIdTransactionDelete={setIdTransactionDelete} />
 
-
-
-                    <TransactionListMobile
-                        walletSelected={walletSelected} onSubmit={onSubmit}
-                        setEditTransactionButton={setEditTransactionButton}
-                        setIdTransactionEdit={setIdTransactionEdit}
-                        setDeleteTransactionButton={setDeleteTransactionButton}
-                        setIdTransactionDelete={setIdTransactionDelete}
-                    />
-
                 </>
             }
-
-
-
 
         </div>
     );

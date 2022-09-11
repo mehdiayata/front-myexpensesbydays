@@ -10,7 +10,7 @@ const ConfirmEmailRegistration = () => {
             <Alert variant="success ">
                 <Alert.Heading>Email confirmation</Alert.Heading>
                 <p>
-                    Thank you for using my Expenses By Days, we have successfully register in application.
+                    Thank you for using my Expenses By Days, we have successfully register in application. (Check your spam box)
                 </p>
                 <hr />
                 <p className="mb-0">

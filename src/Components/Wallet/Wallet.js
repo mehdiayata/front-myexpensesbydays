@@ -30,7 +30,7 @@ const Wallet = () => {
 
             {/* Add */}
             {addWalletButton === true &&
-                <WalletAdd addWalletButton={addWalletButton} setAddWalletButton={setAddWalletButton} setOnSubmitAdd={setOnSubmit} setSpinner={setSpinner}/>
+                <WalletAdd addWalletButton={addWalletButton} setAddWalletButton={setAddWalletButton} setOnSubmitAdd={setOnSubmit} setSpinner={setSpinner} />
             }
 
             {editWalletButton === true &&
@@ -52,29 +52,14 @@ const Wallet = () => {
                 />
             }
 
-            {spinner ?
-
-                <Spinner animation="border" role="status">
-                </Spinner>
-
-                :
-                <>
-                    <WalletListScreen setEditWalletButton={setEditWalletButton}
-                        deleteWalletButton={deleteWalletButton}
-                        setDeleteWalletButton={setDeleteWalletButton}
-                        setIdWalletDelete={setIdWalletDelete}
-                        setIdWalletEdit={setIdWalletEdit}
-                        onSubmit={onSubmit} />
+            <WalletListScreen setEditWalletButton={setEditWalletButton}
+                deleteWalletButton={deleteWalletButton}
+                setDeleteWalletButton={setDeleteWalletButton}
+                setIdWalletDelete={setIdWalletDelete}
+                setIdWalletEdit={setIdWalletEdit}
+                onSubmit={onSubmit} />
 
 
-                    <WalletListMobile setEditWalletButton={setEditWalletButton}
-                        deleteWalletButton={deleteWalletButton}
-                        setDeleteWalletButton={setDeleteWalletButton}
-                        setIdWalletDelete={setIdWalletDelete}
-                        setIdWalletEdit={setIdWalletEdit}
-                        onSubmit={onSubmit} />
-                </>
-            }
 
         </div>
     );

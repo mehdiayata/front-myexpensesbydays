@@ -21,16 +21,32 @@ const TransactionListHeader = (props) => {
 
     }, [walletSelected, onSubmit, walletAmount])
 
+    const displayWalletAmount = () => {
+        if (walletAmount !== null) {
+            {
+                return (
+                    <div className="transaction-list-header-wallet-amount">
+                        <p className="wallet-amount"> {walletAmount} €</p>
+                    </div>
+                )
+            }
+
+        } else {
+            return (
+                <>
+                </>
+            )
+        }
+    }
+
     return (
         <div className="transaction-list-header">
             <SelectWalletForm setWalletSelected={setWalletSelected} />
 
-            <div className="transaction-list-header-wallet-amount">
-                <p>Amount : {walletAmount}</p>
-            </div>
-
-
             {addTransactionButton === false && <Button onClick={() => setAddTransactionButton(true)}> Add </Button>}
+
+            {displayWalletAmount()}
+
 
         </div>
 

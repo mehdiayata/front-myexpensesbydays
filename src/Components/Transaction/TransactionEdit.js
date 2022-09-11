@@ -37,7 +37,7 @@ const TransactionEdit = (props) => {
             <div className="transaction-edit-header">
                 <h5> Transaction Edit</h5>
 
-                {editTransactionButton === true && <Button onClick={() => setEditTransactionButton(false)}> <AiOutlineClose />  </Button>}
+                {editTransactionButton === true && <Button onClick={() => setEditTransactionButton(false)}> close </Button>}
             </div>
             <Form onSubmit={(e) => { editTransaction(e) }} id="transaction-edit-form">
 
@@ -47,7 +47,7 @@ const TransactionEdit = (props) => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Submit
+                    Save
                 </Button>
             </Form>
         </div>

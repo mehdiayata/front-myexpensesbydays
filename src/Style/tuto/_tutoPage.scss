@@ -18,6 +18,12 @@
                 font-size: 23px;
             }
         }
+          
+        .wallet-edit-header {
+            h5 {
+                visibility: hidden;
+            }
+        }
         .wallet-edit {
             width: 70%;
             margin-left: auto;
@@ -27,9 +33,7 @@
                 width: 90%;
             }
 
-            .wallet-edit-form {
-                
-            }
+          
         }
     }
 }

@@ -1,128 +1,106 @@
+@-webkit-keyframes shadow-drop-2-center {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+    }
+}
+
+@keyframes shadow-drop-2-center {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+    }
+}
+
 .wallet-page {
     width: 90%;
     justify-content: center;
 
+    .spinner {
+        margin-top: 50px;
+    }
+
+    .wallet-list-header {
+        button {
+            border-radius: 100%;
+            width: 100px;
+            height: 100px;
+            background-color: #b0e0e6;
+            font-weight: bolder;
+            border: white;
+            box-shadow: 2px 2px 10px gray;
+            -moz-box-shadow: 2px 2px 10px gray;
+            -webkit-box-shadow: 2px 2px 10px gray;
+
+            &:hover {
+                transform: scale(1.15);
+                -webkit-animation: shadow-drop-2-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                animation: shadow-drop-2-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            }
+        }
+    }
+
+    .wallet-list-screen {
+        margin-top: 50px;
+        .wallet-title-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            background-color: white;
+            margin-bottom: 10px;
+
+            p {
+                width: 100%;
+                justify-content: center;
+                font-weight: bold;
+            }
+        }
+        .wallet-container {
+            .wallet-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+
+                p {
+                    width: 100%;
+                    justify-content: center;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .wallet-button {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                background-color: #f0f0f0;
+                border-top: 1px solid grey;
+                border-bottom: 1px solid grey;
+                button {
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
     @media screen and (max-width: 450px) {
         width: 100%;
     }
-
-    .wallet {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-
-        @media screen and (max-width: 850px) {
-            width: 90%;
-        }
-
-        .wallet-list-header {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-
-            @media screen and (max-width: 450px) {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-
-            @media screen and (max-width: 850px) {
-                display: flex;
-                flex-direction: row;
-                justify-content: right;
-            }
-
-            button {
-                background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-                border: black;
-                font-weight: bold;
-                
-                &:hover {
-                    transform: scale(1.05);
-                    background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
-                }
-            }
-        }
-
-        .wallet-list-mobile {
-            @media screen and (max-width: 1366px) {
-                display: none;
-            }
-
-            @media screen and (max-width: 450px) {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-
-                margin-bottom: 70px;
-
-                .table-mobile {
-                    display: flex;
-                    flex-direction: row;
-                    background-color: white;
-                    justify-content: space-around;
-                    border: 1px solid black;
-                    padding: 5px;
-
-                    &:nth-child(2n) {
-                        background-color: #dcdce9;
-                    }
-
-                    .thead-mobile .tr-mobile .th-mobile {
-                        margin-bottom: 10px;
-                    }
-
-                    .tbody-mobile .tr-mobile .td-mobile {
-                        margin-bottom: 10px;
-
-                        button {
-                            background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-                            border: black;
-                            color: white;
-                            transition: transform 1s;
-
-                            &:hover {
-                                transform: scale(1.05);
-                                background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        .wallet-list-screen {
-            margin-bottom: 10px;
-            margin-top: 10px;
-
-            @media screen and (max-width: 450px) {
-                display: none;
-            }
-
-            table {
-                tbody {
-                    tr {
-                        td {
-                            button {
-                                background-image: linear-gradient(15deg, #5a5a5a 25%, #191b19 100%);
-                                border: black;
-                                color: white;
-                                transition: transform 1s;
-
-                                &:hover {
-                                    transform: scale(1.05);
-                                    background-image: linear-gradient(15deg, #8a8a8a 25%, #565f56 100%);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-.wallet-list-mobile {
-    display: none;
 }

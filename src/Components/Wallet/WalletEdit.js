@@ -75,7 +75,7 @@ const WalletEdit = (props) => {
 
                     {editWalletButton === true &&
 
-                        <Button onClick={() => setEditWalletButton(false)}> <AiOutlineClose /> </Button>}
+                        <Button variant='info' onClick={() => setEditWalletButton(false)}> close </Button>}
                 </div>
 
 
@@ -114,7 +114,7 @@ const WalletEdit = (props) => {
                         ))
                     }
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="info" type="submit">
                         Save
                     </Button>
                 </Form>
